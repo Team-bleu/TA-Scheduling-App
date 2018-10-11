@@ -13,30 +13,37 @@ Support commands are:
 1, add <username> <password>
     - Creates a new user with the given username if no such user currently exists, responding with "User <username> added."
     - If that user already exists the response is "Failed. User exists."
+
 2, login <username> <password>
     - If the user exists and the password matches, that user is recognized as the current user and the response is "<username> logged in." and logged boolean is set to true
     - Otherwise the response is "Failed. Username or password invalid." and no change to the current user is made.
+
 3, logout
     - User has no access to commands and the response is "<Username> logged out"
     - The logged boolean is set to false
+
 4, remove <name>
     - Removes information of a user from the database and the response is "<name> has been removed"
     - If <name> doesn't exist the response is "<name> doesn't exist!"
+
 5, roles <name> <role>
     - Changes the role of the user
     - If <mame> exsit, the role is change to the <role> and ouput "<name> has becaome a <role>"
     - If <name> doesn't exist the response is "<name> doesn't exist!"
     - If <role> doesn't exist the response is "<role> doesn't exist!"
+
 6, createcourse <course>
     - Makes a new course:
     - if <course> doesn't exsit, add the new <course> and return "<course> has been created"
     - if <course> exsit, the response is "<course> already exist!"
     - if <role> is not supervisor or adminstrator, nothing is being added and  return "Your <role> can't add course"
+
 7, createlab <lab>
     - Makes a new lab section
     - if <lab> doesn't exsit, add the new <lab> and return "<course> has been created"
     - if <lab> exsit, the response is "<lab> already exist!"
     - if <role> is not supervisor or adminstrator, nothing is being added and  return "Your <role> can't add course"
+
 8, assigncourse <name> <course>
     - if <role> is not supervisor or administrator, the course is not assigned and display "Do not have permission"
     - Assigns a user to a course, displays <name> has been added to <course>
@@ -48,7 +55,6 @@ Support commands are:
     - Assigns a user to a lab section, displays "<name> has been added to <lab>"
     - if <lab> doesn't exist, display "<lab> does not exist"
     - check users and if <name> doesn't exist, display "<name> doesn't exist"
-
 
 10, notify <name> <message>
     - if <name> doesn't exist, display "<name> doesn't exist"
@@ -63,9 +69,9 @@ Support commands are:
     - if <name> doesn't exist, display "<name> doesn't exist"
     - Edits the information of <name>
     - if <role> is instructor or TA, and if <name> parameter is given display "Only can edit your information"
-        if no <name> parameter is given, then the user can change their information, and then it will update.
+            if no <name> parameter is given, then the user can change their information, and then it will update.
     - if <role> is supervisor or adminstrator, if <name> is given, edit the information of <name> and then it will update.
-        if no <name parameter is given, the user will edit their own information, and then it will update.
+            if no <name parameter is given, the user will edit their own information, and then it will update.
     - if edit successful, display "information updated"
 
 12, show <name>
@@ -75,4 +81,4 @@ Support commands are:
     - if <role> is Supervisor or Administrator, then also display the private information of <name>
 
 13, quit
-    -The session ends.
+    - change <logged> to false, then quit the session
