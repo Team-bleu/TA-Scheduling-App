@@ -1,5 +1,15 @@
-Support commands are:
+Data structure:
+A dictionary to hold {<username>, <password>, <logged>, <name>, <role>, <course>, <lab>, <information>}
 
+Two required methods:
+    class Project:
+        def command(userString): #userString is what the user typed on the command line
+            return "" #the return value will be the applications response
+
+        def done():
+            return True; #will let user know that they're done
+
+Support commands are:
 1, add <username> <password>
     - Creates a new user with the given username if no such user currently exists, responding with "User <username> added."
     - If that user already exists the response is "Failed. User exists."
@@ -8,25 +18,24 @@ Support commands are:
     - Otherwise the response is "Failed. Username or password invalid." and no change to the current user is made.
 3, logout
     - The current user is set to None.
-4, append <item>
-    - The given item (an arbitrary string) is added to the current user's list.
-    - The response is the message "<item> added" followed by the complete list of items, one per line.
-    - If no user is logged in the response is "No current user",
-    - if the item already exists the response is "Item is on list" followed by the list, one item per line.
-5, remove <item>
-    - The given item (an arbitrary string) is removed from the current user's list.
-    - The response is the message "<item> removed" followed by the complete list of items, one per line.
-    - If no user is logged in the response is "No current user",
-    - if the item does not exist the response is "Item is not on list" followed by the list, one item per line.
-6, show (<user>)
-    - Shows the contents of the given user's list.
-    - The <user> argument is optional, if not provided it displays the list of the current user.
-    - If the user does not exist or if the current user has not been given permission to access the list it displays "Invalid user."
-7, share <user>
-    - Grant the given user access to the current user's list.
-    - If the user does not exist it displays "Invalid user."
-8, revoke <user>
-    - Revoke the given user's access to the current user's list.
-    - If the user does not exist it displays "Invalid user."
-9, quit
+4, remove <name>
+    - Removes information of a user from the database
+5, roles <name> <role>
+    - Changes the role of the user
+6, createcourse <course>
+    - Makes a new course
+7, createlab <lab>
+    - Makes a new lab section
+8, assigncourse <name> <course>
+    - Assigns a user to a course
+9, assignlab <name> <lab>
+    - Assigns a user to a lab section
+10, notify <name>
+    - Sends out an email to <name>
+11, edit <name>
+    - Edits the information of <name>
+12, show <name>
+    - Shows public information to the requester
+    - Shows private information only to the Supervisor and the Administrator
+13, quit
     -The session ends.
