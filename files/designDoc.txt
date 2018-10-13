@@ -1,5 +1,9 @@
 Data structure:
 A dictionary to hold {<username>, <password>, <logged>, <name>, <role>, <course>, <lab>, <information>}
+A list to hold courses
+    For example: courses = ["CS250", "CS251", "CS351"]
+And another dictionary to hold labs
+    For example: labs = [{ "course": "CS250", "labs": ["Sec801", "Sec802", "Sec803"] }]
 
 Two required methods:
     class Project:
@@ -38,8 +42,8 @@ Support commands are:
     - if <course> exsit, the response is "<course> already exist!"
     - if <role> is not supervisor or adminstrator, nothing is being added and  return "Your <role> can't add course"
 
-7, createlab <lab>
-    - Makes a new lab section
+7, createlab <course> <lab>
+    - Makes a new lab section for <course>
     - if <lab> doesn't exsit, add the new <lab> and return "<course> has been created"
     - if <lab> exsit, the response is "<lab> already exist!"
     - if <role> is not supervisor or adminstrator, nothing is being added and  return "Your <role> can't add course"
