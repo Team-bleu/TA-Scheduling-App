@@ -76,7 +76,7 @@ class AssignTALab(unittest.TestCase):
         # prompts for logout command
         print("\nNow, logout the user.\n")
         while user_input_list[0] != "logout":
-            # prompts for new user
+            # prompts for logout
             user_input = logout_prompt()
             user_input_list = user_input.split(" ")
             if user_input_list[0] != "logout":
