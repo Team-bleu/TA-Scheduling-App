@@ -4,19 +4,30 @@
 import unittest
 from app import App
 
+auto_input = True
+
 
 def login_prompt():
-    user_input = input("Type: login King admin\n")
+    if auto_input:
+        user_input = "login King admin"
+    else:
+        user_input = input("Type: login King admin\n")
     return user_input
 
 
 def notify_prompt():
-    user_input = input("Type: notify John Don't forget the grades.")
+    if auto_input:
+        user_input = "notify John Don't forget the grades."
+    else:
+        user_input = input("Type: notify John Don't forget the grades.")
     return user_input
 
 
 def logout_prompt():
-    user_input = input("Type: logout\n")
+    if auto_input:
+        user_input = "logout"
+    else:
+        user_input = input("Type: logout\n")
     return user_input
 
 

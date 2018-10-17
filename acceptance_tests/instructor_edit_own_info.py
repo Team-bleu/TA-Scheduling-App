@@ -4,19 +4,30 @@
 import unittest
 from app import App
 
+auto_input = True
+
 
 def login_prompt():
-    user_input = input("Type: login Indigo abcd\n")
+    if auto_input:
+        user_input = "login Indigo abcd"
+    else:
+        user_input = input("Type: login Indigo abcd\n")
     return user_input
 
 
 def edit_prompt():
-    user_input = input("Type: edit Indigo\n")
+    if auto_input:
+        user_input = "edit Indigo"
+    else:
+        user_input = input("Type: edit Indigo\n")
     return user_input
 
 
 def logout_prompt():
-    user_input = input("Type: logout\n")
+    if auto_input:
+        user_input = "logout"
+    else:
+        user_input = input("Type: logout\n")
     return user_input
 
 
@@ -47,7 +58,7 @@ class InstructorEdit(unittest.TestCase):
 
         # checks if user has logged in
         self.assertEqual(app.command(user_input),
-                         users[1].get("username") + " logged in")
+                         users[0].get("username") + " logged in")
 
         # prompts for user to edit information
         print("\nEdit your information.")

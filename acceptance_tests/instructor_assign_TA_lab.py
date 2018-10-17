@@ -4,19 +4,30 @@
 import unittest
 from app import App
 
+auto_input = True
+
 
 def login_prompt():
-    user_input = input("Type: login Indigo abcd\n")
+    if auto_input:
+        user_input = "login Indigo abcd"
+    else:
+        user_input = input("Type: login Indigo abcd\n")
     return user_input
 
 
 def assign_prompt():
-    user_input = input("Type: assignlab John\n")
+    if auto_input:
+        user_input = "assignlab John Sec801"
+    else:
+        user_input = input("Type: assignlab John Sec801\n")
     return user_input
 
 
 def logout_prompt():
-    user_input = input("Type: logout\n")
+    if auto_input:
+        user_input = "logout"
+    else:
+        user_input = input("Type: logout\n")
     return user_input
 
 
