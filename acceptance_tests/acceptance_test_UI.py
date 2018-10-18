@@ -2,7 +2,7 @@ import abc
 from app import App
 
 
-class AcceptanceUI(abc):
+class AcceptanceUI():
     users = [{"username": "John", "password": "4321", "logged": False, "name": "John Will", "role": "TA",
              "course": "CS250", "lab": ["Sec801", "Sec802"],
               "information": {"phone": "414-123-4567", "email": "john@gmail.com",
@@ -19,5 +19,5 @@ class AcceptanceUI(abc):
               "course": None, "lab": None,
               "information": {"phone": "414-000-0000", "email": "luke@gmail.com",
                               "address": "0000 W Super Ave WI Milwaukee, 53222"}}]
+    courses = [{"course": "CS250", "labs": ["Sec801", "Sec802", "Sec803"]}]
     app = App()
-
