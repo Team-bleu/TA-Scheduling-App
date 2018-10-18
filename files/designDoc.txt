@@ -1,5 +1,9 @@
 Data structure:
 A dictionary to hold {<username>, <password>, <logged>, <name>, <role>, <course>, <lab>, <information>}
+    For example: {"username": "John", "password": "4321", "logged": False, "name": "John", "role": "TA",
+                  "course": "CS250", "lab": ["Sec801" "Sec802"],
+                  "information": {"name": "John", "phone": "414-123-4567", "email": "john@gmail.com",
+                                  "address": "1234 W Number St WI Milwaukee, 53222"}}
 A list to hold courses
     For example: courses = ["CS250", "CS251", "CS351"]
 And another dictionary to hold labs
