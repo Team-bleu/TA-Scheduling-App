@@ -1,0 +1,44 @@
+id,ref,subject,description,sprint_id,sprint,sprint_estimated_start,sprint_estimated_finish,owner,owner_full_name,assigned_to,assigned_to_full_name,assigned_users,assigned_users_full_name,status,is_closed,back-points,design-points,front-points,ux-points,total-points,backlog_order,sprint_order,kanban_order,created_date,modified_date,finish_date,client_requirement,team_requirement,attachments,generated_from_issue,external_reference,tasks,tags,watchers,voters,due_date,due_date_reason
+2494988,2,As a supervisor I want to create a new course so that I can assign TA's and instructors.,"A course is made and a TA and instructor is added.
+
+Difficulty: Medium",206220,Sprint 1,2018-10-26,2018-11-08,OGarcia27,Oscar Garcia,,,,,Ready,False,,,,,,2,2,1,2018-10-09 17:25:51.314021+00:00,2018-10-16 17:58:54.764228+00:00,,False,False,0,,,,supervisor,[],0,,
+2495007,3,"As a Supervisor, I want to create accounts and edit those accounts so that I can add TA's and edit their contact info","A TA account is created and their information is updated
+
+Difficulty: High",206220,Sprint 1,2018-10-26,2018-11-08,SirVanish,Yangbee,SirVanish,Yangbee,SirVanish,Yangbee,Ready,False,40.0,,,3.0,43.0,1,1,0,2018-10-09 17:29:32.508741+00:00,2018-10-16 18:02:52.581802+00:00,,False,False,0,,,,supervisor,[],0,,
+2495013,4,"As a Supervisor, I want to delete an account so that the account isn't accessable anymore (for when the employee leaves)","An account is deleted
+Difficulty: High",206220,Sprint 1,2018-10-26,2018-11-08,SirVanish,Yangbee,,,,,New,False,,,,,,8,8,3,2018-10-09 17:30:54.933116+00:00,2018-10-16 17:57:56.946235+00:00,,False,False,0,,,,supervisor,[],0,,
+2495019,5,As a supervisor I want to assign TAs to particular lab sections so that they know what lab to teach.,"A TA is assigned to a lab section.
+Difficulty: Medium",206220,Sprint 1,2018-10-26,2018-11-08,OGarcia27,Oscar Garcia,,,,,New,False,,,,,,4,4,5,2018-10-09 17:31:25.769251+00:00,2018-10-16 17:44:01.308209+00:00,,False,False,0,,,,supervisor,[],0,,
+2495022,6,"As a Supervisor, I want to be able to edit all the accounts of my TAs.","As a Supervisor, I want to be able to edit all the accounts of my TAs.
+Difficulty: High",206220,Sprint 1,2018-10-26,2018-11-08,ComputerDino,Mark,,,,,New,False,,,,,,6,6,6,2018-10-09 17:32:07.950594+00:00,2018-10-16 17:44:07.955873+00:00,,False,False,0,,,,supervisor,[],0,,
+2495028,7,"As a Supervisor, I want to login and logout","As a Supervisor, I want to have a user interface so that I can login and logout my account
+
+Difficulty: Medium",206220,Sprint 1,2018-10-26,2018-11-08,xiangm,Mingren Xiang,,,,,New,False,10.0,10.0,0.0,5.0,25.0,0,0,7,2018-10-09 17:33:51.036005+00:00,2018-10-16 18:01:07.316512+00:00,,False,False,0,,,,supervisor,[],0,,
+2495032,8,"As a supervisor I want to assign TAs to courses so that later, the TAs can be assigned to a lab section","A TA is assigned to a course
+Difficulty: Medium",206220,Sprint 1,2018-10-26,2018-11-08,OGarcia27,Oscar Garcia,,,,,New,False,,,,,,3,3,8,2018-10-09 17:34:19.675471+00:00,2018-10-16 17:43:57.609293+00:00,,False,False,0,,,,supervisor,[],0,,
+2495038,9,"As a Supervisor, I want to access all of the data in the system","As a Supervisor, I want to access all of the data in the system
+Difficulty: High",206220,Sprint 1,2018-10-26,2018-11-08,ComputerDino,Mark,,,,,New,False,,,,,,5,5,9,2018-10-09 17:36:15.924445+00:00,2018-10-16 17:44:04.418521+00:00,,False,False,0,,,,supervisor,[],0,,
+2495039,10,"As a As a Supervisor, I want to send out notification via UWM Email","As a Supervisor, I want to send out notification via UWM Email
+An email is sent to all the stuff TA and  instructor
+Difficulty: Epic",206220,Sprint 1,2018-10-26,2018-11-08,xiangm,Mingren Xiang,,,,,New,False,,,,,,7,7,10,2018-10-09 17:36:57.285559+00:00,2018-10-16 17:44:12.055112+00:00,,False,False,0,,,,,[],0,,
+2495045,11,"As an Administrator, I want to be able to delete accounts.","As an Administrator, I want to be able to delete accounts.",,,,,ComputerDino,Mark,,,,,New,False,,,,,,14,1539106728877,11,2018-10-09 17:38:48.914368+00:00,2018-10-16 17:20:25.648895+00:00,,False,False,0,,,,administrator,[],0,,
+2495046,12,"As an Administrator, I want to create account so that I can add accounts for TA's and instrusctors",An account is made and a TA or instructor is added,,,,,SirVanish,Yangbee,,,,,New,False,,,,,,9,1539106753054,12,2018-10-09 17:39:13.086671+00:00,2018-10-16 17:20:07.870353+00:00,,False,False,0,,,,administrator,[],0,,
+2495047,13,"As an Administrator, I want to send out notifications to users via UWM email","As an Administrator, I want to send out notifications to users via UWM email 
+All users should get a UWM email",,,,,xiangm,Mingren Xiang,,,,,New,False,,,,,,13,1539106788041,13,2018-10-09 17:39:48.069101+00:00,2018-10-16 17:20:31.189304+00:00,,False,False,0,,,,,[],0,,
+2495048,14,"As an Administrator, I want to be able to edit accounts.","As an Administrator, I want to be able to edit accounts.",,,,,ComputerDino,Mark,,,,,New,False,,,,,,12,1539106802218,14,2018-10-09 17:40:02.259742+00:00,2018-10-09 17:40:02.282740+00:00,,False,False,0,,,,administrator,[],0,,
+2495049,15,As an administrator I want to create courses so that later I can assign instructors and TAs to their courses.,A course is created and a TA and instructor is assigned to the course.,,,,,OGarcia27,Oscar Garcia,,,,,New,False,,,,,,10,1539106878885,15,2018-10-09 17:41:18.914983+00:00,2018-10-16 17:20:22.684810+00:00,,False,False,0,,,,administrator,[],0,,
+2495050,16,"As a administrator, I want access all data in the system","As an administrator, I want to access all data in the system  
+A table should be returned with all the data user want",,,,,xiangm,Mingren Xiang,,,,,New,False,,,,,,11,1539106900979,16,2018-10-09 17:41:41.023946+00:00,2018-10-16 17:20:35.573914+00:00,,False,False,0,,,,,[],0,,
+2495054,17,"As an Instructor, I want to edit my own contact information so I can update others on my new contact info",The instructor's contact information is updated,,,,,SirVanish,Yangbee,,,,,New,False,,,,,,18,1539106990801,17,2018-10-09 17:43:10.833152+00:00,2018-10-09 17:43:10.853951+00:00,,False,False,0,,,,instructor,[],0,,
+2495056,18,"As an Instructor, I want to view course assignments so that I can see if any assignments need to be changed",A list of course assignments is brought up to the instructor,,,,,SirVanish,Yangbee,,,,,New,False,,,,,,17,1539107049982,18,2018-10-09 17:44:10.010802+00:00,2018-10-16 17:21:47.163904+00:00,,False,False,0,,,,,[],0,,
+2495059,19,"As an instructor, I want to read public contact information of TA's assigned and my own information","As an instructor, I want to read public contact information of TA's assigned and my own information
+All public contact information from the TA's and other instructors should be print on the screen",,,,,xiangm,Mingren Xiang,,,,,New,False,,,,,,19,1539107085424,19,2018-10-09 17:44:45.461040+00:00,2018-10-09 17:53:16.270706+00:00,,False,False,0,,,,,[],0,,
+2495060,20,As an instructor I want to view TA assignments so that I can communicate to my TA about course information.,An assignments list is returned to the instructor.,,,,,OGarcia27,Oscar Garcia,,,,,New,False,,,,,,16,1539107093174,20,2018-10-09 17:44:53.219639+00:00,2018-10-16 17:21:38.477546+00:00,,False,False,0,,,,,[],0,,
+2495062,21,"As an Instructor, I want to be able to assign my TAs to particular lab sections.","As an Instructor, I want to be able to assign my TAs to particular lab sections.
+
+TA has been assigned to a particular lab section by the instructor.",,,,,ComputerDino,Mark,,,,,New,False,,,,,,15,1539107171420,21,2018-10-09 17:46:11.450598+00:00,2018-10-16 17:21:08.666063+00:00,,False,False,0,,,,instructor,[],0,,
+2495064,22,"As a TA, I want to view all the TA assignments.","As a TA, I want to view all the TA assignments.
+
+Each TA can view all TA assignments.",,,,,ComputerDino,Mark,,,,,New,False,,,,,,20,1539107278054,22,2018-10-09 17:47:58.083486+00:00,2018-10-09 17:47:58.101417+00:00,,False,False,0,,,,ta,[],0,,
+2495066,23,"As a TA, I want to read public contact information of all users","As a TA, I want to read public contact information of all users. All public user information should be printed on the screen",,,,,xiangm,Mingren Xiang,,,,,New,False,,,,,,21,1539107354749,23,2018-10-09 17:49:14.779475+00:00,2018-10-09 17:49:14.798487+00:00,,False,False,0,,,,,[],0,,
+2495067,24,As a TA I want tp edit my own information so that the administrator and supervisor have access to it.,Administrator and supervisor are able to view each TA's information.,,,,,OGarcia27,Oscar Garcia,,,,,New,False,,,,,,22,1539107375466,24,2018-10-09 17:49:35.498273+00:00,2018-10-09 17:49:35.517902+00:00,,False,False,0,,,,,[],0,,
