@@ -2,8 +2,7 @@ import unittest
 from app import App
 
 
-# As a Supervisor, I want to assign a TA a lab section,
-# so that they know what lab they'll teach for the semester
+#3As a Supervisor, I want to create accounts and edit those accounts so that I can add TA's and edit their contact info
 class TestSupCreateAccount(unittest.TestCase):
     app = App()
 
