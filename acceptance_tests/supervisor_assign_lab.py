@@ -16,7 +16,7 @@ class TestSupAssignTALab(unittest.TestCase):
         self.assertEqual(self.app.command("assigncourse John CS250"), "John has been added to the course")
 
     # Then we assign the TA a lab
-    def test_assign_course(self):
+    def test_assign_lab(self):
         self.assertEqual(self.app.command("assignlab  John Sec801"), "John has been added to Sec801")
 
     # Then we have them logout
