@@ -15,3 +15,4 @@ class TestSupNotify(unittest.TestCase):
     def test_notify(self):
 		self.assertEqual(self.app.command("notify John Classes are cancelled today!"), "Email has been sent.")
     def test_logout(self):
+        self.assertEqual(self.app.command("logout"), "James logged out")
