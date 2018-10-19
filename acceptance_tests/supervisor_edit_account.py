@@ -4,7 +4,7 @@ from app import App
 
 #6.
 
-#As a supervisor I want to create a new course so that I can assign TA's and instructors.
+#As a Supervisor, I want to be able to edit all the accounts of my TAs.
 
 class TestSupEditAccount(unittest.TestCase):
 
