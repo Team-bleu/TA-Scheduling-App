@@ -9,10 +9,11 @@ from app import App
 class TestAdminEditAccount(unittest.TestCase):
 
     app = App()
-
+    # Mary is an administrator
 	def test_login(self):
-        self.assertEqual(self.app.command("login James password"), "James logged in")
+        self.assertEqual(self.app.command("login Mary password"), "Mary logged in")
     def test_edit_account(self):
+        # John is a TA
 		self.assertEqual(self.app.command("edit John"), "John's information has been updated")
     def test_logout(self):
-    self.assertEqual(self.app.command("logout"), "James logged out")
+        self.assertEqual(self.app.command("logout"), "Mary logged out")

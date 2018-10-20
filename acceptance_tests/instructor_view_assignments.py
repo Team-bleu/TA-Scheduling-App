@@ -9,10 +9,15 @@ from app import App
 class TestInstructorViewAssignments(unittest.TestCase):
 
     app = App()
-
+    # Peter is an instructor
 	def test_login(self):
-        self.assertEqual(self.app.command("login James password"), "James logged in")
-    def test_notify(self):
-		self.assertEqual(self.app.command("view CS351"), "viewed CS351 assignments")
+        self.assertEqual(self.app.command("login Peter password"), "Peter logged in")
+    def test_view(self):
+		self.assertEqual(self.app.command("viewassignment CS351"), "viewed assignments for CS351")
+        #Sally and John are TAs
+        self.assertEqual(self.app.command("viewassignment Sally"), "viewed assignments for Sally")
+        self.assertEqual(self.app.command("viewassignment John"), "viewed assignments for John")
+        #not valid name
+        self.assertEqual(self.app.command("viewassignment djofn"), "djofn does not exist")
     def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "James logged out")
+        self.assertEqual(self.app.command("logout"), "Peter logged out")
