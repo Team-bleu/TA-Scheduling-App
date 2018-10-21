@@ -8,19 +8,17 @@ from app import App
 class SupAssignTALab(unittest.TestCase):
     app = App()
 
-    # First we have the Supervisor, Luke, login
-    # with <username>: Luke and <password>: password
+    # First we have the Administrator, Indigo, login
+    # with <username>: Indigo and <password>: admin
     def test_login(self):
-        self.assertEqual(self.app.command("login Luke password"), "Luke logged in")
+        self.assertEqual(self.app.command("login Indigo admin"), "Indigo logged in")
 
-    # Then we have Luke assign the TA, John, the course, CS250
-    def test_assign_course(self):
-        self.assertEqual(self.app.command("assigncourse John CS250"), "John has been added to the course")
+    # Then we have the Admin, Indigo, send a
+    # notification to John, a TA
+    def test_notify(self):
+        self.assertEqual(self.app.command("notify John Don't forget to grade the assignments"),
+                         "email has been sent")
 
-    # Then we assign the TA, John, a lab section from that course, Sec801
-    def test_assign_course(self):
-        self.assertEqual(self.app.command("assignlab  John Sec801"), "John has been added to Sec801")
-
-    # Then we have the Supervisor logout
+    # Then we have the Admin logout
     def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Luke logged out")
+        self.assertEqual(self.app.command("logout"), "Indigo logged out")
