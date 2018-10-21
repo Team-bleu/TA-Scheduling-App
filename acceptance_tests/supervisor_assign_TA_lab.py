@@ -19,7 +19,7 @@ class SupAssignTALab(unittest.TestCase):
 
     # Then we assign the TA, John, a lab section from that course, Sec801
     def test_assign_course(self):
-        self.assertEqual(self.app.command("assignlab  John Sec801"), "John has been added to Sec801")
+        self.assertEqual(self.app.command("assignlab John Sec801"), "John has been added to Sec801")
 
     # Then we have the Supervisor logout
     def test_logout(self):
