@@ -5,7 +5,7 @@ from app import App
 # 21.
 # As an Instructor, I want to assign my TA a lab section,
 # so that they know what lab they'll teach for the semester
-class SupAssignTALab(unittest.TestCase):
+class InstructAssignTALab(unittest.TestCase):
     app = App()
 
     # with <username>: Guy and <password>: abc123
