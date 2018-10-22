@@ -10,10 +10,10 @@ class TestInstructorViewAssignments(unittest.TestCase):
 
     app = App()
     # Peter is an instructor
-	def test_login(self):
+    def test_login(self):
         self.assertEqual(self.app.command("login Peter password"), "Peter logged in")
     def test_view(self):
-		self.assertEqual(self.app.command("viewassignment CS351"), "viewed assignments for CS351")
+        self.assertEqual(self.app.command("viewassignment CS351"), "viewed assignments for CS351")
         #Sally and John are TAs
         self.assertEqual(self.app.command("viewassignment Sally"), "viewed assignments for Sally")
         self.assertEqual(self.app.command("viewassignment John"), "viewed assignments for John")

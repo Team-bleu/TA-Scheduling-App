@@ -3,7 +3,7 @@ from app import App
 
 
 #15 As an administrator I want to create courses so that later I can assign instructors and TAs to their courses.
-class TestSupCreateAccount(unittest.TestCase):
+class TestAdmCreateAccount(unittest.TestCase):
     app = App()
 
     # First we have the admin login

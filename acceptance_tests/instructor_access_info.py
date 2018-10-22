@@ -6,7 +6,7 @@ from app import App
 
 # 19 As an instructor, I want to read public contact information of TA's assigned and my own information
 #All public contact information from the TA's and other instructors should be print on the screen
-class TestSupCreateAccount(unittest.TestCase):
+class TestInsAccessInfo(unittest.TestCase):
     app = App()
     infor = {"username": "John", "role": "TA", "phone": "999-930-9999", "email":"john@uwm.edu", "course" : "cs250",
              "lab": "section802"}

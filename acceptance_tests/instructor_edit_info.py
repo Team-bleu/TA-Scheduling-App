@@ -5,7 +5,7 @@ from app import App
 # 17.
 # As an Instructor, I want to edit my own information,
 # so that others know that I've updated my new phone and address
-class InstructEdit(unittest.TestCase):
+class TestInstructEdit(unittest.TestCase):
     app = App()
 
     # First we have an Instructor, Guy, login

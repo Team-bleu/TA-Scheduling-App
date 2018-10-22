@@ -11,7 +11,7 @@ class TestSupEditAccount(unittest.TestCase):
     app = App()
 
     # James is a supervisor
-	def test_login(self):
+    def test_login(self):
         self.assertEqual(self.app.command("login James password"), "James logged in")
     def test_edit_account(self):
         # John is a TA

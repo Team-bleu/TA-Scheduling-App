@@ -5,7 +5,7 @@ from app import App
 # 13.
 # As an Administrator, I want to send out notifications
 # via email, so that I can update people with new information
-class AdminNotify(unittest.TestCase):
+class TestAdminNotify(unittest.TestCase):
     app = App()
 
     # First we have the Administrator, Indigo, login
