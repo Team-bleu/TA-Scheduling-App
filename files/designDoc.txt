@@ -88,5 +88,9 @@ Support commands are:
     - check <role>
     - if <role> is Supervisor or Administrator, then also display the private information of <name>
 
-13, quit
+13, view<course>
+    - Shows all the TA's assigned to <course>
+    - Response is "<course>, TA's: (List of TA's)"
+
+14, quit
     - change <logged> to false, then quit the session
