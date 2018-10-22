@@ -54,7 +54,7 @@ Support commands are:
 
 8, assigncourse <name> <course>
     - if <role> is not supervisor or administrator, the course is not assigned and display "Do not have permission"
-    - Assigns a user to a course, displays <name> has been added to <course>
+    - Assigns a user to a course, displays "<name> has been added to <course>""
     - if <course> doesn't exist, display "<course> does not exist"
     - check users and if <name> doesn't exist, display "<name> doesn't exist"
 

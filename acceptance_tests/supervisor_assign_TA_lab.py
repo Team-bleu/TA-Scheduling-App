@@ -15,7 +15,7 @@ class SupAssignTALab(unittest.TestCase):
 
     # Then we have Luke assign the TA, John, the course, CS250
     def test_assign_course(self):
-        self.assertEqual(self.app.command("assigncourse John CS250"), "John has been added to the course")
+        self.assertEqual(self.app.command("assigncourse John CS250"), "John has been added to CS250")
 
     # Then we assign the TA, John, a lab section from that course, Sec801
     def test_assign_course(self):
