@@ -17,8 +17,8 @@ class InstructEdit(unittest.TestCase):
     # (should display a dictionary for the info)
     def test_assign_course(self):
         self.assertEqual(self.app.command("show Guy"), {"name": "Guy", "phone": "414-111-2222",
-                                                         "email": "guy@gmail.com",
-                                                         "address": "4567 W 1st St, Milwaukee WI, 53255"})
+                                                        "email": "guy@gmail.com",
+                                                        "address": "4567 W 1st St, Milwaukee WI, 53255"})
 
     # Then we want the Instructor, Guy, to
     # change that information
@@ -28,8 +28,8 @@ class InstructEdit(unittest.TestCase):
     # The new information should be updated even when viewed
     def test_assign_course(self):
         self.assertEqual(self.app.command("show Guy"), {"name": "Guy", "phone": "414-222-1111",
-                                                         "email": "guy@gmail.com",
-                                                         "address": "4567 W 1st St, Milwaukee WI, 53255"})
+                                                        "email": "guy@gmail.com",
+                                                        "address": "4567 W 1st St, Milwaukee WI, 53255"})
 
     # Then we have the Instructor logout
     def test_logout(self):
