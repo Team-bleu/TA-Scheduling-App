@@ -14,7 +14,7 @@ class CommandsList:
 
     # This method checks the user input to
     # see if we have a matching command
-    def check_command(self, user_input):
+    def check_command(self, user_input, users, courses, labs):
 
         # This parses the user's input
         user_input_list = self.parse_user_input(user_input)
@@ -24,4 +24,4 @@ class CommandsList:
         # find matching command for action
         for command in self.commands:
             if command.isCommand(self, cmd):
-                return command.action(self, user_input_list)
+                return command.action(self, user_input_list, users, courses, labs)

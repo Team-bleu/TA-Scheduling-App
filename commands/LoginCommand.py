@@ -3,7 +3,7 @@ from Command import Command
 
 class LoginCommand(Command):
 
-    def action(self):
+    def action(self, user_input_list, users, courses, labs):
         pass
 
     def isCommand(self, command):

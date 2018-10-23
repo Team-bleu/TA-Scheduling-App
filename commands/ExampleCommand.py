@@ -9,9 +9,9 @@ from Command import Command
 # matches.
 class ExampleCommand(Command):
 
-    def action(self, user_input_list):
+    def action(self, user_input_list, users, courses, labs):
         print("This is the example command")
-        return "\nThis is the output string"
+        return "This is the output string"
 
     def isCommand(self, command):
         return command == "example"
