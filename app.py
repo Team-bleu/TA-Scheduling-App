@@ -14,7 +14,7 @@ class App:
         response = self.commands.check_command(user_input, self.users, self.courses, self.labs)
 
         # This checks if response is a string, if not then, print nothing
-        # (otherwise, it'll print None every time an incorrect command is used
+        # (otherwise, it'll print None every time an incorrect command is used)
         if response:
             print(response)
 
