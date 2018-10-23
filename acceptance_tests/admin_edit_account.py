@@ -14,6 +14,6 @@ class TestAdminEditAccount(unittest.TestCase):
         self.assertEqual(self.app.command("login Mary password"), "Mary logged in")
     def test_edit_account(self):
         # John is a TA
-        self.assertEqual(self.app.command("edit John"), "John's information has been updated")
+        self.assertEqual(self.app.command("edit John"), "information updated")
     def test_logout(self):
         self.assertEqual(self.app.command("logout"), "Mary logged out")

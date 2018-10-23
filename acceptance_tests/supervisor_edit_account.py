@@ -13,6 +13,6 @@ class TestSupEditAccount(unittest.TestCase):
     def test_login(self):
         self.assertEqual(self.app.command("login James password"), "James logged in")
     def test_edit_account(self):
-        self.assertEqual(self.app.command("edit John"), "John's information has been updated") # John is a TA
+        self.assertEqual(self.app.command("edit John"), "information updated") # John is a TA
     def test_logout(self):
         self.assertEqual(self.app.command("logout"), "James logged out")
