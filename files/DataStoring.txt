@@ -1,0 +1,61 @@
+
+HOW WE WILL STORE THE DATA:
+
+There will be four files for the users, one for each role:
+one file for Supervisors
+one file for Administrators
+one file for Instructors
+one file for TAs
+
+*The users within the files will be organized in alphabetical order
+
+Each user will contain their user information:
+First name, Last name, username, password, role, phone, email, address, courses, labs, assignments (if no assignments, write none)
+
+*if multiple courses, labs, or assignments, they are seperated by commas. ','
+
+The user files themselves will be organized like so:
+There will be a two code strings to separate users
+Start of user = "!@#$"
+End of user   = "$#@!"          (we may use a loop instead, but proceed for now)
+
+
+So an example file will look like this:
+
+!@#$                            //start of user 1
+James                                       //firstname
+Peterson                                    //lastname
+jkpeter                                     //username
+hello123                                    //password
+Instructor                                  //role
+4145671234                                  //phone number
+jamespeterson@uwm.edu                       //email
+N76W3424 Lake Drive, Milwaukee, WI 53211    //address
+CS351,CS251                                 //courses
+CS351-801,CS351-802                         //labs
+none                                        //assignments
+$#@!                            //end of user 1
+!@#$                            //start of user 2
+Sally
+Waters
+shwater
+1sallyP1
+TA
+4141234567
+swaters@uwm.edu
+N76W3424 UWM Drive, Milwaukee, WI 53211
+CS459,CS251,CS351
+CS459-802,CS251-801
+CS459-Assignment02,CS251-Assignment03
+$#@!                            //end of user 2
+
+//run until end of file
+
+
+When the program needs information for a particular user, it will go to their
+designated file (based on their role) and search for them
+
+
+
+
+
