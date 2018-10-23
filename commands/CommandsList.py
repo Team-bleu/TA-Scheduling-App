@@ -2,6 +2,9 @@ from ExampleCommand import ExampleCommand
 from LoginCommand import LoginCommand
 
 
+# This class stores all of the commands
+# and cycles through them to retrieve
+# the correct response when called upon
 class CommandsList:
     commands = [ExampleCommand, LoginCommand]
 
