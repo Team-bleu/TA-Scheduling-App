@@ -24,4 +24,4 @@ class CommandsList:
         # find matching command for action
         for command in self.commands:
             if command.isCommand(self, cmd):
-                command.action(self, user_input_list)
+                return command.action(self, user_input_list)

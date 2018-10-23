@@ -11,7 +11,7 @@ class ExampleCommand(Command):
 
     def action(self, user_input_list):
         print("This is the example command")
-        return
+        return "\nThis is the output string"
 
     def isCommand(self, command):
         return command == "example"
