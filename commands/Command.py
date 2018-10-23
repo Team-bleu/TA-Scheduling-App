@@ -5,10 +5,10 @@ class Command(abc.ABC):
 
     # This performs the action of the command
     @classmethod
-    def action(self):
+    def action(cls, user_input_list):
         pass
 
     # This checks if the command matches user's input
     @classmethod
-    def isCommand(self, command):
+    def isCommand(cls, command):
         pass
