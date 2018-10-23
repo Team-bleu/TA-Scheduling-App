@@ -22,6 +22,7 @@ from TA_edit_info import TestTAInfo
 from TA_access_info import TestTAAcessInfo
 from TA_view_assignments import TestTAViewAssignments
 
+
 def main_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestSupAssignTALab))
