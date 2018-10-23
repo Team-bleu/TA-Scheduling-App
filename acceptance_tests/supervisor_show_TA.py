@@ -5,7 +5,7 @@ from app import App
 # 9.
 # As a Supervisor, I want to access to all
 # data in the system, so that I can view or edit data
-class SupShow(unittest.TestCase):
+class TestSupShow(unittest.TestCase):
     app = App()
 
     # First we have the Supervisor, Luke, login

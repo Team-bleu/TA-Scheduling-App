@@ -6,7 +6,7 @@ from app import App
 
 # 23 As an TA, I want to read public contact information of the users
 #All public contact information from the TA's and other instructors should be print on the screen
-class TestSupCreateAccount(unittest.TestCase):
+class TestTAAcessInfo(unittest.TestCase):
     app = App()
     # First we have the instructor login
     def test_login(self):
