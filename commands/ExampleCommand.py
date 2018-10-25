@@ -11,6 +11,7 @@ class ExampleCommand(Command):
 
     def action(self, user_input_list, user, courses, labs):
         print("This is the example command")
+        Command.printExample(self)
         return "This is the output string"
 
     def isCommand(self, command):
