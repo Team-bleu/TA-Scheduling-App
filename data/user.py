@@ -3,11 +3,10 @@
 class User:
 
     def __init_(self, firstname=None, lastname=None, username=None, password=None,
-                logged=False, role=None, course=None, lab=None, information=None,
-                assignment=None):
+                role=None, information=None, course=None, lab=None,
+                assignment=None, parent= None, leftChild = None, rightChild = None):
         self.setName(firstname, lastname)
         self.setAccount(username, password)
-        self.setLogged(logged)
         self.setRole(role)
         self.setClass(course, lab)
         self.setInfo(information)
@@ -32,12 +31,6 @@ class User:
 
     def getPassword(self):
         return self.password
-
-    def setLogged(self, logged):
-        self.logged = logged
-
-    def getLogged(self):
-        return self.logged
 
     def setRole(self, role):
         self.role = role
