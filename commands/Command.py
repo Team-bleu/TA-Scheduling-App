@@ -5,7 +5,7 @@ class Command(abc.ABC):
 
     # This performs the action of the command
     @classmethod
-    def action(cls, user_input_list, users, courses, labs):
+    def action(cls, user_input_list, user, courses, labs):
         pass
 
     # This checks if the command matches user's input

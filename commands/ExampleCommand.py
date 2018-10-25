@@ -9,7 +9,7 @@ from Command import Command
 # matches.
 class ExampleCommand(Command):
 
-    def action(self, user_input_list, users, courses, labs):
+    def action(self, user_input_list, user, courses, labs):
         print("This is the example command")
         return "This is the output string"
 
