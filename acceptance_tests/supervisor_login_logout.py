@@ -3,7 +3,7 @@ from app import App
 
 
 #7 a Supervisor, I want to have a user interface so that I can login and logout my account
-class TestSupCreateAccount(unittest.TestCase):
+class TestSupLoginLogout(unittest.TestCase):
     app = App()
 
     # First we have the Supervisor login

@@ -7,13 +7,12 @@ from app import App
 #As a TA, I want to view all the TA assignments.
 
 class TestTAViewAssignments(unittest.TestCase):
-
     app = App()
     # Paul is a TA
-	def test_login(self):
+    def test_login(self):
         self.assertEqual(self.app.command("login Paul password"), "Paul logged in")
     def test_view(self):
-		self.assertEqual(self.app.command("viewassignment Paul"), "viewed assignments for Paul")
+        self.assertEqual(self.app.command("viewassignment Paul"), "viewed assignments for Paul")
         # Sally is another TA
         self.assertEqual(self.app.command("viewassignment Sally"), "viewed assignments for Sally")
         # TAs cannot view course assignments
