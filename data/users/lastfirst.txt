@@ -1,0 +1,14 @@
+last
+first
+user
+pass
+role
+phone
+email
+address
+course
+lab
+None
+None
+leftguy.txt
+rightdude.txt

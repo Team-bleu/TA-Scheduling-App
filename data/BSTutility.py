@@ -1,56 +1,80 @@
-
 from user import User
+
 
 class BSTUtility:
 
+    _user = None
+    _root = None
+    _current = None
+    _parent = None
+    _leftChild = None
+    _rightChild = None
 
-    _user = None;
-    _root = None;
-    _current = None;
-    _parent = None;
-    _leftChild = None;
-    _rightChild = None;
-    _currentFile = None;
+    def __init__(self):
+        self.setUp()
 
-#    def __init__(self):
-#        pass
+    # Sets up the Binary Search Tree Utility, will retrieve
+    # a root, current, left child, and right child
+    def setUp(self):
+        self._root = self.setUpRoot()
+        self._current = self._root
+        self._leftChild = self.getLeftChild()
+        self._rightChild = self.getRightChild()
 
+    # This function is used to append two strings together
+    # In particular, this function appends a directory with a file
+    def append(self, directory, file):
+        return directory + file
 
-    def getRoot(self):
-        rootFile = ""
-        rootFile = open("root.txt", "r+")
-        rootName = rootFile.readlines()
-        rootFile = rootName[0]
-        currentFile = rootFile
-        print(rootFile)
-        print(rootName)
-        print(currentFile)
+    # This function removes the newline character
+    def removeNewLine(self, contents):
+        i = 0
+        for content in contents:
+            contents[i] = content.replace("\n", "")
+            i += 1
+        return contents
 
-    def getUser(self, username):
-        pass
-        #if (_currentFile == username):
-        #    return _currentFile
-        #else:
-        #    if (username < _currentFile):
-               # _current = _current.leftChild
+    def setUpRoot(self):
+        # Opens the root text file which
+        # stores the name of the root file
+        root = open("users/root.txt", "r+")
+        rootname = root.readlines()
 
-    def openCurrent(self):
-        file = open(self._currentFile, "r+")
-        rfile = file.readlines()
-        _current = User(rfile[0], rfile[1], rfile[2], rfile[3], rfile[4],
-                        [rfile[5], rfile[6], rfile[7]], rfile[8], rfile[9], rfile[10],
-                        rfile[11], rfile[12], rfile[13])
-        print(_current)
-        self._parent = getParent()          #getContents(_current.getParent())
-        self._leftChild = getLeftChild()   #getContents(_current.getLeftChild())
-        self._rightChild = getRightChild() #getContents(_current.getRightChild())
+        # Opens the root file
+        rootname = self.append("users/", rootname[0])
+        file = open(rootname, "r+")
+        contents = file.readlines()
+        self.removeNewLine(contents)
 
-    def getLeft(self):
-         pass#_current
+        return self.createUser(contents)
 
+    # Will create new user with contents following a list in the format:
+    # (firstname, lastname, username, password ,
+    # role, information(phone, email, and address), course, lab,
+    # assignment, parent, leftChild, rightChild)
+    def createUser(self, contents):
+        return User(contents[0], contents[1], contents[2], contents[3], contents[4],
+                    [contents[5], contents[6], contents[7]], contents[8], contents[9],
+                    contents[10], contents[11], contents[12], contents[13])
 
+    # This function grabs the left child based off of the _current
+    def getLeftChild(self):
+        filename = self._current.getLeftChild()
+        filename = self.append("users/", filename)
+        file = open(filename, "r+")
+        contents = file.readlines()
+        self.removeNewLine(contents)
+        return self.createUser(contents)
 
+    # This function grabs the left child based off of the _current
+    def getRightChild(self):
+        filename = self._current.getRightChild()
+        filename = self.append("users/", filename)
+        file = open(filename, "r+")
+        contents = file.readlines()
+        self.removeNewLine(contents)
+        return self.createUser(contents)
 
 obj = BSTUtility()
-obj.getRoot()
-obj.openCurrent(obj._current)
+obj.setUpRoot()
+print("done")
