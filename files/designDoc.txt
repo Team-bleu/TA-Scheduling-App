@@ -88,9 +88,12 @@ Support commands are:
     - check <role>
     - if <role> is Supervisor or Administrator, then also display the private information of <name>
 
-13, view<course>
-    - Shows all the TA's assigned to <course>
-    - Response is "<course>, TA's: (List of TA's)"
+13, viewassignment <name>
+    -if <name> doesn't exist, display "<name> doesn't exist"
+    -if <name> is a TA, view their assignments
+    -if the user is a TA, they can only view TA assignments
+    -if the user is an instructor, they can provide a <course> instead of <name> and view the assignments for that course
+    -if the user is a TA and they provide a <course>, display "Do not have permission"
 
-14, quit
+13, quit
     - change <logged> to false, then quit the session
