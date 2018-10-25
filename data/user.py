@@ -3,13 +3,15 @@
 class User:
 
     def __init_(self, firstname=None, lastname=None, username=None, password=None,
-                logged=False, role=None, course=None, lab=None, information=None):
+                logged=False, role=None, course=None, lab=None, information=None,
+                assignment=None):
         self.setName(firstname, lastname)
         self.setAccount(username, password)
         self.setLogged(logged)
         self.setRole(role)
         self.setClass(course, lab)
         self.setInfo(information)
+        self.setAssignment(assignment)
 
     def setName(self, firstname, lastname):
         self.firstname = firstname
@@ -58,3 +60,9 @@ class User:
 
     def getInfo(self):
         return self.information
+
+    def setAssignment(self, assignment):
+        self.assignment = assignment
+
+    def getAssignment(self):
+        return self.assigment
