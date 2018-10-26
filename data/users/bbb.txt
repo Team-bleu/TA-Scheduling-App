@@ -1,6 +1,6 @@
 last
 first
-user
+bbb
 pass
 role
 phone
@@ -10,5 +10,5 @@ course
 lab
 None
 None
-leftguy.txt
-rightdude.txt
+aaaa.txt
+findme.txt

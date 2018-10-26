@@ -59,6 +59,9 @@ class BSTUtility:
 
     # This function grabs the left child based off of the _current
     def getLeftChild(self):
+        # If no left child exists return immediately
+        if self._current.getLeftChild() == "None":
+            return User()
         filename = self._current.getLeftChild()
         filename = self.append("users/", filename)
         file = open(filename, "r+")
@@ -68,6 +71,9 @@ class BSTUtility:
 
     # This function grabs the left child based off of the _current
     def getRightChild(self):
+        # If no right child exists return immediately
+        if self._current.getRightChild() == "None":
+            return User()
         filename = self._current.getRightChild()
         filename = self.append("users/", filename)
         file = open(filename, "r+")
@@ -75,6 +81,37 @@ class BSTUtility:
         self.removeNewLine(contents)
         return self.createUser(contents)
 
+    def searchUser(self, username):
+        if username == self._current.getUsername():
+            return self._current
+        elif username < self._current.getUsername():
+            self.traverseLeft()
+            return self.searchUser(username)
+        else:
+            self.traverseRight()
+            return self.searchUser(username)
+
+    def traverseLeft(self):
+        self._parent = self._current
+        self._current = self._leftChild
+        self._leftChild = self.getLeftChild()
+        self._rightChild = self.getRightChild()
+
+    def traverseRight(self):
+        self._parent = self._current
+        self._current = self._rightChild
+        self._leftChild = self.getLeftChild()
+        self._rightChild = self.getRightChild()
+
+
 obj = BSTUtility()
 obj.setUpRoot()
 print("done")
+
+# This is rightdude.txt and should print an object pointing to it and name in file
+user = obj.searchUser("findme")
+print(user)
+print("first name: " + user.getFirstName())
+print("last name: " + user.getLastName())
+print("found username: " + user.getUsername())
+
