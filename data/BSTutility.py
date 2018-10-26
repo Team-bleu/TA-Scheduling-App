@@ -122,12 +122,17 @@ class BSTUtility:
         pass
 
 
+# This tests the utility
 obj = BSTUtility()
 obj.setUpRoot()
-print("done")
+print("root is " + obj._root.getUsername())
+print("left child is " + obj._leftChild.getUsername())
+print("right child is " + obj._rightChild.getUsername())
+print("done\n")
 
-# This is rightdude.txt and should print an object pointing to it and name in file
+# This is findme.txt and should print an object pointing to it and name in file
 user = obj.searchUser("findme")
+print("searched for user: findme and obtained object:")
 print(user)
 print("first name: " + user.getFirstName())
 print("last name: " + user.getLastName())
