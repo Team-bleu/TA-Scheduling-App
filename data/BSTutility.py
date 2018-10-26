@@ -81,6 +81,22 @@ class BSTUtility:
         self.removeNewLine(contents)
         return self.createUser(contents)
 
+    # This function traverses the left subtree
+    def traverseLeft(self):
+        self._parent = self._current
+        self._current = self._leftChild
+        self._leftChild = self.getLeftChild()
+        self._rightChild = self.getRightChild()
+
+    # This function traverses the right subtree
+    def traverseRight(self):
+        self._parent = self._current
+        self._current = self._rightChild
+        self._leftChild = self.getLeftChild()
+        self._rightChild = self.getRightChild()
+
+    # This function searches for the user, username
+    # This is a recursive method
     def searchUser(self, username):
         if username == self._current.getUsername():
             return self._current
@@ -91,17 +107,19 @@ class BSTUtility:
             self.traverseRight()
             return self.searchUser(username)
 
-    def traverseLeft(self):
-        self._parent = self._current
-        self._current = self._leftChild
-        self._leftChild = self.getLeftChild()
-        self._rightChild = self.getRightChild()
+    # This function should add a user, username
+    # Must traverse the tree to find the correct spot
+    # to be in, will update parent, left child, and
+    # right child of self and surrounding neighbors
+    def addUser(self, username):
+        pass
 
-    def traverseRight(self):
-        self._parent = self._current
-        self._current = self._rightChild
-        self._leftChild = self.getLeftChild()
-        self._rightChild = self.getRightChild()
+    # This function should remove a user, username
+    # Must traverse the tree to find the correct user
+    # to remove, will update parent, left child, and
+    # right child of self and surrounding neighbors
+    def removeUser(self, username):
+        pass
 
 
 obj = BSTUtility()
