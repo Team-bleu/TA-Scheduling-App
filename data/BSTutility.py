@@ -1,4 +1,5 @@
 from user import User
+import os
 
 
 class BSTUtility:
@@ -57,6 +58,9 @@ class BSTUtility:
                     [contents[5], contents[6], contents[7]], contents[8], contents[9],
                     contents[10], contents[11], contents[12], contents[13])
 
+    def createEmptyUser(self):
+        return User()
+
     # This function grabs the left child based off of the _current
     def getLeftChild(self):
         # If no left child exists return immediately
@@ -95,9 +99,12 @@ class BSTUtility:
         self._leftChild = self.getLeftChild()
         self._rightChild = self.getRightChild()
 
-    # This function searches for the user, username
+    # This function searches for the user,
+    # using their username and returns a User object
     # This is a recursive method
     def searchUser(self, username):
+        if self._current.getUsername() == "None":
+            return self.createEmptyUser()
         if username == self._current.getUsername():
             return self._current
         elif username < self._current.getUsername():
@@ -111,8 +118,37 @@ class BSTUtility:
     # Must traverse the tree to find the correct spot
     # to be in, will update parent, left child, and
     # right child of self and surrounding neighbors
-    def addUser(self, username):
-        pass
+    def updateUser(self, user):
+        username = user.getUsername()
+        newuser = self.searchUser(username)
+
+        # If user doesn't exist, create a new user
+        if newuser.getUsername() == "None":
+            self.addUser(user)
+
+        # If user exists update current existing user
+        else:
+            # Make sure the pointers are set correctly
+            user.setParent(self._parent)
+            user.setLeftChild(self._leftChild)
+            user.setRightChild(self._rightChild)
+
+            # Then remove that user and replace it with an updated one
+            os.remove(user.getUsername() + ".txt")
+            self.addUser(user)
+
+
+    def addUser(self, user):
+        # Update the new location to get a parent pointer
+        location = self.searchUser(user)
+        user.setParent(self._parent)
+
+        # Creates a new file to store the new user
+        file = open(user.getUsername() + ".txt", "w+")
+        contents = user.getContents(user)
+        for content in contents:
+            file.write(content)
+
 
     # This function should remove a user, username
     # Must traverse the tree to find the correct user
@@ -138,3 +174,10 @@ print("first name: " + user.getFirstName())
 print("last name: " + user.getLastName())
 print("found username: " + user.getUsername())
 
+# This is used to see if we can find a non-existing user
+user = obj.searchUser("dontexist")
+print("\nthe username dontexist, doesn't exist; and the object made form it is:")
+print(user)
+print("first name: " + user.getFirstName())
+print("last name: " + user.getLastName())
+print("found username: " + user.getUsername())
