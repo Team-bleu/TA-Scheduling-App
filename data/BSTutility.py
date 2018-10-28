@@ -169,7 +169,7 @@ class BSTUtility:
         # correct after the addition of the new user
         file = user.getUsername() + ".txt"
         if (file != self._parent.getLeftChild()) and \
-                (file!= self._parent.getRightChild()):
+                (file != self._parent.getRightChild()):
             if self._parent.getUsername() + ".txt" > file:
                 self._parent.setLeftChild(file)
             else:
@@ -180,50 +180,44 @@ class BSTUtility:
     # Must traverse the tree to find the correct user
     # to remove, will update parent, left child, and
     # right child of self and surrounding neighbors
-    def removeUser(self, user):
-        # Update the location of user
-        location = self.searchUser(user)
+    def removeUser(self, username):
+        # Reset positions and update the location of user
+        self.setUp()
+        user = self.searchUser(username)
+        file = username + ".txt"
 
         # If that user doesn't exist in the tree
         # ignore and return nothing
-        if location.getUsername() == "None":
+        if user.getUsername() == "None":
             return
 
         # If the user to be removed is the parent's left child,
         # replace the parent's left child with the current's left child
-        username = user.getUsername()
-        if username + ".text" == self._parent.getLeftChild():
-            self._parent.setLeftChild(username + ".txt")
+        if file == self._parent.getLeftChild():
+            self._parent.setLeftChild(user.getLeftChild())
             self.updateUser(self._parent)
 
             # Then search the right subtree of the parent to store
             # the right subtree of current
-            right = user.getRightChild()
-            file = right.getUsername + ".txt"
-            self.updateUser(right)
-            if self._parent.getLeftChild() == right.getUsername() + ".txt":
-                self._parent.setLeftChild(file)
-            else:
-                self._parent.setRightChild(file)
+            right = self.getRightChild()
+            if right.getUsername() != "None":
+                self.updateUser(right)
 
         # Otherwise, the user to be removed is the parent's right child
         # and replace the parent's right child with the current's right child
         else:
-            self._parent.setRightChild(username + ".txt")
+            self._parent.setRightChild(user.getRightChild())
             self.updateUser(self._parent)
 
             # Then search the left subtree of the parent to store the
             # left subtree of current
-            left = user.getLeftChild()
-            file = left.getUsername() + ".txt"
-            self.updateUser(left)
-            if self._parent.getLeftChild() == left.getUsername() + ".txt":
-                self._parent.setLeftChild(file)
-            else:
-                self._parent.setRightChild(file)
+            left = self.getLeftChild()
+            if left.getUsername() != "None":
+                self.updateUser(left)
 
         # Finally, remove the user
-        os.reomve(user.getUsername() + ".txt")
+        file = "users/" + user.getUsername() + ".txt"
+        os.remove(file)
 
 
 # This tests the utility
@@ -250,14 +244,16 @@ print("first name: " + user.getFirstName())
 print("last name: " + user.getLastName())
 print("found username: " + user.getUsername())
 
-# This is to test the functionality of updateUser
-obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
-                    "None", "None", "None", "None"))
-# This is to test the functionality of addUser
-obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
-                    "None", "None", "None", "None"))
-obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
-                    "None", "None", "None", "None"))
+# # This is to test the functionality of updateUser
+# obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
+#                     "None", "None", "None", "None"))
+# # This is to test the functionality of addUser
+# obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
+#                     "None", "None", "None", "None"))
+# obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
+#                     "None", "None", "None", "None"))
+
 # To test correctly, delete guy.txt before running this code
-#obj.updateUser(User("THe", "Guy", "guy", "pass", "role", ["phone", "email", "address"], "course", "lab",
-#                   "None", "None", "None", "None"))
+obj.updateUser(User("THe", "Guy", "guy", "pass", "role", ["phone", "email", "address"], "course", "lab",
+                    "None", "None", "None", "None"))
+obj.removeUser("guy")
