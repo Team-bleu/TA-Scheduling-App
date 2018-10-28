@@ -38,7 +38,7 @@ class BSTUtility:
     def setUpRoot(self):
         # Opens the root text file which
         # stores the name of the root file
-        root = open("users/root.txt", "r+")
+        root = open("root.txt", "r+")
         rootname = root.readlines()
 
         # Opens the root file
@@ -119,8 +119,16 @@ class BSTUtility:
     # to be in, will update parent, left child, and
     # right child of self and surrounding neighbors
     def updateUser(self, user):
+        # Must call setUp to reset current, parent, left child, and right child
+        self.setUp()
+
+        # Search for the user file using the username
         username = user.getUsername()
         newuser = self.searchUser(username)
+
+        # Before we add or edit a user, we must
+        # change the user-to-be-added's parent to match
+        user.setParent(self._parent)
 
         # If user doesn't exist, create a new user
         if newuser.getUsername() == "None":
@@ -128,34 +136,94 @@ class BSTUtility:
 
         # If user exists update current existing user
         else:
-            # Make sure the pointers are set correctly
-            user.setParent(self._parent)
-            user.setLeftChild(self._leftChild)
-            user.setRightChild(self._rightChild)
-
             # Then remove that user and replace it with an updated one
-            os.remove(user.getUsername() + ".txt")
+            file = user.getUsername() + ".txt"
+            os.remove("users/" + file)
             self.addUser(user)
-
 
     def addUser(self, user):
         # Update the new location to get a parent pointer
-        location = self.searchUser(user)
-        user.setParent(self._parent)
+        self.searchUser(user.getUsername())
 
         # Creates a new file to store the new user
-        file = open(user.getUsername() + ".txt", "w+")
-        contents = user.getContents(user)
+        # The nested for loops take into account the
+        # information list and None existing parent and childs
+        file = open("users/" + user.getUsername() + ".txt", "w+")
+        contents = user.getContents()
         for content in contents:
-            file.write(content)
+            if isinstance(content, list):
+                for item in content:
+                    item = item + "\n"
+                    file.write(item)
+            elif isinstance(content, User):
+                if content.getUsername() == "None":
+                    file.write("None\n")
+                else:
+                    content = content.getUsername() + ".txt\n"
+                    file.write(content)
+            else:
+                content = content + "\n"
+                file.write(content)
 
+        # Now we must make sure to have the parent's child's
+        # correct after the addition of the new user
+        file = user.getUsername() + ".txt"
+        if (file != self._parent.getLeftChild()) and \
+                (file!= self._parent.getRightChild()):
+            if self._parent.getUsername() + ".txt" > file:
+                self._parent.setLeftChild(file)
+            else:
+                self._parent.setRightChild(file)
+            self.updateUser(self._parent)
 
     # This function should remove a user, username
     # Must traverse the tree to find the correct user
     # to remove, will update parent, left child, and
     # right child of self and surrounding neighbors
-    def removeUser(self, username):
-        pass
+    def removeUser(self, user):
+        # Update the location of user
+        location = self.searchUser(user)
+
+        # If that user doesn't exist in the tree
+        # ignore and return nothing
+        if location.getUsername() == "None":
+            return
+
+        # If the user to be removed is the parent's left child,
+        # replace the parent's left child with the current's left child
+        username = user.getUsername()
+        if username + ".text" == self._parent.getLeftChild():
+            self._parent.setLeftChild(username + ".txt")
+            self.updateUser(self._parent)
+
+            # Then search the right subtree of the parent to store
+            # the right subtree of current
+            right = user.getRightChild()
+            file = right.getUsername + ".txt"
+            self.updateUser(right)
+            if self._parent.getLeftChild() == right.getUsername() + ".txt":
+                self._parent.setLeftChild(file)
+            else:
+                self._parent.setRightChild(file)
+
+        # Otherwise, the user to be removed is the parent's right child
+        # and replace the parent's right child with the current's right child
+        else:
+            self._parent.setRightChild(username + ".txt")
+            self.updateUser(self._parent)
+
+            # Then search the left subtree of the parent to store the
+            # left subtree of current
+            left = user.getLeftChild()
+            file = left.getUsername() + ".txt"
+            self.updateUser(left)
+            if self._parent.getLeftChild() == left.getUsername() + ".txt":
+                self._parent.setLeftChild(file)
+            else:
+                self._parent.setRightChild(file)
+
+        # Finally, remove the user
+        os.reomve(user.getUsername() + ".txt")
 
 
 # This tests the utility
@@ -181,3 +249,15 @@ print(user)
 print("first name: " + user.getFirstName())
 print("last name: " + user.getLastName())
 print("found username: " + user.getUsername())
+
+# This is to test the functionality of updateUser
+obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
+                    "None", "None", "None", "None"))
+# This is to test the functionality of addUser
+obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
+                    "None", "None", "None", "None"))
+obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
+                    "None", "None", "None", "None"))
+# To test correctly, delete guy.txt before running this code
+#obj.updateUser(User("THe", "Guy", "guy", "pass", "role", ["phone", "email", "address"], "course", "lab",
+#                   "None", "None", "None", "None"))

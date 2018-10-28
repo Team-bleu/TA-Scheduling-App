@@ -60,7 +60,7 @@ class User:
         self.assignment = assignment
 
     def getAssignment(self):
-        return self.assigment
+        return self.assignment
 
     def setParent(self, parent):
         self.parent = parent
