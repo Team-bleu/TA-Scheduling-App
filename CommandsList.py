@@ -2,14 +2,14 @@ from user import User
 from ExampleCommand import ExampleCommand
 from LoginCommand import LoginCommand
 from LogoutCommand import LogoutCommand
-
+from AddCommand import AddCommand
 
 # This class stores all of the commands
 # and cycles through them to retrieve
 # the correct response when called upon
 class CommandsList:
     _current = User()
-    _commands = [ExampleCommand, LoginCommand, LogoutCommand]
+    _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand]
 
     # Method for parsing user input into a list
     def parseInput(self, user_input):
@@ -47,3 +47,21 @@ class CommandsList:
     def logged(self):
         return "No user is logged in. Please login before typing a command."
 
+    # This function returns a rank for the role of the user.
+    # The rank is used to determine the role's accessibility,
+    # e.g. ranks 3 and 4 can access private info, ranks 1 and 2
+    # can access only public info (if rank is 0 then they have no use)
+    def getCredentialss(self):
+        role = self._current.getRole()
+        rank = 0
+
+        if role == "Supervisor":
+            rank = 4
+        if role == "Administrator":
+            rank = 3
+        if role == "Instructor":
+            rank = 2
+        if role == "TA":
+            rank = 1
+
+        return rank

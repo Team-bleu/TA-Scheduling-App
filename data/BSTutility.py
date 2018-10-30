@@ -128,7 +128,8 @@ class BSTUtility:
 
         # Before we add or edit a user, we must
         # change the user-to-be-added's parent to match
-        user.setParent(self._parent)
+        if self._root != self._current:
+            user.setParent(self._parent)
 
         # If user doesn't exist, create a new user
         if newuser.getUsername() == "None":
@@ -174,7 +175,8 @@ class BSTUtility:
                 self._parent.setLeftChild(file)
             else:
                 self._parent.setRightChild(file)
-            self.updateUser(self._parent)
+            if self._root != self._current:
+                self.updateUser(self._parent)
 
     # This function should remove a user, username
     # Must traverse the tree to find the correct user
