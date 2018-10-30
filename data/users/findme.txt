@@ -1,0 +1,14 @@
+right
+dude
+findme
+pass
+role
+phone
+email
+address
+course
+lab
+None
+None
+None
+None

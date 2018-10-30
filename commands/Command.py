@@ -12,3 +12,7 @@ class Command(abc.ABC):
     @classmethod
     def isCommand(cls, command):
         pass
+
+    # This is to test the Example Command, prints statement
+    def printExample(self):
+        print("This print is from the Command UI")
