@@ -1,9 +1,9 @@
 
 
 class User:
-    def __init__(self, firstname=None, lastname=None, username=None, password=None,
-                role=None, information=None, course=None, lab=None,
-                assignment=None, parent=None, leftChild=None, rightChild=None):
+    def __init__(self, firstname="None", lastname="None", username="None", password="None",
+                role="None", information="None", course="None", lab="None",
+                assignment="None", parent="None", leftChild="None", rightChild="None"):
         self.setName(firstname, lastname)
         self.setAccount(username, password)
         self.setRole(role)
@@ -60,7 +60,7 @@ class User:
         self.assignment = assignment
 
     def getAssignment(self):
-        return self.assigment
+        return self.assignment
 
     def setParent(self, parent):
         self.parent = parent
@@ -79,3 +79,8 @@ class User:
 
     def getRightChild(self):
         return self.rightChild
+
+    def getContents(self):
+        return [self.getFirstName(), self.getLastName(), self.getUsername(), self.getPassword(), self.getRole(),
+                self.getInfo(), self.getCourse(), self.getLab(), self.getAssignment(),
+                self.getParent(), self.getLeftChild(), self.getRightChild()]
