@@ -15,10 +15,9 @@ class AddCommand(Command):
         if user.getUsername() != "None":
             return "User already exists."
 
-        # user is empty user: User("first", "last", username, password, "role",
-        # ["phone", "email", "address"], "course", "lab",
-        # "assignment", "None", "None", "None")
-        user = User()
+        user = User("first", "last", username, password, "role",
+                    ["phone", "email", "address"], "course", "lab", "assignment", "None", "None", "None")
+        # user = User()
 
         user.setAccount(username, password)
 
