@@ -1,0 +1,14 @@
+Super
+User
+super
+password
+Supervisor
+phone
+email
+address
+course
+lab
+assignment
+None
+None
+None

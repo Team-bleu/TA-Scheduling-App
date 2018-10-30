@@ -38,11 +38,11 @@ class BSTUtility:
     def setUpRoot(self):
         # Opens the root text file which
         # stores the name of the root file
-        root = open("root.txt", "r+")
+        root = open("data/root.txt", "r+")
         rootname = root.readlines()
 
         # Opens the root file
-        rootname = self.append("users/", rootname[0])
+        rootname = self.append("data/users/", rootname[0])
         file = open(rootname, "r+")
         contents = file.readlines()
         self.removeNewLine(contents)
@@ -67,7 +67,7 @@ class BSTUtility:
         if self._current.getLeftChild() == "None":
             return User()
         filename = self._current.getLeftChild()
-        filename = self.append("users/", filename)
+        filename = self.append("data/users/", filename)
         file = open(filename, "r+")
         contents = file.readlines()
         self.removeNewLine(contents)
@@ -79,7 +79,7 @@ class BSTUtility:
         if self._current.getRightChild() == "None":
             return User()
         filename = self._current.getRightChild()
-        filename = self.append("users/", filename)
+        filename = self.append("data/users/", filename)
         file = open(filename, "r+")
         contents = file.readlines()
         self.removeNewLine(contents)
@@ -138,7 +138,7 @@ class BSTUtility:
         else:
             # Then remove that user and replace it with an updated one
             file = user.getUsername() + ".txt"
-            os.remove("users/" + file)
+            os.remove("data/users/" + file)
             self.addUser(user)
 
     def addUser(self, user):
@@ -147,8 +147,8 @@ class BSTUtility:
 
         # Creates a new file to store the new user
         # The nested for loops take into account the
-        # information list and None existing parent and childs
-        file = open("users/" + user.getUsername() + ".txt", "w+")
+        # information list and None existing parent and child
+        file = open("data/users/" + user.getUsername() + ".txt", "w+")
         contents = user.getContents()
         for content in contents:
             if isinstance(content, list):
@@ -216,44 +216,44 @@ class BSTUtility:
                 self.updateUser(left)
 
         # Finally, remove the user
-        file = "users/" + user.getUsername() + ".txt"
+        file = "data/users/" + user.getUsername() + ".txt"
         os.remove(file)
 
 
-# This tests the utility
-obj = BSTUtility()
-obj.setUpRoot()
-print("root is " + obj._root.getUsername())
-print("left child is " + obj._leftChild.getUsername())
-print("right child is " + obj._rightChild.getUsername())
-print("done\n")
-
-# This is findme.txt and should print an object pointing to it and name in file
-user = obj.searchUser("findme")
-print("searched for user: findme and obtained object:")
-print(user)
-print("first name: " + user.getFirstName())
-print("last name: " + user.getLastName())
-print("found username: " + user.getUsername())
-
-# This is used to see if we can find a non-existing user
-user = obj.searchUser("dontexist")
-print("\nthe username dontexist, doesn't exist; and the object made form it is:")
-print(user)
-print("first name: " + user.getFirstName())
-print("last name: " + user.getLastName())
-print("found username: " + user.getUsername())
-
-# # This is to test the functionality of updateUser
-# obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
+# # This tests the utility
+# obj = BSTUtility()
+# obj.setUpRoot()
+# print("root is " + obj._root.getUsername())
+# print("left child is " + obj._leftChild.getUsername())
+# print("right child is " + obj._rightChild.getUsername())
+# print("done\n")
+#
+# # This is findme.txt and should print an object pointing to it and name in file
+# user = obj.searchUser("findme")
+# print("searched for user: findme and obtained object:")
+# print(user)
+# print("first name: " + user.getFirstName())
+# print("last name: " + user.getLastName())
+# print("found username: " + user.getUsername())
+#
+# # This is used to see if we can find a non-existing user
+# user = obj.searchUser("dontexist")
+# print("\nthe username dontexist, doesn't exist; and the object made form it is:")
+# print(user)
+# print("first name: " + user.getFirstName())
+# print("last name: " + user.getLastName())
+# print("found username: " + user.getUsername())
+#
+# # # This is to test the functionality of updateUser
+# # obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
+# #                     "None", "None", "None", "None"))
+# # # This is to test the functionality of addUser
+# # obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
+# #                     "None", "None", "None", "None"))
+# # obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
+# #                     "None", "None", "None", "None"))
+#
+# # To test correctly, delete guy.txt before running this code
+# obj.updateUser(User("THe", "Guy", "guy", "pass", "role", ["phone", "email", "address"], "course", "lab",
 #                     "None", "None", "None", "None"))
-# # This is to test the functionality of addUser
-# obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
-#                     "None", "None", "None", "None"))
-# obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
-#                     "None", "None", "None", "None"))
-
-# To test correctly, delete guy.txt before running this code
-obj.updateUser(User("THe", "Guy", "guy", "pass", "role", ["phone", "email", "address"], "course", "lab",
-                    "None", "None", "None", "None"))
-obj.removeUser("guy")
+# obj.removeUser("guy")
