@@ -16,3 +16,6 @@ class ExampleCommand(Command):
 
     def isCommand(self, command):
         return command == "example"
+
+    def countArgs(self, user_input_list):
+        return len(user_input_list) < 1
