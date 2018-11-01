@@ -4,7 +4,7 @@ from CourseUtility import CourseUtility
 
 class CreateCourseCommand(Command):
 
-    def action(self, user_input_list, user, courses, labs):
+    def action(self, user_input_list):
 
         courseUtil = CourseUtility()
         courseName = user_input_list[1]

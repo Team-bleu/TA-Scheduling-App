@@ -3,7 +3,7 @@ from Command import Command
 
 class AssignCourseCommand(Command):
 
-    def action(self, user_input_list, user, courses, labs):
+    def action(self, user_input_list):
         pass
 
     def isCommand(self, command):

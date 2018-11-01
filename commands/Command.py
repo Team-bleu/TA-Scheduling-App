@@ -5,7 +5,7 @@ class Command(abc.ABC):
 
     # This performs the action of the command
     @abc.abstractmethod
-    def action(self, user_input_list, user, courses, labs):
+    def action(self, user_input_list):
         pass
 
     # This checks if the command matches user's input
