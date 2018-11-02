@@ -3,13 +3,17 @@ from ExampleCommand import ExampleCommand
 from LoginCommand import LoginCommand
 from LogoutCommand import LogoutCommand
 from AddCommand import AddCommand
+from CreateCourseCommand import CreateCourseCommand
+from AssignLabCommand import AssignLabCommand
+from AssignCourseCommand import AssignCourseCommand
+from CreateLabCommand import CreateLabCommand
 
 # This class stores all of the commands
 # and cycles through them to retrieve
 # the correct response when called upon
 class CommandsList:
     _current = User()
-    _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand]
+    _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand, AssignCourseCommand, CreateLabCommand]
 
     # Method for parsing user input into a list
     def parseInput(self, user_input):

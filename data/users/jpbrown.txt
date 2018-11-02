@@ -1,8 +1,8 @@
-Super
-User
-super
+james
+brown
+jpbrown
 pass
-Supervisor
+instructor
 phone
 email
 address
@@ -10,5 +10,5 @@ CS351
 None
 assignment
 super.txt
-jpbrown.txt
-None
+imbarny.txt
+sffields.txt

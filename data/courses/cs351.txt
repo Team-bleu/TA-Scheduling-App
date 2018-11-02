@@ -1,4 +1,4 @@
-cs351
-Lab801,Lab802
-jbpeters
-None
+CS351
+Lab801
+jpbrown
+sffields
