@@ -5,7 +5,7 @@ from user import User
 
 class AddCommand(Command):
 
-    def action(self, user_input_list, user, courses, labs):
+    def action(self, user_input_list):
         util = BSTUtility()
         username = user_input_list[1]
         password = user_input_list[2]

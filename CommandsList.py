@@ -33,7 +33,7 @@ class CommandsList:
                     return "Not enough arguments."
 
                 # Preforms the command
-                return command.action(self, user_input_list, user, courses, labs)
+                return command.action(self, user_input_list)
 
     # Sets the currently logged user
     def setCurrent(self, user):
