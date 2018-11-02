@@ -21,10 +21,13 @@ class AddCommandTest(unittest.TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list1[0]))
         self.assertTrue(self.cmd.isCommand(self.user_input_list2[0]))
 
+    # Before this line is initiated, make user user1 and user2
+    # aren't existing users already. (This can occur if the test
+    # is ran multiple times at once).
     def test_add_user(self):
         self.assertEqual(self.cmd.action(self.user_input_list1, "", "", ""), "user1 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list1, "", "", ""), "User already exists.")
-        self.assertEqual(self.cmd.action(self.user_input_list2, "", "", ""), "user1 has been added")
+        self.assertEqual(self.cmd.action(self.user_input_list2, "", "", ""), "user2 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list2, "", "", ""), "User already exists.")
 
 
