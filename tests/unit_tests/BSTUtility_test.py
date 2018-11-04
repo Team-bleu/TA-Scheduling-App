@@ -64,14 +64,15 @@ class BSTUtilityTest(unittest.TestCase):
     # here is the method I left out. Sorry about that. I understand how the code works
     # but Can't think about a way to properly test them since they don't return anything
     # It would be great if you can help me implement them
+    def test_init(self):
+        pass
     def test_add_user(self):
         pass
     def test_update_user(self):
         pass
     def test_setup_root(self):
         pass;
-    def test_constructor(self):
-        pass
+
     def tearDown(self):
 
         self.util = None

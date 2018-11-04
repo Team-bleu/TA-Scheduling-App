@@ -7,6 +7,7 @@ from CreateCourseTest import CreateCourseTest
 from CreateLabTest import CreateLabTest
 from LoginCommandTest import LoginCommandTest
 from LoguoutCommandTest import LogoutCommandTest
+from UserTest import UserTest
 
 
 
@@ -21,7 +22,7 @@ def main_tests():
     suite.addTest(unittest.makeSuite(CreateLabTest))
     suite.addTest(unittest.makeSuite(LoginCommandTest))
     suite.addTest(unittest.makeSuite(LogoutCommandTest))
-
+    suite.addTest(unittest.makeSuite(UserTest))
     runner = unittest.TextTestRunner()
     res = runner.run(suite)
     print(res)
