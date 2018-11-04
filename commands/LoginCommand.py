@@ -10,8 +10,10 @@ class LoginCommand(Command):
         password = user_input_list[2]
 
         user = util.searchUser(username)
+        if user is None:
+            return "No such user exists."
 
-        if user.getUsername() != "None":
+        if user.getUsername() is not None:
             if user.getPassword() == password:
                 self.setCurrent(user)
                 return username + " logged in."

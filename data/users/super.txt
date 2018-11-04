@@ -1,8 +1,8 @@
-Super
-User
+first
+last
 super
 pass
-Supervisor
+role
 phone
 email
 address
@@ -11,4 +11,4 @@ lab
 assignment
 None
 None
-user1.txt
+None

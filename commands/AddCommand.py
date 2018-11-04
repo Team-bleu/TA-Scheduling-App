@@ -12,11 +12,11 @@ class AddCommand(Command):
 
         user = util.searchUser(username)
 
-        if user.getUsername() != "None":
+        if user is not None and user.getUsername() is not None:
             return "User already exists."
 
         user = User("first", "last", username, password, "role",
-                    ["phone", "email", "address"], "course", "lab", "assignment", "None", "None", "None")
+                    "phone", "email", "address", "course", "lab", "assignment", "None", "None", "None")
         # user = User()
 
         user.setAccount(username, password)

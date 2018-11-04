@@ -5,7 +5,7 @@ class UserTest(unittest.TestCase):
 
     def setUp(self):
         self.user0 = User()
-        self.user1 = User("Peter", "Xiong", "xiongpp", "admin123", "Instrutor", ["phone", "email", "address"], "CS351",
+        self.user1 = User("Peter", "Xiong", "xiongpp", "admin123", "Instrutor", "phone", "email", "address", "CS351",
                           "lab01", "assignment","super",None,None)
 
     def test_init(self):
@@ -68,7 +68,7 @@ class UserTest(unittest.TestCase):
         self.assertEqual(self.user0.getRole(), "Instrutor")
 
     def test_set_info(self):
-        self.user0.setInfo(["phone", "email", "address"])
+        self.user0.setInfo("phone", "email", "address")
         self.assertIsNotNone(self.user0.getInfo())
         self.assertEqual(self.user0.getInfo(), ["phone", "email", "address"])
 
@@ -97,7 +97,7 @@ class UserTest(unittest.TestCase):
     def test_get_contents(self):
         self.assertIsNotNone(self.user1.getContents())
         self.assertEqual(self.user1.getContents(), ["Peter", "Xiong", "xiongpp", "admin123", "Instrutor",
-                                                    ["phone", "email", "address"], "CS351",
+                                                    "phone", "email", "address", "CS351",
                                                     "lab01", "assignment","super",None,None])
 
     def tearDown(self):
