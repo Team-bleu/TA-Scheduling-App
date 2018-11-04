@@ -73,7 +73,7 @@ class BSTUtility:
         self.removeNewLine(contents)
         return self.createUser(contents)
 
-    # This function grabs the left child based off of the _current
+    # This function grabs the right child based off of the _current
     def getRightChild(self):
         # If no right child exists return immediately
         if self._current.getRightChild() == "None":
