@@ -1,5 +1,6 @@
 from Command import Command
 from CourseUtility import CourseUtility
+from CommandsList import CommandsList
 
 
 class CreateLabCommand(Command):

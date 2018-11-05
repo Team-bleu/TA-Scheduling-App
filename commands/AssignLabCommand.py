@@ -1,6 +1,8 @@
 from Command import Command
 from CourseUtility import CourseUtility
 from BSTutility import BSTUtility
+from CommandsList import CommandsList
+
 
 class AssignLabCommand(Command):
 

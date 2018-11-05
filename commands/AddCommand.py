@@ -1,6 +1,8 @@
 from Command import Command
 from BSTutility import BSTUtility
 from user import User
+from CommandsList import CommandsList
+
 
 
 class AddCommand(Command):
