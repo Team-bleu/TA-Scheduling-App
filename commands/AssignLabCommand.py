@@ -5,6 +5,9 @@ from BSTutility import BSTUtility
 class AssignLabCommand(Command):
 
     def action(self, user_input_list):
+        if not CommandsList.getCredentialss() >= 4:
+            return "Error. Current User does not have permission to assign labs."
+
         # <username> <course> <lab>
         courseUtil = CourseUtility()
         bstUtil = BSTUtility()

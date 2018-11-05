@@ -5,6 +5,8 @@ from CourseUtility import CourseUtility
 class CreateLabCommand(Command):
 
     def action(self, user_input_list):
+        if not CommandsList.getCredentialss() >= 4:
+            return "Error. Current User does not have permission to create a lab."
 
         courseUtil = CourseUtility()
         courseName = user_input_list[1]

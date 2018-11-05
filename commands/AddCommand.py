@@ -6,6 +6,9 @@ from user import User
 class AddCommand(Command):
 
     def action(self, user_input_list):
+        if not CommandsList.getCredentialss() >= 3:
+            return "Error. Current User does not have permission to create a user."
+
         util = BSTUtility()
         username = user_input_list[1]
         password = user_input_list[2]
