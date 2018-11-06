@@ -1,5 +1,7 @@
 import unittest
 from AssignCourseCommand import AssignCourseCommand
+from LoginCommand import LoginCommand
+from AddCommand import  AddCommand
 
 
 class AssignCourseCommandTest(unittest.TestCase):
@@ -25,7 +27,10 @@ class AssignCourseCommandTest(unittest.TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list3[0]))
 
     def test_assign_course(self):
-        pass
+        # Before we can test whether or not we can add a course,
+        # we must first log in a supervisor who has the role to do so
+        LoginCommand.action(self.cmd, "login super pass")
 
+        # Next, we must add a user to be able to add them to a course
 
-
+        self.assertEqual(self.cmd.action("assicncourse "))
