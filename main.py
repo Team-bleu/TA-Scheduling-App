@@ -1,4 +1,4 @@
-import main_tests
+from tests.sprint1_acceptance_test import main_tests
 import mainUnitTests
 from app import App
 
@@ -21,7 +21,7 @@ def main():
     app = App()
     while user_string != "quit":
         user_string = input()
-        app.command(user_string)
+        print(app.command(user_string))
 
 
 if __name__ == "__main__":

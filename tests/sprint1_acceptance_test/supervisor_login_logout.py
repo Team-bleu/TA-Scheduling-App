@@ -12,5 +12,5 @@ class TestSupLoginLogout(unittest.TestCase):
 
     # Then we have them logout
     def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Luke logged out")
+        self.assertEqual(self.app.command("logout"), "logged out.")
 
