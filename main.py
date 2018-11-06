@@ -8,8 +8,8 @@ def main():
     # This boolean is to see if we want
     # to check the acceptance tests
     # and unittests
-    test = False
-    unittest = True
+    test = True
+    unittest = False
     if test:
         main_tests.main_tests()
         print("Finished acceptance tests.")

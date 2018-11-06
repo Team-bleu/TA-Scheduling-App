@@ -1,5 +1,5 @@
 import unittest
-from tests.sprint1_acceptance_test.supervisor_login_logout import TestSupLoginLogout
+from tests.sprint1_acceptance_test.sprint1_acceptance_test import acceptanceTest
 from supervisor_assign_lab import TestSupAssignTALab
 from supervisor_create_account import TestSupCreateAccount
 from supervisor_assign_TAs_course import TestSupAssignCourse
@@ -27,7 +27,7 @@ from TA_view_assignments import TestTAViewAssignments
 def main_tests():
     suite = unittest.TestSuite()
 
-    suite.addTest(unittest.makeSuite(TestSupLoginLogout))
+    suite.addTest(unittest.makeSuite(acceptanceTest))
     # suite.addTest(unittest.makeSuite(TestSupAssignTALab))
     # suite.addTest(unittest.makeSuite(TestSupCreateAccount))
     # suite.addTest(unittest.makeSuite(TestSupCreateAccount))
