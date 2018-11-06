@@ -1,5 +1,6 @@
 import unittest
 from AssignLabCommand import AssignLabCommand
+from LoginCommand import LoginCommand
 
 
 class AssignLabCommandTest(unittest.TestCase):
@@ -21,4 +22,10 @@ class AssignLabCommandTest(unittest.TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list2[0]))
 
     def test_assign_lab(self):
-        pass
+        # First, before we test assigning a lab, we must make sure a
+        # supervisor is already logged in (since they can assign labs)
+        LoginCommand.action(self.cmd, ["login", "super", "pass"])
+
+        # Now we can assign our dummy user a the lab section 801
+        # from TEST100 course, make sure that the course and lab exists
+        self.assertEqual(self.cmd.action(["assignlab", "dummy", "TEST100", "LAB801"]), "dummy has been added to LAB801")

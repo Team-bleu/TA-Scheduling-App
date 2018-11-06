@@ -129,9 +129,6 @@ class CourseUtility:
             self._TAs[index] = username
             #print("afterTAs = ", self._TAs)
 
-
-            return print(username,"has been added to",LabName)
-
     def createCourse(self, courseName):
 
         fileName = self.append("data/courses/", courseName) + ".txt"
