@@ -12,7 +12,8 @@ from CreateLabCommand import CreateLabCommand
 # and cycles through them to retrieve
 # the correct response when called upon
 class CommandsList:
-    _current = User()
+    logged = False
+    _logger = None #User()
     _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand, AssignCourseCommand, CreateLabCommand]
 
     # Method for parsing user input into a list
@@ -39,33 +40,5 @@ class CommandsList:
                 # Preforms the command
                 return command.action(self, user_input_list)
 
-    # Sets the currently logged user
-    def setCurrent(self, user):
-        self._current = user
 
-    # Checks if there is a user already logged in
-    def isCurrent(self):
-        return self._current.getUsername() == "None"
 
-    # Simple function to return that there exists no currently logged user
-    def logged(self):
-        return "No user is logged in. Please login before typing a command."
-
-    # This function returns a rank for the role of the user.
-    # The rank is used to determine the role's accessibility,
-    # e.g. ranks 3 and 4 can access private info, ranks 1 and 2
-    # can access only public info (if rank is 0 then they have no use)
-    def getCredentialss(self):
-        role = self._current.getRole()
-        rank = 0
-
-        if role == "Supervisor":
-            rank = 4
-        if role == "Administrator":
-            rank = 3
-        if role == "Instructor":
-            rank = 2
-        if role == "TA":
-            rank = 1
-
-        return rank

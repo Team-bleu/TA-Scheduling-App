@@ -6,6 +6,7 @@ class LogoutCommand(Command):
 
     def action(self, user_input_list):
 
+        Command.setLogged(self,False)
         return "logged out."
 
     def isCommand(self, command):

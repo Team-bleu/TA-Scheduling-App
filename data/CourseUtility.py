@@ -85,12 +85,13 @@ class CourseUtility:
     def assignCourse(self,username):
         bst = BSTUtility()
         insObj = bst.searchUser(username)
-        if (insObj.getRole() != "instructor"):
-            return print(username,"is not an instructor")
+        if (insObj.getRole() != "Instructor" and insObj.getRole() != "TA"):
+            print(username,"is not an Instructor or TA")
+            return False
 
         self._instructor = insObj.username
         print(username,"has been added to",self._courseName)
-        return
+        return True
 
 
     def assignLab(self,username, LabName):

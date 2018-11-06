@@ -177,6 +177,8 @@ class BSTUtility:
         # Now we must make sure to have the parent's child's
         # correct after the addition of the new user
         file = user.getUsername() + ".txt"
+        if (file == self._current.getUsername() + ".txt"):
+            return
         if (file != self._parent.getLeftChild()) and \
                 (file != self._parent.getRightChild()):
             if self._parent.getUsername() + ".txt" > file:

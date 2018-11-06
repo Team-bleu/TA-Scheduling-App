@@ -11,6 +11,9 @@ class AssignLabCommand(Command):
         if not Command.isLogged(self):
             return "No user is logged in."
 
+        if Command.getCredentialss(self) < 2:
+            return "Do not have permission"
+
         # <username> <course> <lab>
         courseUtil = CourseUtility()
         bstUtil = BSTUtility()

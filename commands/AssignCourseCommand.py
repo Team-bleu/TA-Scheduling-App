@@ -10,6 +10,9 @@ class AssignCourseCommand(Command):
 
         if not Command.isLogged(self):
             return "No user is logged in."
+
+        if Command.getCredentialss(self) < 3:
+            return "Do not have permission"
         
         bstUtil = BSTUtility()
         courseUtil = CourseUtility()
@@ -19,7 +22,9 @@ class AssignCourseCommand(Command):
         if (courseUtil.getContents(courseName) == False):   #if course doesn't exist, return error
             return
 
-        courseUtil.assignCourse(username)
+        if not courseUtil.assignCourse(username):
+            return
+
         courseUtil.writeContents()
 
         user = bstUtil.searchUser(username)

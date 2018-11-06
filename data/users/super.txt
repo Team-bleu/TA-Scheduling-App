@@ -2,12 +2,12 @@ first
 last
 super
 pass
-role
+Supervisor
 phone
 email
 address
-course
-lab
+None
+None
 assignment
 None
 None

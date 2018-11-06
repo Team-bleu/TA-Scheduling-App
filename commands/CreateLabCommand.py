@@ -10,6 +10,9 @@ class CreateLabCommand(Command):
         if not Command.isLogged(self):
             return "No user is logged in."
 
+        if Command.getCredentialss(self) < 3:
+            return "Do not have permission"
+
         courseUtil = CourseUtility()
         courseName = user_input_list[1]
         labName = user_input_list[2]
