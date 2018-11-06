@@ -25,6 +25,9 @@ from TA_view_assignments import TestTAViewAssignments
 
 def main_tests():
     suite = unittest.TestSuite()
+
+
+
     suite.addTest(unittest.makeSuite(TestSupAssignTALab))
     suite.addTest(unittest.makeSuite(TestSupCreateAccount))
     suite.addTest(unittest.makeSuite(TestSupCreateAccount))
@@ -48,6 +51,8 @@ def main_tests():
     suite.addTest(unittest.makeSuite(TestSupCreateCourse))
     suite.addTest(unittest.makeSuite(TestSupShow))
     suite.addTest(unittest.makeSuite(TestSupEditAccount))
+
+
 
     runner = unittest.TextTestRunner()
     res=runner.run(suite)

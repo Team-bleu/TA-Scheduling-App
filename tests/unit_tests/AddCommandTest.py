@@ -1,18 +1,22 @@
 import unittest
 from AddCommand import AddCommand
 from BSTutility import BSTUtility
+from LoginCommand import LoginCommand
 
 
 class AddCommandTest(unittest.TestCase):
     util = BSTUtility()
 
     def setUp(self):
+        self.login = LoginCommand
         self.cmd = AddCommand()
         self.user_input_list1 = ["add", "user1", "admin123"]
         self.user_input_list2 = ["add", "user2", "admin123"]
         self.user_input_list3 = ["add", "user3", "admin123"]
         self.invalid_input_list = ["invalidCommand", "user"]
-        self.cmd.setLogged(True)
+
+
+
 
     def test_invalid_input_list(self):
         self.assertTrue(self.cmd.countArgs(self.invalid_input_list))
@@ -30,6 +34,9 @@ class AddCommandTest(unittest.TestCase):
     # aren't existing users already. (This can occur if the test
     # is ran multiple times at once).
     def test_add_user(self):
+        self.cmd.setLogged(True)
+        #this is the work
+        self.login.action(self,"login super pass")
         self.assertEqual(self.cmd.action(self.user_input_list1), "user1 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list1), "User already exists.")
         self.assertEqual(self.cmd.action(self.user_input_list2), "user2 has been added")

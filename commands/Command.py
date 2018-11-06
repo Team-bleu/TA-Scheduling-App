@@ -3,7 +3,7 @@ import abc
 
 class Command(abc.ABC):
     logged = False
-    _logger = "" #User()
+    _logger = None #User()
 
     def setLogged(self, logged):
         self.logged = logged
@@ -22,6 +22,8 @@ class Command(abc.ABC):
     # e.g. ranks 3 and 4 can access private info, ranks 1 and 2
     # can access only public info (if rank is 0 then they have no use)
     def getCredentialss(self):
+        if self._logger is None:
+            return 0
         role = self._logger.getRole()
         rank = 0
 
