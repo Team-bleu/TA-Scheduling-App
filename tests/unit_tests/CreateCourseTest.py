@@ -1,6 +1,7 @@
 import unittest
 from CreateCourseCommand import CreateCourseCommand
 
+
 class CreateCourseTest(unittest.TestCase):
 
     def setUp(self):

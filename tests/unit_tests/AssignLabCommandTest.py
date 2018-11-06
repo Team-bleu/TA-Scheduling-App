@@ -1,6 +1,7 @@
 import unittest
 from AssignLabCommand import AssignLabCommand
 
+
 class AssignLabCommandTest(unittest.TestCase):
     def setUp(self):
         self.cmd = AssignLabCommand()

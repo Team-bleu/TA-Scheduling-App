@@ -1,6 +1,7 @@
 import unittest
 from CreateLabCommand import CreateLabCommand
 
+
 class CreateLabTest(unittest.TestCase):
 
     def setUp(self):
@@ -10,7 +11,6 @@ class CreateLabTest(unittest.TestCase):
         self.user_input_list3 = ["createlab", "CS351", "lab01"]
         self.invalid_input_list = ["createlab", "CS595"]
         self.invalid_input_list1 = ["Create", "CS251"]
-
 
     def test_invalid_input_list(self):
         self.assertTrue(self.cmd.countArgs(self.invalid_input_list))

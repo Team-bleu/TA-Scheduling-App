@@ -1,6 +1,7 @@
 import unittest
 from AssignCourseCommand import AssignCourseCommand
 
+
 class AssignCourseCommandTest(unittest.TestCase):
     def setUp(self):
         self.cmd = AssignCourseCommand()

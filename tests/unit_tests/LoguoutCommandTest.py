@@ -1,6 +1,7 @@
 import unittest
 from LogoutCommand import LogoutCommand
 
+
 class LogoutCommandTest(unittest.TestCase):
 
     def setUp(self):
