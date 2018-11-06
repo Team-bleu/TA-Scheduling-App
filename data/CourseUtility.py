@@ -133,12 +133,12 @@ class CourseUtility:
 
             return print(username,"has been added to",LabName)
 
-    def createCourse(self,courseName):
+    def createCourse(self, courseName):
 
         fileName = self.append("data/courses/", courseName) + ".txt"
 
-        if (os.path.isfile(fileName)):      #check if file exists already
-            print("Course already exists")
+        if os.path.isfile(fileName):      # Check if file exists already
+            return "Course already exists"
         else:
             file = open(fileName, "+w")
             file.write(courseName)
@@ -146,8 +146,7 @@ class CourseUtility:
             file.write("\nNone")
             file.write("\nNone")
             file.close()
-            print(courseName,"has been created")
-
+            return courseName + " has been created"
 
     def deleteCourse(self,courseName):
         fileName = self.append("data/courses/", courseName) + ".txt"

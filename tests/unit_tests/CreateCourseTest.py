@@ -1,5 +1,6 @@
 import unittest
 from CreateCourseCommand import CreateCourseCommand
+from LoginCommand import LoginCommand
 
 
 class CreateCourseTest(unittest.TestCase):
@@ -26,4 +27,10 @@ class CreateCourseTest(unittest.TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list3[0]))
 
     def test_create_course(self):
-        pass
+        # First, before we test adding a course, we must make sure a
+        # supervisor is already logged in (since they can add courses)
+        LoginCommand.action(self.cmd, ["login", "super", "pass"])
+
+        # We have to manually delete TEST100.txt from data/courses/ if
+        # it's been created prior or already exist so this test can run correctly
+        self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "TEST100 has been created")
