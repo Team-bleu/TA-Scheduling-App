@@ -11,6 +11,10 @@ def main():
     test = True # set this to true to run acceptance test
     unittest = True # set this to true to run unit test
 
+
+    # Limitation for unittest and acceptance test: Since we don't have remove command, you need to manually
+    # delete files to make sure both unittest and acceptence tests are passing
+
     if unittest:
         print("start unit tests.\n")
         mainUnitTests.main_tests()
