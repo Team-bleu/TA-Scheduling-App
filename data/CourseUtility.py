@@ -168,10 +168,6 @@ class CourseUtility:
 
             self._labs = tempLabList
 
-        print(labName,"has been created")
-
-
-
     # This function is used to append two strings together
     # In particular, this function appends a directory with a file
     def append(self, directory, file):

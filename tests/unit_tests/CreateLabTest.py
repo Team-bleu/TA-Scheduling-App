@@ -1,5 +1,6 @@
 import unittest
 from CreateLabCommand import CreateLabCommand
+from LoginCommand import LoginCommand
 
 
 class CreateLabTest(unittest.TestCase):
@@ -26,4 +27,10 @@ class CreateLabTest(unittest.TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list3[0]))
 
     def test_create_lab(self):
-        pass
+        # First, before we test adding a lab, we must make sure a
+        # supervisor is already logged in (since they can add lab)
+        LoginCommand.action(self.cmd, ["login", "super", "pass"])
+
+        # Now we create a lab in TEST100 course
+        # Make sure that TEST100 exists
+        self.assertEqual(self.cmd.action(["createlab", "TEST100", "LAB801"]), "LAB801 has been created")
