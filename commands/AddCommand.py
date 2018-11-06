@@ -12,6 +12,9 @@ class AddCommand(Command):
         if not Command.isLogged(self):
             return "No user is logged in."
 
+        if Command.getCredentialss(self) < 3:
+            return "Do not have permission"
+
         util = BSTUtility()
         username = user_input_list[1]
         password = user_input_list[2]

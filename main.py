@@ -9,7 +9,7 @@ def main():
     # to check the acceptance tests
     # and unittests
     test = False
-    unittest = True
+    unittest = False#True
     if test:
         main_tests.main_tests()
         print("Finished acceptance tests.")

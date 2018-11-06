@@ -3,6 +3,7 @@ import abc
 
 class Command(abc.ABC):
     logged = False
+    _logger = "" #User()
 
     def setLogged(self, logged):
         self.logged = logged
@@ -12,6 +13,28 @@ class Command(abc.ABC):
             return True
         else:
             return False
+
+    def setLogger(self,logger):
+        self._logger = logger
+
+    # This function returns a rank for the role of the user.
+    # The rank is used to determine the role's accessibility,
+    # e.g. ranks 3 and 4 can access private info, ranks 1 and 2
+    # can access only public info (if rank is 0 then they have no use)
+    def getCredentialss(self):
+        role = self._logger.getRole()
+        rank = 0
+
+        if role == "Supervisor":
+            rank = 4
+        if role == "Administrator":
+            rank = 3
+        if role == "Instructor":
+            rank = 2
+        if role == "TA":
+            rank = 1
+
+        return rank
 
     # This performs the action of the command
     @abc.abstractmethod
