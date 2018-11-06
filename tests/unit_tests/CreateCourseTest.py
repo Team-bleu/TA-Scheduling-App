@@ -1,6 +1,7 @@
 import unittest
 from CreateCourseCommand import CreateCourseCommand
 from LoginCommand import LoginCommand
+import os
 
 
 class CreateCourseTest(unittest.TestCase):
@@ -31,7 +32,11 @@ class CreateCourseTest(unittest.TestCase):
         # supervisor is already logged in (since they can add courses)
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
 
-        # If this test is failing:
-        # We have to manually delete TEST100.txt from data/courses/ if
-        # it's been created prior or already exist so this test can run correctly
-        self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "TEST100 has been created")
+        if os.path.isfile("data/courses/TEST100.txt"):
+            self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "Course already exists")
+
+        else:
+            # If this test is failing:
+            # We have to manually delete TEST100.txt from data/courses/ if
+            # it's been created prior or already exist so this test can run correctly
+            self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "TEST100 has been created")
