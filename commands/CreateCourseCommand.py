@@ -1,12 +1,10 @@
 from Command import Command
-from CommandsList import CommandsList
+from CourseUtility import CourseUtility
 
 
 class CreateCourseCommand(Command):
 
     def action(self, user_input_list, user, courses, labs):
-        if not CommandsList.getCredentialss() >= 3:
-            return "Error. Current User does not have permission to create courses."
         
         courseUtil = CourseUtility()
         courseName = user_input_list[1]

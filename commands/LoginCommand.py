@@ -15,7 +15,6 @@ class LoginCommand(Command):
 
         if user.getUsername() is not None:
             if user.getPassword() == password:
-                self.setCurrent(user)
                 return username + " logged in."
             return "Wrong password."
 

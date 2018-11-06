@@ -1,12 +1,11 @@
 from Command import Command
-from CommandsList import CommandsList
+from BSTutility import BSTUtility
+from CourseUtility import CourseUtility
 
 
 class AssignCourseCommand(Command):
 
     def action(self, user_input_list, user, courses, labs):
-        if not CommandsList.getCredentialss() >= 4:
-            return "Error. Current User does not have permission to assign course."
         
         bstUtil = BSTUtility()
         courseUtil = CourseUtility()

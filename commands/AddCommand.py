@@ -1,15 +1,12 @@
 from Command import Command
 from BSTutility import BSTUtility
 from user import User
-from CommandsList import CommandsList
 
 
 
 class AddCommand(Command):
 
     def action(self, user_input_list):
-        if not CommandsList.getCredentialss() >= 3:
-            return "Error. Current User does not have permission to create a user."
 
         util = BSTUtility()
         username = user_input_list[1]
