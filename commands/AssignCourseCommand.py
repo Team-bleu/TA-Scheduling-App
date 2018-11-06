@@ -31,7 +31,7 @@ class AssignCourseCommand(Command):
         user.setClass(courseName,"None")
         bstUtil.updateUser(user)
 
-        return username + " has been added to " + courseName
+        return username + " has been assigned to " + courseName
 
     def isCommand(self, command):
         return command == "assigncourse"

@@ -1,5 +1,4 @@
 from user import User
-from ExampleCommand import ExampleCommand
 from LoginCommand import LoginCommand
 from LogoutCommand import LogoutCommand
 from AddCommand import AddCommand
@@ -15,7 +14,7 @@ from CreateLabCommand import CreateLabCommand
 class CommandsList:
     logged = False
     _logger = None
-    _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand,
+    _commands = [LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand,
                  AssignCourseCommand, CreateLabCommand]
 
     # Method for parsing user input into a list

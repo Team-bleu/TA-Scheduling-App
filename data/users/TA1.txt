@@ -1,12 +1,12 @@
 first
 last
-dummy
+TA1
 pass
 TA
 phone
 email
 address
-TEST100
+CS351
 LAB801
 assignment
 super.txt

@@ -8,15 +8,20 @@ def main():
     # This boolean is to see if we want
     # to check the acceptance tests
     # and unittests
-    test = True
-    unittest = False
-    if test:
-        main_tests.main_tests()
-        print("Finished acceptance tests.")
-    if unittest:
-        mainUnitTests.main_tests()
-        print("Finished unit tests.")
+    test = True # set this to true to run acceptance test
+    unittest = True # set this to true to run unit test
 
+    if unittest:
+        print("start unit tests.\n")
+        mainUnitTests.main_tests()
+        print("Finished unit tests.\n")
+
+    if test:
+        print("\nstart acceptance tests.\n")
+        main_tests.main_tests()
+        print("\nFinished acceptance tests.\n")
+
+    print("\nWelcome to TA Scheduling App\n")
     user_string = ""
     app = App()
     while user_string != "quit":

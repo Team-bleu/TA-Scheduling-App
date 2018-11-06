@@ -113,7 +113,7 @@ class CourseUtility:
             count = count + 1
 
         if (index == -1):
-            return print(LabName,"doesn't exist")
+            return " lab doesn't exist"
         else:
             #print("TA size = ",self._TAs.__len__())
             #print("index = ",index)
@@ -159,7 +159,7 @@ class CourseUtility:
             tempLabList = [None] * (index + 1)
             for x in range(0,self._labs.__len__()): # put contents of old list into new list
                 if(self._labs[x] == labName):
-                    return print("Lab already exists")
+                    return "Lab already exists"
                 tempLabList[x] = self._labs[x]
             tempLabList[index] = labName
 

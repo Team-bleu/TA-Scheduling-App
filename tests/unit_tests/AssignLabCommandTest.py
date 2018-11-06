@@ -28,4 +28,4 @@ class AssignLabCommandTest(unittest.TestCase):
 
         # Now we can assign our dummy user a the lab section 801
         # from TEST100 course, make sure that the course and lab exists
-        self.assertEqual(self.cmd.action(["assignlab", "dummy", "TEST100", "LAB801"]), "dummy has been added to LAB801")
+        self.assertEqual(self.cmd.action(["assignlab", "TA1", "TEST100", "LAB801"]), "TA1 has been assigned to LAB801")

@@ -1,4 +1,0 @@
-cs351
-Lab801,Lab802
-None
-None

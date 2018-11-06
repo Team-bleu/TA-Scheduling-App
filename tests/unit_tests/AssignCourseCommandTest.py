@@ -31,4 +31,4 @@ class AssignCourseCommandTest(unittest.TestCase):
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
 
         # Next, we will use the dummy user to assign it a course
-        self.assertEqual(self.cmd.action(["assicncourse", "dummy", "TEST100"]), "dummy has been added to TEST100")
+        self.assertEqual(self.cmd.action(["assicncourse", "TA1", "TEST100"]), "TA1 has been assigned to TEST100")

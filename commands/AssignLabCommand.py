@@ -32,7 +32,7 @@ class AssignLabCommand(Command):
         user.setClass(courseName,labName)
         bstUtil.updateUser(user)
 
-        return username + " has been added to " + labName
+        return username + " has been assigned to " + labName
 
     def isCommand(self, command):
         return command == "assignlab"
