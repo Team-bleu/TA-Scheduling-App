@@ -10,5 +10,5 @@ course
 lab
 assignment
 None
-dude.txt
+None
 None
