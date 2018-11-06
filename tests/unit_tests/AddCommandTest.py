@@ -12,6 +12,7 @@ class AddCommandTest(unittest.TestCase):
         self.user_input_list2 = ["add", "user2", "admin123"]
         self.user_input_list3 = ["add", "user3", "admin123"]
         self.invalid_input_list = ["invalidCommand", "user"]
+        self.cmd.setLogged(True)
 
     def test_invalid_input_list(self):
         self.assertTrue(self.cmd.countArgs(self.invalid_input_list))

@@ -18,7 +18,7 @@ class LoginCommandTest(unittest.TestCase):
 
         self.cmd = LoginCommand()
         self.user_input_list1 = ["login", "user1", "admin123"]
-        self.user_input_list2 = ["login", "user2", "wrongPassWord"]
+        self.user_input_list2 = ["login", "user1", "wrongPassWord"]
         self.user_input_list3 = ["login", "user3", "admin123"]
         self.invalid_input_list = ["invalidCommand", "user"]
 

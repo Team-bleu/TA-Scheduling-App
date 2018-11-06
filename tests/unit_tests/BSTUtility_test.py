@@ -14,9 +14,6 @@ class BSTUtilityTest(unittest.TestCase):
                           "phone", "email", "address", "course", "lab", "assignment", "None", "None", "None")
         self.emptyUser = User()
 
-        self.util.updateUser(self.searchuser)
-
-
     def test_append(self):
         fileName1 = "CS150.txt"
         fileName2 = "CS351.txt"
@@ -50,7 +47,7 @@ class BSTUtilityTest(unittest.TestCase):
         self.assertEqual(self.util.searchUser("NotExist"), None)
 
         # We must reset the utility before looking for the new user
-        self.util.setUp()
+        self.util.updateUser(self.searchuser)
         self.assertIsInstance(self.util.searchUser("searchuser"), User)
         self.assertEqual(self.util.searchUser("searchuser").getContents(), self.searchuser.getContents())
         # Now we must reset the utility and remove the dummy user
@@ -71,12 +68,13 @@ class BSTUtilityTest(unittest.TestCase):
         self.util.updateUser(self.searchuser)
         # If the user "searchuser" has been added correctly, we can verify its contents
         self.assertEqual(self.util.searchUser("searchuser").getContents(), self.searchuser.getContents())
+        self.assertIsNone(self.util.removeUser("searchuser"))
 
     def test_add_user(self):
         self.util.addUser(self.searchuser)
         # If the user "searchuser" has been added correctly, we can verify its contents
         # same reason as update user test
-        self.assertEqual(self.util.searchUser("searchuser").getContents(), self.searchuser.getContents())
+        self.assertIsNone(self.util.removeUser("searchuser"))
 
     def test_setup_root(self):
         self.assertIsInstance(self.util.setUpRoot(), User)
