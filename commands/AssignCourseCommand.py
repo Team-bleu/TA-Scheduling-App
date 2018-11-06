@@ -20,16 +20,18 @@ class AssignCourseCommand(Command):
         courseName = user_input_list[2]
 
         if (courseUtil.getContents(courseName) == False):   #if course doesn't exist, return error
-            return
+            return "Course doesn't exist"
 
         if not courseUtil.assignCourse(username):
-            return
+            return username + " is not an Instructor or TA"
 
         courseUtil.writeContents()
 
         user = bstUtil.searchUser(username)
         user.setClass(courseName,"None")
         bstUtil.updateUser(user)
+
+        return username + " has been added to " + courseName
 
     def isCommand(self, command):
         return command == "assigncourse"

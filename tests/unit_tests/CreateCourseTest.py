@@ -31,6 +31,7 @@ class CreateCourseTest(unittest.TestCase):
         # supervisor is already logged in (since they can add courses)
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
 
+        # If this test is failing:
         # We have to manually delete TEST100.txt from data/courses/ if
         # it's been created prior or already exist so this test can run correctly
         self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "TEST100 has been created")

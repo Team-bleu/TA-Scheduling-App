@@ -2,12 +2,12 @@ first
 last
 dummy
 pass
-role
+TA
 phone
 email
 address
-course
-lab
+TEST100
+None
 assignment
 super.txt
 None
