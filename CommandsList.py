@@ -8,13 +8,15 @@ from AssignLabCommand import AssignLabCommand
 from AssignCourseCommand import AssignCourseCommand
 from CreateLabCommand import CreateLabCommand
 
+
 # This class stores all of the commands
 # and cycles through them to retrieve
 # the correct response when called upon
 class CommandsList:
     logged = False
-    _logger = None #User()
-    _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand, AssignCourseCommand, CreateLabCommand]
+    _logger = None
+    _commands = [ExampleCommand, LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand,
+                 AssignCourseCommand, CreateLabCommand]
 
     # Method for parsing user input into a list
     def parseInput(self, user_input):

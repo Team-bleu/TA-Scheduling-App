@@ -23,6 +23,8 @@ class CreateLabCommand(Command):
         courseUtil.createLab(labName)
         courseUtil.writeContents()
 
+        return labName + " has been created"
+
 
     def isCommand(self, command):
         return command == "createlab"

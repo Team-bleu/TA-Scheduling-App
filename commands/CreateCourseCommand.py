@@ -15,8 +15,7 @@ class CreateCourseCommand(Command):
         courseUtil = CourseUtility()
         courseName = user_input_list[1]
 
-
-        courseUtil.createCourse(courseName)
+        return courseUtil.createCourse(courseName)
 
 
     def isCommand(self, command):

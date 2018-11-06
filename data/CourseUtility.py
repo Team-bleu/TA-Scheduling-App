@@ -86,11 +86,10 @@ class CourseUtility:
         bst = BSTUtility()
         insObj = bst.searchUser(username)
         if (insObj.getRole() != "Instructor" and insObj.getRole() != "TA"):
-            print(username,"is not an Instructor or TA")
             return False
 
         self._instructor = insObj.username
-        print(username,"has been added to",self._courseName)
+        # print(username, "has been added to", self._courseName)
         return True
 
 
@@ -130,15 +129,12 @@ class CourseUtility:
             self._TAs[index] = username
             #print("afterTAs = ", self._TAs)
 
-
-            return print(username,"has been added to",LabName)
-
-    def createCourse(self,courseName):
+    def createCourse(self, courseName):
 
         fileName = self.append("data/courses/", courseName) + ".txt"
 
-        if (os.path.isfile(fileName)):      #check if file exists already
-            print("Course already exists")
+        if os.path.isfile(fileName):      # Check if file exists already
+            return "Course already exists"
         else:
             file = open(fileName, "+w")
             file.write(courseName)
@@ -146,8 +142,7 @@ class CourseUtility:
             file.write("\nNone")
             file.write("\nNone")
             file.close()
-            print(courseName,"has been created")
-
+            return courseName + " has been created"
 
     def deleteCourse(self,courseName):
         fileName = self.append("data/courses/", courseName) + ".txt"
@@ -169,10 +164,6 @@ class CourseUtility:
             tempLabList[index] = labName
 
             self._labs = tempLabList
-
-        print(labName,"has been created")
-
-
 
     # This function is used to append two strings together
     # In particular, this function appends a directory with a file

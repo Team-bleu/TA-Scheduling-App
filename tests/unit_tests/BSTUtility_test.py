@@ -45,7 +45,7 @@ class BSTUtilityTest(unittest.TestCase):
         self.assertIsInstance(self.util.getRightChild(), User)
         self.assertEqual(self.util.getRightChild().getContents(), self.emptyUser.getContents())
 
-    #If user does't exist. would it be better to return None than an empty user?
+    # If user does't exist. would it be better to return None than an empty user?
     def test_search_user(self):
         self.assertEqual(self.util.searchUser("NotExist"), None)
 
@@ -88,7 +88,6 @@ class BSTUtilityTest(unittest.TestCase):
     def tearDown(self):
         self.util = None
         self.user1 = self.emptyUser = None
-
 
 
 if __name__ == "__main__":

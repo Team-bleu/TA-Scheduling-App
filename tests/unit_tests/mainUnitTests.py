@@ -15,11 +15,11 @@ def main_tests():
     suite = unittest.TestSuite()
 
     suite.addTest(unittest.makeSuite(AddCommandTest))
+    suite.addTest(unittest.makeSuite(CreateCourseTest))
+    suite.addTest(unittest.makeSuite(CreateLabTest))
     suite.addTest(unittest.makeSuite(AssignCourseCommandTest))
     suite.addTest(unittest.makeSuite(AssignLabCommandTest))
     suite.addTest(unittest.makeSuite(BSTUtilityTest))
-    suite.addTest(unittest.makeSuite(CreateCourseTest))
-    suite.addTest(unittest.makeSuite(CreateLabTest))
     suite.addTest(unittest.makeSuite(LoginCommandTest))
     suite.addTest(unittest.makeSuite(LogoutCommandTest))
     suite.addTest(unittest.makeSuite(UserTest))
