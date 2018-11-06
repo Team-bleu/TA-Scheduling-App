@@ -142,7 +142,7 @@ class BSTUtility:
         else:
             # Then remove that user and replace it with an updated one
             file = user.getUsername() + ".txt"
-            os.remove(self._directory+ file)
+            os.remove(self._directory + file)
             self.addUser(user)
 
     def addUser(self, user):

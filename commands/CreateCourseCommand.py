@@ -1,10 +1,13 @@
 from Command import Command
 from CourseUtility import CourseUtility
+from Command import Command
 
 
 class CreateCourseCommand(Command):
 
-    def action(self, user_input_list, user, courses, labs):
+    def action(self, user_input_list):
+        if not Command.isLogged(self):
+            return "No user is logged in."
         
         courseUtil = CourseUtility()
         courseName = user_input_list[1]

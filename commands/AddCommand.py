@@ -1,12 +1,16 @@
 from Command import Command
 from BSTutility import BSTUtility
 from user import User
+from Command import Command
 
 
 
 class AddCommand(Command):
 
     def action(self, user_input_list):
+
+        if not Command.isLogged(self):
+            return "No user is logged in."
 
         util = BSTUtility()
         username = user_input_list[1]

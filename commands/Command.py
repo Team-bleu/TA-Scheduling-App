@@ -2,6 +2,16 @@ import abc
 
 
 class Command(abc.ABC):
+    logged = False
+
+    def setLogged(self, logged):
+        self.logged = logged
+
+    def isLogged(self):
+        if self.logged:
+            return True
+        else:
+            return False
 
     # This performs the action of the command
     @abc.abstractmethod

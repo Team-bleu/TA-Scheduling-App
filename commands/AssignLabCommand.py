@@ -1,11 +1,15 @@
 from Command import Command
 from CourseUtility import CourseUtility
 from BSTutility import BSTUtility
+from Command import Command
 
 
 class AssignLabCommand(Command):
 
     def action(self, user_input_list):
+
+        if not Command.isLogged(self):
+            return "No user is logged in."
 
         # <username> <course> <lab>
         courseUtil = CourseUtility()
