@@ -10,6 +10,8 @@ class BSTUtility:
     _parent = None
     _leftChild = None
     _rightChild = None
+    _directory = "data/users/"
+    _root_directory = "data/root.txt"
 
     def __init__(self):
         self.setUp()
@@ -38,11 +40,11 @@ class BSTUtility:
     def setUpRoot(self):
         # Opens the root text file which
         # stores the name of the root file
-        root = open("data/root.txt", "r+")
+        root = open(self._root_directory, "r+")
         rootname = root.readlines()
 
         # Opens the root file
-        rootname = self.append("data/users/", rootname[0])
+        rootname = self.append(self._directory, rootname[0])
         file = open(rootname, "r+")
         contents = file.readlines()
         self.removeNewLine(contents)
@@ -54,9 +56,10 @@ class BSTUtility:
     # role, information(phone, email, and address), course, lab,
     # assignment, parent, leftChild, rightChild)
     def createUser(self, contents):
-        return User(contents[0], contents[1], contents[2], contents[3], contents[4],
-                    [contents[5], contents[6], contents[7]], contents[8], contents[9],
+        user = User(contents[0], contents[1], contents[2], contents[3], contents[4],
+                    contents[5], contents[6], contents[7], contents[8], contents[9],
                     contents[10], contents[11], contents[12], contents[13])
+        return user
 
     def createEmptyUser(self):
         return User()
@@ -64,22 +67,22 @@ class BSTUtility:
     # This function grabs the left child based off of the _current
     def getLeftChild(self):
         # If no left child exists return immediately
-        if self._current.getLeftChild() == "None":
+        if self._current.getLeftChild() is None:
             return User()
         filename = self._current.getLeftChild()
-        filename = self.append("data/users/", filename)
+        filename = self.append(self._directory, filename)
         file = open(filename, "r+")
         contents = file.readlines()
         self.removeNewLine(contents)
         return self.createUser(contents)
 
-    # This function grabs the left child based off of the _current
+    # This function grabs the right child based off of the _current
     def getRightChild(self):
         # If no right child exists return immediately
-        if self._current.getRightChild() == "None":
+        if self._current.getRightChild() is None:
             return User()
         filename = self._current.getRightChild()
-        filename = self.append("data/users/", filename)
+        filename = self.append(self._directory, filename)
         file = open(filename, "r+")
         contents = file.readlines()
         self.removeNewLine(contents)
@@ -103,8 +106,8 @@ class BSTUtility:
     # using their username and returns a User object
     # This is a recursive method
     def searchUser(self, username):
-        if self._current.getUsername() == "None":
-            return self.createEmptyUser()
+        if self._current.getUsername() is None:
+            return None
         if username == self._current.getUsername():
             return self._current
         elif username < self._current.getUsername():
@@ -132,14 +135,14 @@ class BSTUtility:
             user.setParent(self._parent)
 
         # If user doesn't exist, create a new user
-        if newuser.getUsername() == "None":
+        if newuser is None:
             self.addUser(user)
 
         # If user exists update current existing user
         else:
             # Then remove that user and replace it with an updated one
             file = user.getUsername() + ".txt"
-            os.remove("data/users/" + file)
+            os.remove(self._directory+ file)
             self.addUser(user)
 
     def addUser(self, user):
@@ -149,19 +152,24 @@ class BSTUtility:
         # Creates a new file to store the new user
         # The nested for loops take into account the
         # information list and None existing parent and child
-        file = open("data/users/" + user.getUsername() + ".txt", "w+")
+        file = open(self._directory + user.getUsername() + ".txt", "w+")
         contents = user.getContents()
         for content in contents:
             if isinstance(content, list):
                 for item in content:
-                    item = item + "\n"
-                    file.write(item)
+                    if item is None:
+                        file.write("None\n")
+                    else:
+                        item = item + "\n"
+                        file.write(item)
             elif isinstance(content, User):
-                if content.getUsername() == "None":
+                if content.getUsername() is None:
                     file.write("None\n")
                 else:
                     content = content.getUsername() + ".txt\n"
                     file.write(content)
+            elif content is None:
+                file.write("None\n")
             else:
                 content = content + "\n"
                 file.write(content)
@@ -186,11 +194,13 @@ class BSTUtility:
         # Reset positions and update the location of user
         self.setUp()
         user = self.searchUser(username)
+        if user is None:
+            return
         file = username + ".txt"
 
         # If that user doesn't exist in the tree
         # ignore and return nothing
-        if user.getUsername() == "None":
+        if user.getUsername() is None:
             return
 
         # If the user to be removed is the parent's left child,
@@ -202,7 +212,7 @@ class BSTUtility:
             # Then search the right subtree of the parent to store
             # the right subtree of current
             right = self.getRightChild()
-            if right.getUsername() != "None":
+            if right.getUsername() is not None:
                 self.updateUser(right)
 
         # Otherwise, the user to be removed is the parent's right child
@@ -214,11 +224,11 @@ class BSTUtility:
             # Then search the left subtree of the parent to store the
             # left subtree of current
             left = self.getLeftChild()
-            if left.getUsername() != "None":
+            if left.getUsername() is not None:
                 self.updateUser(left)
 
         # Finally, remove the user
-        file = "data/users/" + user.getUsername() + ".txt"
+        file = self._directory + user.getUsername() + ".txt"
         os.remove(file)
 
 
@@ -226,36 +236,38 @@ class BSTUtility:
 # obj = BSTUtility()
 # obj.setUpRoot()
 # print("root is " + obj._root.getUsername())
-# print("left child is " + obj._leftChild.getUsername())
-# print("right child is " + obj._rightChild.getUsername())
+# print("left child is: ")
+# print(obj._leftChild.getUsername())
+# print("right child is: ")
+# print(obj._rightChild.getUsername())
 # print("done\n")
 #
 # # This is findme.txt and should print an object pointing to it and name in file
 # user = obj.searchUser("findme")
 # print("searched for user: findme and obtained object:")
 # print(user)
-# print("first name: " + user.getFirstName())
-# print("last name: " + user.getLastName())
-# print("found username: " + user.getUsername())
-#
+# print("first name: ")
+# print(user.getFirstName())
+# print("last name: ")
+# print(user.getLastName())
+# print("found username: ")
+# print(user.getUsername())
+# #
 # # This is used to see if we can find a non-existing user
 # user = obj.searchUser("dontexist")
 # print("\nthe username dontexist, doesn't exist; and the object made form it is:")
 # print(user)
-# print("first name: " + user.getFirstName())
-# print("last name: " + user.getLastName())
-# print("found username: " + user.getUsername())
-#
+# #
 # # # This is to test the functionality of updateUser
-# # obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
-# #                     "None", "None", "None", "None"))
-# # # This is to test the functionality of addUser
-# # obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
-# #                     "None", "None", "None", "None"))
-# # obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
-# #                     "None", "None", "None", "None"))
-#
-# # To test correctly, delete guy.txt before running this code
+# obj.updateUser(User("New", "Dude", "findme", "pass", "role", ["newphone", "newemail", "address"], "course", "lab",
+#                     "None", "None", "None", "None"))
+# # This is to test the functionality of addUser
+# obj.updateUser(User("a", "b", "ab", "pass", "role", ["phone", "email", "address"], "course", "lab",
+#                     "None", "None", "None", "None"))
+# obj.updateUser(User("zz", "z", "zz", "pass", "role", ["phone", "email", "address"], "course", "lab",
+#                     "None", "None", "None", "None"))
+# #
+# # # To test correctly, delete guy.txt before running this code
 # obj.updateUser(User("THe", "Guy", "guy", "pass", "role", ["phone", "email", "address"], "course", "lab",
 #                     "None", "None", "None", "None"))
-# obj.removeUser("guy")
+# # obj.removeUser("guy")

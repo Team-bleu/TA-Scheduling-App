@@ -1,8 +1,10 @@
 import unittest
 from AddCommand import AddCommand
+from BSTutility import BSTUtility
 
 
 class AddCommandTest(unittest.TestCase):
+    util = BSTUtility()
 
     def setUp(self):
         self.cmd = AddCommand()
@@ -18,8 +20,10 @@ class AddCommandTest(unittest.TestCase):
     def test_valid_input_list(self):
         self.assertFalse(self.cmd.countArgs(self.user_input_list1))
         self.assertFalse(self.cmd.countArgs(self.user_input_list2))
+        self.assertFalse(self.cmd.countArgs(self.user_input_list3))
         self.assertTrue(self.cmd.isCommand(self.user_input_list1[0]))
         self.assertTrue(self.cmd.isCommand(self.user_input_list2[0]))
+        self.assertTrue(self.cmd.isCommand(self.user_input_list3[0]))
 
     # Before this line is initiated, make user user1 and user2
     # aren't existing users already. (This can occur if the test
@@ -29,6 +33,9 @@ class AddCommandTest(unittest.TestCase):
         self.assertEqual(self.cmd.action(self.user_input_list1), "User already exists.")
         self.assertEqual(self.cmd.action(self.user_input_list2), "user2 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list2), "User already exists.")
+        # # Now we got to remove the users added so it doesn't crash the second run
+        self.util.removeUser("user1")
+        self.util.removeUser("user2")
 
 
 if __name__ == "__main__":
