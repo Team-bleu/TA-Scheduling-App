@@ -1,4 +1,4 @@
-from BSTutility import BSTUtility
+from UserUtility import UserUtility
 from user import User
 from Command import Command
 
@@ -13,7 +13,7 @@ class AddCommand(Command):
         if Command.getCredentialss(self) < 3:
             return "Do not have permission"
 
-        util = BSTUtility()
+        util = UserUtility()
         username = user_input_list[1]
         password = user_input_list[2]
 
@@ -23,7 +23,7 @@ class AddCommand(Command):
             return "User already exists."
 
         user = User("first", "last", username, password, "role",
-                    "phone", "email", "address", "course", "lab", "assignment", "None", "None", "None")
+                    "phone", "email", "address", "course", "lab", "assignment")
         # user = User()
 
         user.setAccount(username, password)

@@ -1,5 +1,4 @@
 from Command import Command
-from user import User
 
 
 class LogoutCommand(Command):

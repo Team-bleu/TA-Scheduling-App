@@ -86,9 +86,5 @@ class acceptanceTest(unittest.TestCase):
         self.assertEqual(self.app.command("assignlab TA1 CS351 LAB801"), "Do not have permission")
         self.assertEqual(self.app.command("logout"), "logged out.")
 
-
-
-
-
-
-
+    def test_logout(self):
+        self.assertEqual(self.app.command("logout"), "logged out.")

@@ -1,7 +1,6 @@
 from Command import Command
 from CourseUtility import CourseUtility
-from BSTutility import BSTUtility
-from Command import Command
+from UserUtility import UserUtility
 
 
 class AssignLabCommand(Command):
@@ -16,7 +15,7 @@ class AssignLabCommand(Command):
 
         # <username> <course> <lab>
         courseUtil = CourseUtility()
-        bstUtil = BSTUtility()
+        userUtil = UserUtility()
 
         username = user_input_list[1]
         courseName = user_input_list[2]
@@ -28,9 +27,9 @@ class AssignLabCommand(Command):
         courseUtil.assignLab(username,labName)
         courseUtil.writeContents()
 
-        user = bstUtil.searchUser(username)
+        user = userUtil.searchUser(username)
         user.setClass(courseName,labName)
-        bstUtil.updateUser(user)
+        userUtil.updateUser(user)
 
         return username + " has been assigned to " + labName
 

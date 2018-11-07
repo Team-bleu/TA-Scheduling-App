@@ -9,6 +9,3 @@ address
 CS351
 LAB801
 assignment
-super.txt
-None
-None

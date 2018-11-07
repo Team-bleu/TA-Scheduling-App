@@ -1,7 +1,6 @@
 from Command import Command
-from BSTutility import BSTUtility
+from UserUtility import UserUtility
 from CourseUtility import CourseUtility
-from Command import Command
 
 
 class AssignCourseCommand(Command):
@@ -14,7 +13,7 @@ class AssignCourseCommand(Command):
         if Command.getCredentialss(self) < 3:
             return "Do not have permission"
         
-        bstUtil = BSTUtility()
+        userUtil = UserUtility()
         courseUtil = CourseUtility()
         username = user_input_list[1]
         courseName = user_input_list[2]
@@ -27,9 +26,9 @@ class AssignCourseCommand(Command):
 
         courseUtil.writeContents()
 
-        user = bstUtil.searchUser(username)
+        user = userUtil.searchUser(username)
         user.setClass(courseName,"None")
-        bstUtil.updateUser(user)
+        userUtil.updateUser(user)
 
         return username + " has been assigned to " + courseName
 

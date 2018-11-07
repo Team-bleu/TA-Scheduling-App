@@ -1,6 +1,5 @@
 from Command import Command
 from CourseUtility import CourseUtility
-from Command import Command
 
 
 class CreateCourseCommand(Command):

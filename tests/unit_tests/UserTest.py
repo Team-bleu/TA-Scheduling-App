@@ -6,7 +6,7 @@ class UserTest(unittest.TestCase):
     def setUp(self):
         self.user0 = User()
         self.user1 = User("Peter", "Xiong", "xiongpp", "admin123", "Instrutor", "phone", "email", "address", "CS351",
-                          "lab01", "assignment","super",None,None)
+                          "lab01", "assignment")
 
     def test_init(self):
         self.assertIsNotNone(User())
@@ -41,12 +41,6 @@ class UserTest(unittest.TestCase):
     def test_get_assignment(self):
         self.assertIsNotNone(self.user1.getAssignment())
         self.assertEqual(self.user1.getAssignment(), "assignment")
-
-    def test_get_parent_left_right_node(self):
-        self.assertIsNotNone(self.user1.getParent())
-        self.assertEqual(self.user1.getParent(), "super")
-        self.assertIsNone(self.user1.getLeftChild())
-        self.assertIsNone(self.user1.getRightChild())
 
     def test_set_name(self):
         self.user0.setName("Peter", "Xiong")
@@ -83,22 +77,11 @@ class UserTest(unittest.TestCase):
         self.assertIsNotNone(self.user1.getAssignment())
         self.assertEqual(self.user1.getAssignment(), "assignment")
 
-    def test_set_parent_left_right_node(self):
-        self.user0.setParent("super")
-        self.assertIsNotNone(self.user0.getParent())
-        self.assertEqual(self.user0.getParent(), "super")
-        self.user1.setLeftChild("left1")
-        self.user1.setRightChild("right1")
-        self.assertIsNotNone(self.user1.getLeftChild())
-        self.assertEqual(self.user1.getLeftChild(), "left1")
-        self.assertIsNotNone(self.user1.getRightChild())
-        self.assertEqual(self.user1.getRightChild(), "right1")
-
     def test_get_contents(self):
         self.assertIsNotNone(self.user1.getContents())
         self.assertEqual(self.user1.getContents(), ["Peter", "Xiong", "xiongpp", "admin123", "Instrutor",
                                                     "phone", "email", "address", "CS351",
-                                                    "lab01", "assignment","super",None,None])
+                                                    "lab01", "assignment"])
 
     def tearDown(self):
         self.emptyUser = None

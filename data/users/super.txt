@@ -9,6 +9,3 @@ address
 None
 None
 assignment
-None
-TA1.txt
-None
