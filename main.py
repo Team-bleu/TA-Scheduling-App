@@ -13,7 +13,8 @@ def main():
 
 
     # Limitation for unittest and acceptance test: Since we don't have remove command, you need to manually
-    # delete files to make sure both unittest and acceptence tests are passing
+    # delete files to make sure both unittest and acceptence tests are passing when we run them multiple times
+    # will fix this in sprint two
 
     if unittest:
         print("start unit tests.\n")
