@@ -39,6 +39,7 @@ class acceptanceTest(unittest.TestCase):
         self.assertEqual(self.app.command("login user1 admin123"), "user1 logged in.")
         self.assertEqual(self.app.command("createcourse CS361"), "Do not have permission")
         self.assertEqual(self.app.command("createcourse CS251"), "Do not have permission")
+        self.assertEqual(self.app.command("logout"), "logged out.")
 
 
     # 8(Sprint 1) As a supervisor I want to assign TAs to courses so that later, the TAs can be assigned to a lab section
