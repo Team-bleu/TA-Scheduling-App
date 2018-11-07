@@ -13,6 +13,12 @@ class UserUtility:
     def setUp(self):
         self._user = None
 
+    def set_directory(self, directory):
+        self._directory = directory
+
+    def set_concat(self, concat):
+        self._concat = concat
+
     def appendDir(self, file):
         return self._directory + file
 
