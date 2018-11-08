@@ -1,24 +1,27 @@
+from UserUtility import UserUtility
 from Command import Command
-from CourseUtility import CourseUtility
 
 
-class CreateCourseCommand(Command):
+class EditCommand(Command):
 
     def action(self, user_input_list):
+
         if not Command.isLogged(self):
             return "No user is logged in."
 
         if Command.getCredentialss(self) < 3:
             return "Do not have permission"
-        
-        courseUtil = CourseUtility()
-        courseName = user_input_list[1]
 
-        return courseUtil.createCourse(courseName)
+        util = UserUtility()
+        username = user_input_list[1]
+        user = util.searchUser(username)
+        if user is None:
+            return username + " doesn't exist!"
 
+        pass
 
     def isCommand(self, command):
-        return command == "createcourse"
+        return command == "edit"
 
     def countArgs(self, user_input_list):
         return len(user_input_list) < 2

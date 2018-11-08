@@ -1,11 +1,11 @@
 import unittest
 from AddCommand import AddCommand
-from BSTutility import BSTUtility
+from UserUtility import UserUtility
 from LoginCommand import LoginCommand
 
 
 class AddCommandTest(unittest.TestCase):
-    util = BSTUtility()
+    util = UserUtility()
 
     def setUp(self):
         self.cmd = AddCommand()

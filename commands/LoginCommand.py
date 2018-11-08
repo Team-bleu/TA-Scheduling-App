@@ -1,11 +1,11 @@
 from Command import Command
-from BSTutility import BSTUtility
+from UserUtility import UserUtility
 
 
 class LoginCommand(Command):
 
     def action(self, user_input_list):
-        util = BSTUtility()
+        util = UserUtility()
         username = user_input_list[1]
         password = user_input_list[2]
 

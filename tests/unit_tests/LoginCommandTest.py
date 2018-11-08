@@ -1,6 +1,6 @@
 import unittest
 from LoginCommand import LoginCommand
-from BSTutility import BSTUtility
+from UserUtility import UserUtility
 from user import User
 
 
@@ -27,7 +27,7 @@ class LoginCommandTest(unittest.TestCase):
     def test_login_command(self):
         # We must have the utility so we can add a
         # dummy user in order to login.
-        self.util = BSTUtility()
+        self.util = UserUtility()
         # Now we must create the dummy user
         self.user = User()
         self.user.setAccount("user1", "admin123")

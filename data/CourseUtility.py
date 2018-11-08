@@ -1,5 +1,4 @@
-from user import User
-from BSTutility import BSTUtility
+from UserUtility import UserUtility
 import os
 
 
@@ -83,8 +82,8 @@ class CourseUtility:
         return self._TAs
 
     def assignCourse(self,username):
-        bst = BSTUtility()
-        insObj = bst.searchUser(username)
+        util = UserUtility()
+        insObj = util.searchUser(username)
         if (insObj.getRole() != "Instructor" and insObj.getRole() != "TA"):
             return False
 
@@ -95,8 +94,8 @@ class CourseUtility:
 
     def assignLab(self,username, LabName):
 
-        bst = BSTUtility()
-        TAobj = bst.searchUser(username)
+        util = UserUtility()
+        TAobj = util.searchUser(username)
 
         #print("TA =",TAobj.getUsername())
 

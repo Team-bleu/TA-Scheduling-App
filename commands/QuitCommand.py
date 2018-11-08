@@ -1,15 +1,13 @@
 from Command import Command
 
 
-class LogoutCommand(Command):
+class QuitCommand(Command):
 
     def action(self, user_input_list):
-
-        Command.setLogged(self,False)
-        return "logged out."
+        return "Quiting session."
 
     def isCommand(self, command):
-        return command == "logout"
+        return command == "quit"
 
     def countArgs(self, user_input_list):
         return len(user_input_list) < 1
