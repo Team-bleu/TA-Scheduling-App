@@ -8,8 +8,8 @@ def main():
     # This boolean is to see if we want
     # to check the acceptance tests
     # and unittests
-    test = True # set this to true to run acceptance test
-    unittest = True # set this to true to run unit test
+    test = False # set this to true to run acceptance test
+    unittest = False # set this to true to run unit test
 
 
     # Limitation for unittest and acceptance test: Since we don't have remove command, you need to manually

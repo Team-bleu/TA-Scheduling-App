@@ -1,4 +1,3 @@
-from user import User
 from LoginCommand import LoginCommand
 from LogoutCommand import LogoutCommand
 from AddCommand import AddCommand
@@ -6,7 +5,8 @@ from CreateCourseCommand import CreateCourseCommand
 from AssignLabCommand import AssignLabCommand
 from AssignCourseCommand import AssignCourseCommand
 from CreateLabCommand import CreateLabCommand
-
+from RoleCommand import RoleCommand
+from RemoveCommand import RemoveCommand
 
 # This class stores all of the commands
 # and cycles through them to retrieve
@@ -15,7 +15,7 @@ class CommandsList:
     logged = False
     _logger = None
     _commands = [LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand,
-                 AssignCourseCommand, CreateLabCommand]
+                 AssignCourseCommand, CreateLabCommand, RoleCommand, RemoveCommand]
 
     # Method for parsing user input into a list
     def parseInput(self, user_input):
@@ -23,7 +23,7 @@ class CommandsList:
 
     # This method checks the user input to
     # see if we have a matching command
-    def checkCommand(self, user_input, user, courses, labs):
+    def checkCommand(self, user_input):
 
         # This parses the user's input
         user_input_list = self.parseInput(user_input)
