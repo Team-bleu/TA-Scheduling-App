@@ -8,6 +8,8 @@ from CreateLabCommand import CreateLabCommand
 from RoleCommand import RoleCommand
 from RemoveCommand import RemoveCommand
 from QuitCommand import QuitCommand
+from EditCommand import EditCommand
+from ShowCommand import ShowCommand
 
 # This class stores all of the commands
 # and cycles through them to retrieve
@@ -16,7 +18,8 @@ class CommandsList:
     logged = False
     _logger = None
     _commands = [LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand,
-                 AssignCourseCommand, CreateLabCommand, RoleCommand, RemoveCommand, QuitCommand]
+                 AssignCourseCommand, CreateLabCommand, RoleCommand, RemoveCommand, QuitCommand,
+                 ShowCommand, EditCommand]
 
     # Method for parsing user input into a list
     def parseInput(self, user_input):
@@ -41,6 +44,3 @@ class CommandsList:
 
                 # Preforms the command
                 return command.action(self, user_input_list)
-
-
-
