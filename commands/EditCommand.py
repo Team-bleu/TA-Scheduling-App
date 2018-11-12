@@ -30,6 +30,12 @@ class EditCommand(Command):
             elif user_input_list[index] == "address":
                 index += 1
                 user.setAddress(EditCommand.getAddress(self, user_input_list, index, length))
+            elif user_input_list[index] == "firstname":
+                index += 1
+                user.setFirstName(user_input_list[index])
+            elif user_input_list[index] == "lastname":
+                index += 1
+                user.setLastName(user_input_list[index])
             else:
                 index += 1
 
@@ -47,7 +53,8 @@ class EditCommand(Command):
         string = ""
         while index < length:
             if user_input_list[index] == "phone" or user_input_list[index] == "email" or \
-                    user_input_list[index] == "address":
+                    user_input_list[index] == "address" or user_input_list[index] == "firstname" or \
+                    user_input_list[index] == "lastname":
                 return string
             string = string + user_input_list[index] + " "
             index += 1
