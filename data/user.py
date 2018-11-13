@@ -12,7 +12,13 @@ class User:
         self.setAssignment(assignment)
 
     def setName(self, firstname, lastname):
+        self.setFirstName(firstname)
+        self.setLastName(lastname)
+
+    def setFirstName(self, firstname):
         self.firstname = firstname
+
+    def setLastName(self, lastname):
         self.lastname = lastname
 
     def getFirstName(self):

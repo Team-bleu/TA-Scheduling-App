@@ -74,7 +74,8 @@ Support commands are:
     - if email of <name> does not exist, display "Error sending, that email does not exist."
     - Sends out an email to <name>, displays "email has been sent"
 
-11, edit <name>
+11, edit <name> phone <phone number> email <email> address <address> firstname <first name> lastname <last name>
+    - the edit command syntax above can have the information at any order or even omit some info
     - if <name> doesn't exist, display "<name> doesn't exist"
     - Edits the information of <name>
     - if <role> is instructor or TA, and if <name> parameter is given display "Only can edit your information"
