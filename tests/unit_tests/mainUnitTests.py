@@ -8,6 +8,8 @@ from LoginCommandTest import LoginCommandTest
 from LoguoutCommandTest import LogoutCommandTest
 from QuitCommandTest import QuitCommandTest
 from RoleCommandTest import RoleCommandTest
+from ShowCommandTest import ShowCommandTest
+from RemoveCommandTest import RemoveCommandTest
 from UserUtilityTest import UserUtilityTest
 
 from UserTest import UserTest
@@ -28,6 +30,8 @@ def main_tests():
     suite.addTest(unittest.makeSuite(UserUtilityTest))
     suite.addTest(unittest.makeSuite(QuitCommandTest))
     suite.addTest(unittest.makeSuite(RoleCommandTest))
+    suite.addTest(unittest.makeSuite(ShowCommandTest))
+    suite.addTest(unittest.makeSuite(RemoveCommandTest))
     suite.addTest(unittest.makeSuite(LogoutCommandTest))
     runner = unittest.TextTestRunner()
     res = runner.run(suite)
