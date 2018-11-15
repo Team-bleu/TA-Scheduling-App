@@ -7,6 +7,7 @@ from CreateLabTest import CreateLabTest
 from LoginCommandTest import LoginCommandTest
 from LoguoutCommandTest import LogoutCommandTest
 from QuitCommandTest import QuitCommandTest
+from RoleCommandTest import RoleCommandTest
 from UserUtilityTest import UserUtilityTest
 
 from UserTest import UserTest
@@ -14,6 +15,7 @@ from UserTest import UserTest
 
 
 def main_tests():
+
     suite = unittest.TestSuite()
 
     suite.addTest(unittest.makeSuite(AddCommandTest))
@@ -25,6 +27,7 @@ def main_tests():
     suite.addTest(unittest.makeSuite(UserTest))
     suite.addTest(unittest.makeSuite(UserUtilityTest))
     suite.addTest(unittest.makeSuite(QuitCommandTest))
+    suite.addTest(unittest.makeSuite(RoleCommandTest))
     suite.addTest(unittest.makeSuite(LogoutCommandTest))
     runner = unittest.TextTestRunner()
     res = runner.run(suite)
