@@ -10,6 +10,7 @@ from QuitCommandTest import QuitCommandTest
 from RoleCommandTest import RoleCommandTest
 from ShowCommandTest import ShowCommandTest
 from RemoveCommandTest import RemoveCommandTest
+from EditCommandTest import EditCommandTest
 from UserUtilityTest import UserUtilityTest
 
 from UserTest import UserTest
@@ -32,6 +33,7 @@ def main_tests():
     suite.addTest(unittest.makeSuite(RoleCommandTest))
     suite.addTest(unittest.makeSuite(ShowCommandTest))
     suite.addTest(unittest.makeSuite(RemoveCommandTest))
+    suite.addTest(unittest.makeSuite(EditCommandTest))
     suite.addTest(unittest.makeSuite(LogoutCommandTest))
     runner = unittest.TextTestRunner()
     res = runner.run(suite)
