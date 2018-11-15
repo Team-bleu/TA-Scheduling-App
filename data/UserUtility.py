@@ -4,7 +4,7 @@ import os
 
 class UserUtility:
 
-    _directory = "data/users/"
+    _directory = "../data/users/"
     _concat = ".txt"
 
     def __init__(self):
