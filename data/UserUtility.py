@@ -53,8 +53,18 @@ class UserUtility:
 
         file = open(file, "r+")
         contents = file.readlines()
+        file.close()    # close file
 
         contents = self.removeNewLine(contents)
+
+        if (contents.__len__ != 0):
+            courseString = contents[8]
+            courseList = courseString.split(",")
+            contents[8] = courseList
+            labString = contents[9]
+            labList = labString.split(",")
+            contents[9] = labList
+
         return self.createUser(contents)
 
     # This function will add a user, username
@@ -75,6 +85,30 @@ class UserUtility:
     def addUser(self, user):
         file = open(self._directory + user.getUsername() + self._concat, "w+")
         contents = user.getContents()
+        courseList = list(contents[8])
+        labList = list(contents[9])
+
+        courseListString = ""
+        labListString = ""
+
+        # for courses
+        for i in range(0,courseList.__len__()): # loop through courses and make them one string
+            if (i != courseList.__len__()-1):
+                courseListString = courseListString + courseList[i] + ","
+            else:
+                courseListString = courseListString + courseList[i]
+
+        contents[8] = courseListString  # set contents[8] to the new courseListString
+
+        # for labs
+        for i in range(0,labList.__len__()): # loop through labs and make them one string
+            if (i != labList.__len__()-1):
+                labListString = labListString + labList[i] + ","
+            else:
+                labListString = labListString + labList[i]
+
+        contents[9] = labListString  # set contents[9] to the new labListString
+
         for content in contents:
             if isinstance(content, list):
                 for item in content:
@@ -88,6 +122,7 @@ class UserUtility:
             else:
                 content = content + "\n"
                 file.write(content)
+        file.close()    #close file
 
     def removeUser(self, username):
         user = self.searchUser(username)
