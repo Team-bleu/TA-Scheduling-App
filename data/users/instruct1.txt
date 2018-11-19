@@ -1,8 +1,8 @@
 first
 last
-TA1
+instruct1
 pass
-TA
+Instructor
 phone
 email
 address

@@ -21,13 +21,33 @@ class AssignCourseCommand(Command):
         if (courseUtil.getContents(courseName) == False):   #if course doesn't exist, return error
             return "Course doesn't exist"
 
-        if not courseUtil.assignCourse(username):
-            return username + " is not an Instructor or TA"
+        user = userUtil.searchUser(username)
+        if (user == None):
+            return username + " does not exist"
+
+        if (user.getRole() != "Instructor"):
+            return username + " is not an Instructor"
+
+        # if there was an instructor assigned to this course, make sure to unassign them
+        oldInstructor = courseUtil.assignCourse(username)
+
+        if (oldInstructor != "None"):
+
+            if (oldInstructor == username):
+                return username + " is already assigned to " + courseName
+
+            oldUser = userUtil.searchUser(oldInstructor)
+            if (oldUser != None):
+                oldUser.unAssignCourse(courseName)
+                userUtil.updateUser(oldUser)
+
 
         courseUtil.writeContents()
 
-        user = userUtil.searchUser(username)
-        user.setClass(courseName,"None")
+
+        if (user.assignCourse(courseName) == False):
+            return username + " is already assigned to " + courseName
+
         userUtil.updateUser(user)
 
         return username + " has been assigned to " + courseName

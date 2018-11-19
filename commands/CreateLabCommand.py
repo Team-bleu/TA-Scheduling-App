@@ -17,9 +17,10 @@ class CreateLabCommand(Command):
         labName = user_input_list[2]
 
         if (courseUtil.getContents(courseName) == False):   #if course doesn't exist, return error
-            return
+            return courseName + " does not exist"
 
-        courseUtil.createLab(labName)
+        if (courseUtil.createLab(labName) == False):
+            return labName + " already exists"
         courseUtil.writeContents()
 
         return labName + " has been created"

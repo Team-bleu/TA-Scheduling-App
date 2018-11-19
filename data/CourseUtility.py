@@ -33,7 +33,7 @@ class CourseUtility:
 
             file.close()
         else:
-            print("Course does not exist\n")
+            #print("Course does not exist\n")
             return False
 
     def writeContents(self):
@@ -81,26 +81,64 @@ class CourseUtility:
     def getTAs(self):
         return self._TAs
 
+    #assign this course to this instructor, return old instructor if there is one, else return "None"
     def assignCourse(self,username):
         util = UserUtility()
-        insObj = util.searchUser(username)
-        if (insObj.getRole() != "Instructor" and insObj.getRole() != "TA"):
-            return False
+        #insObj = util.searchUser(username)
+        oldInstructor = "None"
 
-        self._instructor = insObj.username
+        if (self._instructor != "None"):
+            oldInstructor = self._instructor
+
+        self._instructor = username
+        return oldInstructor
+
+
+        #if (insObj.getRole() != "Instructor"): #and insObj.getRole() != "TA"):
+        #    return False
+
+        #if (insObj.getRole() == "Instructor"):
+        #    self._instructor = insObj.username
         # print(username, "has been added to", self._courseName)
-        return True
 
+        #return True
+
+    #unassign instructors or TAs from this class, could also use this for unassignlab
+    def unAssignCourse(self,username):
+        util = UserUtility()
+        user = util.searchUser(username)
+
+        if (user.getRole() == "TA"):    # if the user is a TA, search through the TAs and remove them for this course
+            changed = False
+            for i in range(0, self._TAs.__len__()):
+                if (username == self._TAs[i]):
+                    self._TAs[i] = "None"
+                    changed = True
+                    #return True #removed TA
+            return changed
+
+        if (user.getRole() == "Instructor"):  # if the user is a TA, search through the TAs and remove them for this course
+
+            if (username == self._instructor):
+                self._instructor = "None"
+                return True # removed instructor
+            else:
+                return False    # this user was not the instructor, so nothing changes
+
+        #return False    # return False if no user was unassigned
 
     def assignLab(self,username, LabName):
+
+        courseLabName = self._courseName+"-"+LabName
+        #print("courselabname = ",courseLabName)
 
         util = UserUtility()
         TAobj = util.searchUser(username)
 
         #print("TA =",TAobj.getUsername())
 
-        if (TAobj.getRole() != "TA"):
-            return print(username,"is not a TA")
+        if (TAobj.getRole() != "TA"):   # this shouldn't occur
+            return "None" #print(username,"is not a TA")
 
 
         count = 0;
@@ -111,29 +149,43 @@ class CourseUtility:
                 index = count
             count = count + 1
 
-        if (index == -1):
-            return " lab doesn't exist"
+        if (index == -1):   # this shouldn't occur
+            return "None"  # " lab doesn't exist"
         else:
-            #print("TA size = ",self._TAs.__len__())
-            #print("index = ",index)
+
             if ((index+1) > self._TAs.__len__()):
                 TASize = self._TAs.__len__()
-                tempTAList = [None]*(index+1)
+                tempTAList = ["None"]*(index+1)
                 for x in range(0,TASize):
                     tempTAList[x] = self._TAs[x]
                 self._TAs = tempTAList
 
-            #print("TAs = ",self._TAs)
-            #print("tempTAList = ", tempTAList)
+
+            oldTA = self._TAs[index]
             self._TAs[index] = username
-            #print("afterTAs = ", self._TAs)
+            return oldTA
+
+
+        return "None"
+
+    # unassign a TA from a lab, return True if successful, else False
+    def unAssignLab(self, userName, labName):
+
+        for i in range(0,self._labs.__len__()):
+            if (labName == self._labs[i]):
+                if (userName == self._TAs[i]):
+                    self._TAs[i] = "None"
+                    return True
+        return False
+
+
 
     def createCourse(self, courseName):
 
         fileName = self.append("data/courses/", courseName) + ".txt"
 
         if os.path.isfile(fileName):      # Check if file exists already
-            return "Course already exists"
+            return False  #"Course already exists"
         else:
             file = open(fileName, "+w")
             file.write(courseName)
@@ -141,12 +193,103 @@ class CourseUtility:
             file.write("\nNone")
             file.write("\nNone")
             file.close()
-            return courseName + " has been created"
+            return True #courseName + " has been created"
 
-    def deleteCourse(self,courseName):
-        fileName = self.append("data/courses/", courseName) + ".txt"
+    def deleteCourse(self):
+        fileName = self.append("data/courses/", self._courseName) + ".txt"
+
+        userUtil = UserUtility()
+
+        # if there is an instructor assigned to this course, remove this course from them
+        if (self._instructor != "None"):
+            user = userUtil.searchUser(self._instructor)
+            user.unAssignCourse(self._courseName)
+            #user.setClass("None", "None")
+            userUtil.updateUser(user)
+
+        # if there are TAs assigned to this course, remove this course from them
+        if (self._TAs != "None"):
+            for i in range(0,self._TAs.__len__()):
+                user = userUtil.searchUser(self._TAs[i])
+                if (user != None):
+                    user.unAssignCourse(self._courseName)
+                    #user.setClass("None","None")
+                    userUtil.updateUser(user)
+
         os.remove(fileName)
 
+    def removeLab(self,labName):
+
+        userUtil = UserUtility()
+
+        if (self._labs == None):
+            return "There are no Labs to remove"
+
+        for i in range(0,self._labs.__len__()):
+            if (self._labs[i] == labName):
+                self._labs[i] = "None"                           # set this lab to None
+                if (self._TAs[i] != None):                      # check if there is a TA for that Lab
+                    user = userUtil.searchUser(self._TAs[i])    # if there is a TA assigned, search for that TA
+                    self._TAs[i] = "None"                       # set the TA for this lab to None
+                    if (user != None):                          # if the TA user exists, remove that lab from them
+                        #user.setClass(self._courseName,"None")
+                        userUtil.updateUser(user)
+                self.cleanUpLabList()
+                return True
+
+        return False
+
+    #remove any "None"s from the list
+    def cleanUpList(self, origList):
+
+        tempListOld = list(origList)
+        newSize = tempListOld.__len__()
+
+        for i in range(0,tempListOld.__len__()):
+            if (tempListOld[i] == "None"):
+                newSize = newSize - 1
+
+        if (newSize != tempListOld.__len__()):
+            tempListNew = [None]*(newSize)
+            for i in range(0,tempListOld):
+                if (tempListOld[i] != "None"):
+                    tempListNew[i] = tempListOld[i]
+
+            origList = tempListNew # set original list to this new list without "None"s
+
+        return origList
+
+    def cleanUpLabList(self):
+
+        tempOldLabList = self._labs
+        tempOldTAList = self._TAs
+        newSize = self._labs.__len__()
+        index = 0
+
+        for i in range(0,tempOldLabList.__len__()):
+            if (tempOldLabList[i] == "None"):
+                newSize = newSize - 1
+
+        if (newSize == 0):  # if all elements in list are gone, make sure to leave one "None"
+            tempListNew = ["None"] * (1)
+            self._labs = tempListNew    # set both labs and TAs list to one "None"
+            self._TAs = tempListNew
+            return
+
+        if (newSize != tempOldLabList.__len__()):
+            tempNewLabList = [None] * (newSize)
+            tempNewTAList  = [None] * (newSize)
+            for i in range(0, tempOldLabList.__len__()):
+                if (tempOldLabList[i] != "None"):
+                    tempNewLabList[index] = tempOldLabList[i]
+                    tempNewTAList[index] = tempOldTAList[i]
+                    index = index + 1
+            self._labs = tempNewLabList
+            self._TAs  = tempNewTAList
+
+
+
+    # return False if lab already exists, if not, create the lab and return true
     def createLab(self, labName):
         index = self._labs.__len__()
 
@@ -158,11 +301,13 @@ class CourseUtility:
             tempLabList = [None] * (index + 1)
             for x in range(0,self._labs.__len__()): # put contents of old list into new list
                 if(self._labs[x] == labName):
-                    return "Lab already exists"
+                    return False
                 tempLabList[x] = self._labs[x]
             tempLabList[index] = labName
 
             self._labs = tempLabList
+
+        return True
 
     # This function is used to append two strings together
     # In particular, this function appends a directory with a file
@@ -176,7 +321,8 @@ class CourseUtility:
 # Testing stuff below
 
 #obj = CourseUtility()
-#obj.getContents("CS351")
+#obj.getContents("CS251")
+#obj.deleteCourse("CS251")
 #print("coursename = ",obj.getCourseName())
 
 #obj.assignLab("sffields","Lab803")

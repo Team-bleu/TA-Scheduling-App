@@ -22,13 +22,41 @@ class AssignLabCommand(Command):
         labName = user_input_list[3]
 
         if (courseUtil.getContents(courseName) == False):
-            return
+            return courseName + " does not exist"
 
-        courseUtil.assignLab(username,labName)
-        courseUtil.writeContents()
+        labFound = False
+        for i in range(0, courseUtil.getLabs().__len__()):
+            if (labName == courseUtil.getLabs()[i]):
+                labFound = True
+                break
+        if (labFound == False):
+            return labName + " does not exist"
 
         user = userUtil.searchUser(username)
-        user.setClass(courseName,labName)
+
+        if (user.getRole() != "TA"):
+            return user.getUsername()+" is not a TA"
+
+        oldTA = courseUtil.assignLab(username,labName)
+
+        if (oldTA != "None"):
+            if (oldTA == username):
+                return username + " is already assigned to " + courseName+"-"+labName
+            oldUser = userUtil.searchUser(oldTA)
+            if (oldUser != None):
+                oldUser.unAssignLab(courseName,labName)
+                userUtil.updateUser(oldUser)
+
+
+        courseUtil.writeContents()
+
+        #user = userUtil.searchUser(username)
+        #user.setClass(courseName,courseName+"-"+labName)
+
+        # we know the course and lab already exist, so assign them to this user
+        if (user.assignLab(courseName,labName) == False):
+            return username + " is already assigned to " + courseName+"-"+labName
+
         userUtil.updateUser(user)
 
         return username + " has been assigned to " + labName
