@@ -1,10 +1,12 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
 
 
 
 class acceptanceTest(unittest.TestCase):
     app = App()
+    util = UserUtility()
 
     # 7(Sprint 1) a Supervisor, I want to have a user interface so that I can login and logout my account
     def test_login(self):
@@ -26,6 +28,7 @@ class acceptanceTest(unittest.TestCase):
         self.assertEqual(self.app.command("add user1 admin123"), "User already exists.")
         self.assertEqual(self.app.command("add user1"), "Not enough arguments.")
         self.assertEqual(self.app.command("logout"), "logged out.")
+
 
     # 2(Sprint 1) As a supervisor I want to create a new course so that I can assign TA's and instructors.
     def test_supervisor_create_course(self):
@@ -88,3 +91,7 @@ class acceptanceTest(unittest.TestCase):
 
     def test_logout(self):
         self.assertEqual(self.app.command("logout"), "logged out.")
+
+    def test_reset(self):
+        # We will delete user1 for testing purposes
+        self.util.removeUser("user1")

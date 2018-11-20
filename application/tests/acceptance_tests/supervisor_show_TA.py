@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 # 9.
@@ -7,20 +9,25 @@ from application.app import App
 # data in the system, so that I can view or edit data
 class TestSupShow(unittest.TestCase):
     app = App()
+    util = UserUtility()
+    user = User("John", None, "John", None, "TA", None, None, None, None, None, None)
 
-    # First we have the Supervisor, Luke, login
-    # with <username>: Luke and <password>: password
+    # First we have the Supervisor, super, login
+    # with <username>: super and <password>: pass
     def test_login(self):
-        self.assertEqual(self.app.command("login Luke password"), "Luke logged in")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
 
-    # Then, we have the Supervisor, Luke, view information
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
+
+    # Then, we have the Supervisor, super, view information
     # from John, the TA. This should print out a dictionary
     # of John's information
-    def test_show(self):
         self.assertEqual(self.app.command("show John"), {"name": "John", "phone": "414-123-4567",
                                                          "email": "john@gmail.com",
                                                          "address": "1234 W Number St WI Milwaukee, 53222"})
 
     # Then we have the Supervisor logout
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Luke logged out")
+        self.assertEqual(self.app.command("logout"), "logged out.")
+        util = UserUtility()
+        util.removeUser("John")

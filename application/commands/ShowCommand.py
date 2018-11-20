@@ -21,13 +21,32 @@ class ShowCommand(Command):
         if user_rank < search_rank:
             return "You do not have permission to view " + username
 
+        string = ""
+
         if user_rank <= 2:
             string = "First Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName() \
                      + "\nemail: " + user.getEmail()
         else:
-            string = "First Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName() \
-                     + "\nemail: " + user.getEmail() + "\nphone: " + user.getPhone() \
-                     + "\naddress: " + user.getAddress()
+            if user.getFirstName() is None:
+                string = "First Name: None"
+            else:
+                string = string + "First Name: " + user.getFirstName()
+            if user.getLastName() is None:
+                string = string + "\nLast Name: None"
+            else:
+                string = string + "\nLast Name: " + user.getLastName()
+            if user.getEmail() is None:
+                string = string + "\nemail: None"
+            else:
+                string = string + "\nemail: " + user.getEmail()
+            if user.getPassword() is None:
+                string = string + "\nphone: None"
+            else:
+                string = string + "\nphone: " + user.getPhone()
+            if user.getAddress() is None:
+                string = string + "\naddress: None"
+            else:
+                string = string + "\naddress: " + user.getAddress()
 
         return string
 

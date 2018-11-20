@@ -1,18 +1,26 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
+# 6.
+# As a Supervisor, I want to be able to edit all the accounts of my TAs.
 
-#6.
-
-#As a Supervisor, I want to be able to edit all the accounts of my TAs.
 
 class TestSupEditAccount(unittest.TestCase):
 
     app = App()
-    # James is a supervisor
+    util = UserUtility()
+    user = User("John", None, "John", None, "TA", None, None, None, None, None, None)
+
     def test_login(self):
-        self.assertEqual(self.app.command("login James password"), "James logged in")
-    def test_edit_account(self):
-        self.assertEqual(self.app.command("edit John"), "information updated") # John is a TA
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "James logged out")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
+
+        self.assertEqual(self.app.command("edit John"), "information updated")
+
+        self.assertEqual(self.app.command("logout"), "logged out.")
+        util = UserUtility()
+        util.removeUser("John")

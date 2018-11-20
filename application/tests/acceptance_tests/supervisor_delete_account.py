@@ -1,6 +1,7 @@
 import unittest
-from application.app import App
-
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 # 4
 
@@ -9,16 +10,18 @@ from application.app import App
 class TestSupDelAccount(unittest.TestCase):
 
     app = App()
-    # Peter is an supervisor
-    
+    util = UserUtility()
+    user = User("John", None, "John", None, "TA", None, None, None, None, None, None)
+
     def test_login(self):
-        self.assertEqual(self.app.command("login Peter password"), "Peter logged in")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
         
-    def test_remove(self):
         # John is a TA
-        self.assertEqual(self.app.command("remove John"), "John has been added to course")
+        self.assertEqual(self.app.command("remove John"), "John has been removed.")
         # not valid name
-        self.assertEqual(self.app.command("remove djofn"), "djofn does not exist")
+        self.assertEqual(self.app.command("remove djofn"), "djofn doesn't exist!")
         
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Peter logged out") 
+        self.assertEqual(self.app.command("logout"), "logged out.")

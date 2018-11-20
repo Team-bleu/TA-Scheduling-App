@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 #10.
@@ -9,11 +11,17 @@ from application.app import App
 class TestSupNotify(unittest.TestCase):
 
     app = App()
+    util = UserUtility()
+    user = User("John", None, "John", None, "TA", None, None, None, None, None, None)
 
-    # James is a supervisor
     def test_login(self):
-        self.assertEqual(self.app.command("login James password"), "James logged in")
-    def test_notify(self):
-        self.assertEqual(self.app.command("notify John Classes are cancelled today!"), "Email has been sent.")# John is a TA
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "James logged out")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
+
+        self.assertEqual(self.app.command("notify John Classes are cancelled today!"), None)
+
+        self.assertEqual(self.app.command("logout"), "logged out.")
+        util = UserUtility()
+        util.removeUser("John")

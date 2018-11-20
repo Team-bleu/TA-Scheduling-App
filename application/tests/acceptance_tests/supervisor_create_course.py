@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 #2.
@@ -9,14 +11,20 @@ from application.app import App
 class TestSupCreateCourse(unittest.TestCase):
 
     app = App()
+    util = UserUtility()
+    user = User("John", None, "John", None, "TA", None, None, None, None, None, None)
 
-    #James is a supervisor
     def test_login(self):
-        self.assertEqual(self.app.command("login James password"), "James logged in")
-    def test_create_course(self):
-        self.assertEqual(self.app.command("createcourse CS351"), "CS351 has been created")
-    def test_assign_course(self):
-        # John is a TA
-        self.assertEqual(self.app.command("assigncourse John CS351"), "John has been added to the course")
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "James logged out")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
+
+        self.assertEqual(self.app.command("createcourse CS352"), "CS352 has been created")
+
+        self.assertEqual(self.app.command("assigncourse John CS352"), "John has been assigned to CS352")
+
+        self.assertEqual(self.app.command("logout"), "logged out.")
+        util = UserUtility()
+        util.removeUser("John")
+

@@ -27,7 +27,7 @@ Support commands are:
     - Otherwise the response is "Failed. Username or password invalid." and no change to the current user is made.
 
 3, logout
-    - User has no access to commands and the response is "<Username> logged out"
+    - User has no access to commands and the response is "logged out."
     - The logged boolean is set to false
 
 4, remove <name>

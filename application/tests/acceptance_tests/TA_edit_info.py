@@ -9,16 +9,13 @@ from application.app import App
 class TestTAInfo(unittest.TestCase):
 
     app = App()
-    # Peter is an instructor
-    
+
     def test_login(self):
-        self.assertEqual(self.app.command("login Peter password"), "Peter logged in")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
         
-    def test_edit(self):
-        self.assertEqual(self.app.command("edit CS351"), "information updated")
+        self.assertEqual(self.app.command("edit super"), "information updated")
 
         # not valid name
-        self.assertEqual(self.app.command("viewassignment djofn"), "djofn does not exist")
+        self.assertEqual(self.app.command("viewassignment djofn"), None) # djofn does not exist
         
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Peter has logged out")
+        self.assertEqual(self.app.command("logout"), "logged out.")

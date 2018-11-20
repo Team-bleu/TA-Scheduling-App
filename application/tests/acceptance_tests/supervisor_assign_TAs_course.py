@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 #8
@@ -9,15 +11,18 @@ from application.app import App
 class TestSupAssignCourse(unittest.TestCase):
 
     app = App()
-    # Peter is an instructor
+    util = UserUtility()
+    user = User("John", None, "John", None, "TA", None, None, None, ["None"], ["None"], None)
+
     def test_login(self):
-        self.assertEqual(self.app.command("login Peter password"), "Peter logged in")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
         
-    def test_assigncourse(self):
-        self.assertEqual(self.app.command("asigncourse John CS351"), "John has been added to CS351")
+        self.assertEqual(self.app.command("assigncourse John CS351"), "John has been assigned to CS351")
         
-        #not valid name
-        self.assertEqual(self.app.command("assigncourse djofn"), "djofn does not exist")
+        # not valid name
+        self.assertEqual(self.app.command("assigncourse djofn CS351"), "djofn doesn't exist!")
         
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Peter logged out")
+        self.assertEqual(self.app.command("logout"), "logged out.")

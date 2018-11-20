@@ -8,7 +8,7 @@ def main():
     # This boolean is to see if we want
     # to check the acceptance tests
     # and unittests
-    test = False # set this to true to run acceptance test
+    test = True # set this to true to run acceptance test
     unittest = False # set this to true to run unit test
 
 

@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 # 16
@@ -9,17 +11,22 @@ from application.app import App
 class TestAdminInfo(unittest.TestCase):
 
     app = App()
-    # Peter is an instructor
-    
+    util = UserUtility()
+    user = User("John", None, "John", None, None, None, None, None, None, None, None)
+
     def test_login(self):
-        self.assertEqual(self.app.command("login Peter password"), "Peter logged in")
-        
-    def test_show(self):
-        self.assertEqual(self.app.command("show John"), "John's information: ")
-        
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes we'll add a John
+        self.util.updateUser(self.user)
+        self.assertEqual(self.app.command("show John"), "First Name: John" +
+                                                        "\nLast Name: None" +
+                                                        "\nemail: None" +
+                                                        "\nphone: None" +
+                                                        "\naddress: None")
+
         # not valid name
         
-        self.assertEqual(self.app.command("show djofn"), "djofn does not exist")
+        self.assertEqual(self.app.command("show djofn"), "djofn doesn't exist!")
         
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Peter has logged out")
+        self.assertEqual(self.app.command("logout"), "logged out.")

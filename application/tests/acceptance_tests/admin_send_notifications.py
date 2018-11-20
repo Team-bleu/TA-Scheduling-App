@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 # 13.
@@ -7,18 +9,21 @@ from application.app import App
 # via email, so that I can update people with new information
 class TestAdminNotify(unittest.TestCase):
     app = App()
+    util = UserUtility()
+    user = User("John", None, "John", None, None, None, None, None, None, None, None)
 
-    # First we have the Administrator, Indigo, login
-    # with <username>: Indigo and <password>: admin
+    # First we have the Administrator, login
     def test_login(self):
-        self.assertEqual(self.app.command("login Indigo admin"), "Indigo logged in")
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
 
-    # Then we have the Admin, Indigo, send a
+    # For testing purposes we'll add a John
+        self.util.updateUser(self.user)
+
+    # Then we have the Admin, send a
     # notification to John, a TA
-    def test_notify(self):
-        self.assertEqual(self.app.command("notify John Don't forget to grade the assignments"),
-                         "email has been sent")
+        self.assertEqual(self.app.command("notify John Don't forget to grade the assignments"), None)
 
     # Then we have the Admin logout
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Indigo logged out")
+        self.assertEqual(self.app.command("logout"), "logged out.")
+
+

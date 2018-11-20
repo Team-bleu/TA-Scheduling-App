@@ -1,5 +1,7 @@
 import unittest
-from application.app import App
+from app import App
+from UserUtility import UserUtility
+from user import User
 
 
 #14.
@@ -9,11 +11,18 @@ from application.app import App
 class TestAdminEditAccount(unittest.TestCase):
 
     app = App()
-    # Mary is an administrator
+    util = UserUtility()
+    user = User("John", None, "John", None, None, None, None, None, None, None, None)
+
+    # Super is an administrator
     def test_login(self):
-        self.assertEqual(self.app.command("login Mary password"), "Mary logged in")
-    def test_edit_account(self):
+        self.assertEqual(self.app.command("login super pass"), "super logged in.")
+
+        # For testing purposes, we'll add a John
+        self.util.updateUser(self.user)
+
         # John is a TA
         self.assertEqual(self.app.command("edit John"), "information updated")
-    def test_logout(self):
-        self.assertEqual(self.app.command("logout"), "Mary logged out")
+
+        self.assertEqual(self.app.command("logout"), "logged out.")
+
