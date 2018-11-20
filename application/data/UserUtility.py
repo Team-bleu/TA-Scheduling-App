@@ -1,6 +1,6 @@
 from user import User
 import os
-from TA_Scheduling_App.models import Account, Person
+from TA_Scheduling_App.models import Account
 
 
 class UserUtility:
@@ -125,13 +125,7 @@ class UserUtility:
                 file.write(content)
         file.close()    #close file
 
-        person = Person(firstname=user.getFirstName(), lastname=user.getLastName(),
-                        username=user.getUsername(), password=user.getPassword(), role=user.getRole,
-                        phone=user.getPhone, email=user.getEmail(), address=user.getAddress(),
-                        course=user.getCourse, lab=user.getLab(), assignment=user.getAssignment())
-        person.save()
-        account = Account(account=person)
-        account.save()
+        self.updateDB(user)
 
     def removeUser(self, username):
         user = self.searchUser(username)
@@ -141,3 +135,20 @@ class UserUtility:
 
         file = self._directory + user.getUsername() + self._concat
         os.remove(file)
+
+        account = Account.objects.get(username=user.getUsername())
+        account.delete()
+
+    def updateDB(self, user):
+        if Account.objects.filter(username=user.getUsername()):
+            account = Account.objects.filter(username=user.getUsername())
+            account.update(firstname=user.getFirstName(), lastname=user.getLastName(),
+                           username=user.getUsername(), password=user.getPassword(), role=user.getRole(),
+                           phone=user.getPhone(), email=user.getEmail(), address=user.getAddress(),
+                           course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment())
+        else:
+            account = Account(firstname=user.getFirstName(), lastname=user.getLastName(),
+                              username=user.getUsername(), password=user.getPassword(), role=user.getRole(),
+                              phone=user.getPhone(), email=user.getEmail(), address=user.getAddress(),
+                              course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment())
+            account.save()
