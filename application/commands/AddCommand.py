@@ -23,7 +23,7 @@ class AddCommand(Command):
             return "User already exists."
 
         user = User("first", "last", username, password, "role",
-                    "phone", "email", "address", "course", "lab", "assignment")
+                    "phone", "email", "address", ["None"], ["None"], "assignment")
         # user = User()
 
         user.setAccount(username, password)

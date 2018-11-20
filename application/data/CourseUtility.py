@@ -1,5 +1,6 @@
 from UserUtility import UserUtility
 import os
+from TA_Scheduling_App.models import Class, Instructor, TA, Lab
 
 
 class CourseUtility:
@@ -17,7 +18,7 @@ class CourseUtility:
 
     def getContents(self, courseName):
 
-        fileName = self.append("data/courses/",courseName)+".txt"
+        fileName = self.append("application/data/courses/",courseName)+".txt"
 
         #print("fileName =",fileName)
 
@@ -37,7 +38,7 @@ class CourseUtility:
             return False
 
     def writeContents(self):
-        fileName = self.append("data/courses/", str(self._courseName))+".txt"
+        fileName = self.append("application/data/courses/", str(self._courseName))+".txt"
 
         #print("FileName = ",fileName)
         file = open(fileName, "w+")
@@ -182,7 +183,7 @@ class CourseUtility:
 
     def createCourse(self, courseName):
 
-        fileName = self.append("data/courses/", courseName) + ".txt"
+        fileName = self.append("application/data/courses/", courseName) + ".txt"
 
         if os.path.isfile(fileName):      # Check if file exists already
             return False  #"Course already exists"
@@ -193,10 +194,20 @@ class CourseUtility:
             file.write("\nNone")
             file.write("\nNone")
             file.close()
+
+            lab = Lab(lab="None")
+            instructor = Instructor(instructor="None")
+            ta = TA(ta="None")
+            lab.save()
+            instructor.save()
+            ta.save()
+            course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)
+            course.save()
+
             return True #courseName + " has been created"
 
     def deleteCourse(self):
-        fileName = self.append("data/courses/", self._courseName) + ".txt"
+        fileName = self.append("application/data/courses/", self._courseName) + ".txt"
 
         userUtil = UserUtility()
 
@@ -215,6 +226,9 @@ class CourseUtility:
                     user.unAssignCourse(self._courseName)
                     #user.setClass("None","None")
                     userUtil.updateUser(user)
+
+        course = Class.objects.filter(course=self._courseName)
+        course.delete()
 
         os.remove(fileName)
 
