@@ -1,19 +1,18 @@
 import unittest
-from AddCommandTest import AddCommandTest
-from AssignCourseCommandTest import AssignCourseCommandTest
-from AssignLabCommandTest import AssignLabCommandTest
-from CreateCourseTest import CreateCourseTest
-from CreateLabTest import CreateLabTest
-from LoginCommandTest import LoginCommandTest
-from LoguoutCommandTest import LogoutCommandTest
-from QuitCommandTest import QuitCommandTest
-from RoleCommandTest import RoleCommandTest
-from ShowCommandTest import ShowCommandTest
-from RemoveCommandTest import RemoveCommandTest
-from EditCommandTest import EditCommandTest
-from UserUtilityTest import UserUtilityTest
-
-from UserTest import UserTest
+from application.tests.unit_tests.AddCommandTest import AddCommandTest
+from application.tests.unit_tests.AssignCourseCommandTest import AssignCourseCommandTest
+from application.tests.unit_tests.AssignLabCommandTest import AssignLabCommandTest
+from application.tests.unit_tests.CreateCourseTest import CreateCourseTest
+from application.tests.unit_tests.CreateLabTest import CreateLabTest
+from application.tests.unit_tests.LoginCommandTest import LoginCommandTest
+from application.tests.unit_tests.LoguoutCommandTest import LogoutCommandTest
+from application.tests.unit_tests.QuitCommandTest import QuitCommandTest
+from application.tests.unit_tests.RoleCommandTest import RoleCommandTest
+from application.tests.unit_tests.ShowCommandTest import ShowCommandTest
+from application.tests.unit_tests.RemoveCommandTest import RemoveCommandTest
+from application.tests.unit_tests.EditCommandTest import EditCommandTest
+from application.tests.unit_tests.UserUtilityTest import UserUtilityTest
+from application.tests.unit_tests.UserTest import UserTest
 
 
 

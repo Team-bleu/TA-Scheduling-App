@@ -1,5 +1,5 @@
 from application.tests.sprint1_acceptance_test import main_tests
-import mainUnitTests
+from application.tests.unit_tests import mainUnitTests
 from application.app import App
 
 
