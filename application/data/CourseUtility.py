@@ -43,8 +43,22 @@ class CourseUtility:
         #print("FileName = ",fileName)
         file = open(fileName, "w+")
 
+
+
+
         #write course name to 1st line
         file.write(self._courseName+"\n")
+
+
+        # Database Code for updating coursename:    # probably do not need this
+        #if (Class.objects.filter(course= self._courseName)):    #if this course already exists in database, set dbCourseName to it
+        #    dbCourseName = Class.objects.filter(course= self._courseName)
+        #else:
+        #    dbCourseName = Class(course=self._courseName)       # else create new element in database
+        #    dbCourseName.save()
+        # dbCourseName = Class(course=self._courseName)
+        # dbCourseName.save()
+
 
         #write labs to 2nd line
         for x in range(0,self._labs.__len__()):
@@ -55,8 +69,40 @@ class CourseUtility:
             else:
                 file.write(self._labs[x]+"\n")
 
+        # Database Code updating labs:
+        labListString = self.listToString(self._labs)
+
+        if (Lab.objects.filter(lab= labListString)):
+            dbLabs = Lab.objects.get(lab=labListString)
+            #dbLabs = Lab.objects.filter(lab= labListString)
+        else:
+            dbLabs = Lab(lab= labListString)
+            dbLabs.save()
+        #dbLabs = Class(labs=labListString)
+        #dbLabs.save()
+
+
+
+
+
         #write instructor to 3rd line
         file.write(str(self._instructor)+"\n")
+
+        # Database Code updating instructor:
+        instructorName = str(self._instructor)
+        if (Instructor.objects.filter(instructor= instructorName)):
+            #dbInstructor = Instructor.objects.filter(instructor= instructorName)
+            dbInstructor = Instructor.objects.get(instructor= instructorName)
+        else:
+            dbInstructor = Instructor(instructor= instructorName)
+            dbInstructor.save()
+        #dbInstructor = Class(instructor=self._instructor)
+        #dbInstructor.save()
+
+
+
+
+
 
         #write TAs to 4th line
         for x in range(0,self._TAs.__len__()):
@@ -67,6 +113,41 @@ class CourseUtility:
                     file.write(self._TAs[x]+",")
             else:
                 file.write((self._TAs[x]))
+
+        # Database Code updating TAs:
+        TAListString = self.listToString(self._TAs)
+        if (TA.objects.filter(ta= TAListString)):
+            dbTAs = TA.objects.get(ta=TAListString)
+            #dbTAs = TA.objects.filter(ta= TAListString)
+        else:
+            dbTAs = TA(ta= TAListString)
+            dbTAs.save()
+        #dbTAs = Class(ta=TAListString)
+        #dbTAs.save()
+
+
+        # Database Code to update this Course
+
+        #Lab.objects.all().delete()
+        #Instructor.objects.all().delete()
+        #TA.objects.all().delete()
+        #return
+
+        if (Class.objects.filter(course= self._courseName)):
+            dbCourse = Class.objects.get(course=self._courseName)
+            #dbCourse = Class.objects.filter(course= self._courseName)
+            dbCourse.labs = dbLabs
+            dbCourse.instructor = dbInstructor
+            dbCourse.ta = dbTAs
+            dbCourse.save()
+            #dbCourse.update(labs=dbLabs, instructor=dbInstructor, ta=dbTAs)
+        else:
+            dbCourse = Class(course= self._courseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs)
+            dbCourse.save()
+        #dbCourse = Class.objects.filter(course=self._courseName)
+        #dbCourse.update(course= dbCourseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs)
+        # if course didn't exist yet, should maybe use dbCourse.save()
+
 
         file.close()
 
@@ -92,6 +173,13 @@ class CourseUtility:
             oldInstructor = self._instructor
 
         self._instructor = username
+
+        # Database Code:
+        #dbInstructor = Instructor(instructor=username)
+        #dbInstructor.save()
+
+
+
         return oldInstructor
 
 
@@ -185,6 +273,22 @@ class CourseUtility:
 
         fileName = self.append("application/data/courses/", courseName) + ".txt"
 
+
+        #dbInstructor = Instructor.objects.filter(instructor="None")
+        #if (Instructor.objects.filter(instructor="None")):
+        #    print("It exists")
+        #else:
+        #    print("it does not exist")
+
+        #dbInstructor = Instructor.objects.get(instructor="None")
+        #Lab.objects.all().delete()
+        #Instructor.objects.all().delete()
+        #TA.objects.all().delete()
+        #newInstructor = Instructor(instructor= "None")
+        #newInstructor.save()
+        #dbInstructor = Instructor.objects.get(instructor="None")
+        #return
+
         if os.path.isfile(fileName):      # Check if file exists already
             return False  #"Course already exists"
         else:
@@ -195,14 +299,37 @@ class CourseUtility:
             file.write("\nNone")
             file.close()
 
-            lab = Lab(lab="None")
-            instructor = Instructor(instructor="None")
-            ta = TA(ta="None")
-            lab.save()
-            instructor.save()
-            ta.save()
-            course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)
-            course.save()
+
+            # Database code below:
+
+            if (Lab.objects.filter(lab= "None")):
+                lab = Lab.objects.filter(lab= "None")
+            else:
+                lab = Lab(lab= "None")
+                lab.save()
+            #lab = Lab(lab="None")
+
+            if (Instructor.objects.filter(instructor= "None")):
+                instructor = Instructor.objects.filter(instructor= "None")
+            else:
+                instructor = Instructor(instructor= "None")
+                instructor.save()
+            #instructor = Instructor(instructor="None")
+
+            if (TA.objects.filter(ta= "None")):
+                ta = TA.objects.filter(ta= "None")
+            else:
+                ta = TA(ta= "None")
+                ta.save()
+            #ta = TA(ta="None")
+
+
+            if (Class.objects.filter(course=courseName)):
+                course = Class.objects.filter(course=courseName)
+                course.update(labs=lab, instructor=instructor, ta=ta)
+            else:
+                course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)
+                course.save()
 
             return True #courseName + " has been created"
 
@@ -227,8 +354,12 @@ class CourseUtility:
                     #user.setClass("None","None")
                     userUtil.updateUser(user)
 
+
+        #Database Code:
         course = Class.objects.filter(course=self._courseName)
         course.delete()
+
+
 
         os.remove(fileName)
 
@@ -323,6 +454,32 @@ class CourseUtility:
 
         return True
 
+
+    #used to access _labs or _TAs as a string
+    def listToString(self, dataList):
+
+        #to be safe
+        if (dataList == None):
+            return "None"
+
+        newList = list(dataList)
+
+        listString = ""
+
+        for i in range(0, newList.__len__()):
+            if (newList[i] == None):
+                listString = "None"
+            if (i < newList.__len__() - 1):
+                listString = listString + str(newList[i]) + ","
+            else:
+                listString = listString + str(newList[i])
+
+        return listString
+
+
+
+
+
     # This function is used to append two strings together
     # In particular, this function appends a directory with a file
     def append(self, directory, file):
@@ -336,21 +493,7 @@ class CourseUtility:
 
 #obj = CourseUtility()
 #obj.getContents("CS251")
-#obj.deleteCourse("CS251")
-#print("coursename = ",obj.getCourseName())
-
-#obj.assignLab("sffields","Lab803")
-#obj.assignLab("jpbrown","Lab802")
-
+#string = obj.listToString(obj.getLabs())
+#print("string = ",string)
 #obj.writeContents()
-
-#obj.createCourse("CS351")
-#obj.deleteCourse("CS401")
-
-#print("\nCourseName =",obj.getCourseName())
-
-#print("\nSections =",obj.getSections())
-#print("\nLabs =",obj.getLabs())
-#print("\nInstructor =",obj.getInstructor())
-#print("\nTAs =",obj.getTAs())
 

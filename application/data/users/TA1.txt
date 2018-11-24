@@ -1,11 +1,11 @@
-first
-last
+Eddard
+stark
 TA1
 pass
 TA
 phone
 email
-address
-None
-None
+222 MaryLand 
+CS351
+CS351-LAB801
 assignment
