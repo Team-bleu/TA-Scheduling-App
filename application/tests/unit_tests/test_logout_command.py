@@ -1,8 +1,8 @@
-import unittest
+from django.test import TestCase
 from LogoutCommand import LogoutCommand
 
 
-class LogoutCommandTest(unittest.TestCase):
+class LogoutCommandTest(TestCase):
 
     def setUp(self):
         self.cmd = LogoutCommand()

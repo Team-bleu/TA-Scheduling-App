@@ -1,10 +1,10 @@
-import unittest
+from django.test import TestCase
 from CreateCourseCommand import CreateCourseCommand
 from LoginCommand import LoginCommand
 import os
 
 
-class CreateCourseTest(unittest.TestCase):
+class CreateCourseTest(TestCase):
 
     def setUp(self):
         self.cmd = CreateCourseCommand()

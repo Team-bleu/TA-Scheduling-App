@@ -1,7 +1,7 @@
-import unittest
+from django.test import TestCase
 from QuitCommand import QuitCommand
 
-class QuitCommandTest(unittest.TestCase):
+class QuitCommandTest(TestCase):
 
     def setUp(self):
         self.cmd = QuitCommand()

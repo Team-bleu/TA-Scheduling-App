@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from AssignCourseCommand import AssignCourseCommand
 from LoginCommand import LoginCommand
 
 
-class AssignCourseCommandTest(unittest.TestCase):
+class AssignCourseCommandTest(TestCase):
     def setUp(self):
         self.cmd = AssignCourseCommand()
         self.user_input_list1 = ["assigncourse", "Peter", "CS250"]

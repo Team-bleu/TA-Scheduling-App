@@ -1,17 +1,18 @@
-import unittest
-from ShowCommand import ShowCommand
+from django.test import TestCase
+from RoleCommand import RoleCommand
 from LoginCommand import LoginCommand
 
-class ShowCommandTest(unittest.TestCase):
+class RoleCommandTest(TestCase):
 
     def setUp(self):
-        self.cmd = ShowCommand()
-        self.invalid_input_list0 = ["show", "Peter"]
-        self.invalid_input_list1 = ["view", "TA1"]
-        self.valid_command0 = ["show", "TA1"]
-        self.valid_command1 = ["show", "super"]
+        self.cmd = RoleCommand()
+        self.log = LoginCommand()
+        self.invalid_input_list0 = ["role", "Peter", "TA"]
+        self.invalid_input_list1 = ["assign", "TA1", "TA"]
+        self.invalid_input_list2 = ["role", "TA1", "staff"]
+        self.valid_command0 = ["role", "TA1", "TA"]
+        self.valid_command1 = ["role", "TA1", "Instructor"]
         self.login_command = ["login", "super", "pass"]
-        self.string = "First Name: John\nLast Name: last\nemail: email\nphone: 905-444-2222\naddress: address"
 
     def test_is_command(self):
         self.assertFalse(self.cmd.isCommand(self.invalid_input_list1[0]))
@@ -20,10 +21,11 @@ class ShowCommandTest(unittest.TestCase):
     def test_role_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
-        self.assertEqual(self.cmd.action(self.valid_command1), self.string)
-
+        self.assertEqual(self.cmd.action(self.valid_command1), "TA1 has become a Instructor")
+        self.assertEqual(self.cmd.action(self.valid_command0), "TA1 has become a TA")
 
     def test_invalid_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
+        self.assertEqual(self.cmd.action(self.invalid_input_list2), "staff doesn't exist!")
         self.assertEqual(self.cmd.action(self.invalid_input_list0), "Peter doesn't exist!")

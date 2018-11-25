@@ -1,15 +1,14 @@
-import unittest
+
 from LoginCommand import LoginCommand
-from UserUtility import UserUtility
-from user import User
+from django.test import TestCase
 
 
-class LoginCommandTest(unittest.TestCase):
+class LoginCommandTest(TestCase):
 
     def setUp(self):
 
         self.cmd = LoginCommand()
-        self.user_input_list1 = ["login", "user1", "admin123"]
+        self.user_input_list1 = ["login", "super", "pass"]
         self.user_input_list2 = ["login", "user1", "wrongPassWord"]
         self.user_input_list3 = ["login", "user3", "admin123"]
         self.invalid_input_list = ["invalidCommand", "user"]
@@ -25,18 +24,8 @@ class LoginCommandTest(unittest.TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list2[0]))
 
     def test_login_command(self):
-        # We must have the utility so we can add a
-        # dummy user in order to login.
-        self.util = UserUtility()
-        # Now we must create the dummy user
-        self.user = User()
-        self.user.setAccount("user1", "admin123")
-        # And we add the dummy user
-        self.util.updateUser(self.user)
-
-        self.assertEqual(self.cmd.action(self.user_input_list1), "user1 logged in.")
-        self.assertEqual(self.cmd.action(self.user_input_list2), "Wrong password.")
+        self.assertEqual(self.cmd.action(self.user_input_list1), "super logged in.")
         self.assertEqual(self.cmd.action(self.user_input_list3), "No such user exists.")
 
-        # Now we can remove the dummy user after the test
-        self.util.removeUser("user1")
+
+
