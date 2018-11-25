@@ -1,6 +1,6 @@
 from UserUtility import UserUtility
 import os
-from TA_Scheduling_App.models import Class, Instructor, TA, Lab
+from TA_Scheduling_App.models import Account, Class, Instructor, TA, Lab, Relationship
 
 
 class CourseUtility:
@@ -43,9 +43,6 @@ class CourseUtility:
         #print("FileName = ",fileName)
         file = open(fileName, "w+")
 
-
-
-
         #write course name to 1st line
         file.write(self._courseName+"\n")
 
@@ -81,10 +78,6 @@ class CourseUtility:
         #dbLabs = Class(labs=labListString)
         #dbLabs.save()
 
-
-
-
-
         #write instructor to 3rd line
         file.write(str(self._instructor)+"\n")
 
@@ -98,11 +91,6 @@ class CourseUtility:
             dbInstructor.save()
         #dbInstructor = Class(instructor=self._instructor)
         #dbInstructor.save()
-
-
-
-
-
 
         #write TAs to 4th line
         for x in range(0,self._TAs.__len__()):
@@ -124,7 +112,6 @@ class CourseUtility:
             dbTAs.save()
         #dbTAs = Class(ta=TAListString)
         #dbTAs.save()
-
 
         # Database Code to update this Course
 
@@ -178,7 +165,16 @@ class CourseUtility:
         #dbInstructor = Instructor(instructor=username)
         #dbInstructor.save()
 
-
+        user = Account.objects.get(username=username)
+        course = Class.objects.get(course=self._courseName)
+        lab = Lab.objects.get(lab="None")
+        relationship = Relationship.objects.filter(course=course)
+        if relationship:
+            relationship = Relationship.objects.filter(course=course)
+            relationship.update(user=user)
+        else:
+            relationship = Relationship(user=user, course=course, labs=lab)
+            relationship.save()
 
         return oldInstructor
 
@@ -229,7 +225,6 @@ class CourseUtility:
         if (TAobj.getRole() != "TA"):   # this shouldn't occur
             return "None" #print(username,"is not a TA")
 
-
         count = 0;
         index = -1
 
@@ -240,8 +235,8 @@ class CourseUtility:
 
         if (index == -1):   # this shouldn't occur
             return "None"  # " lab doesn't exist"
-        else:
 
+        else:
             if ((index+1) > self._TAs.__len__()):
                 TASize = self._TAs.__len__()
                 tempTAList = ["None"]*(index+1)
@@ -249,13 +244,9 @@ class CourseUtility:
                     tempTAList[x] = self._TAs[x]
                 self._TAs = tempTAList
 
-
             oldTA = self._TAs[index]
             self._TAs[index] = username
             return oldTA
-
-
-        return "None"
 
     # unassign a TA from a lab, return True if successful, else False
     def unAssignLab(self, userName, labName):
@@ -303,23 +294,23 @@ class CourseUtility:
             # Database code below:
 
             if (Lab.objects.filter(lab= "None")):
-                lab = Lab.objects.filter(lab= "None")
+                lab = Lab.objects.get(lab="None")
             else:
-                lab = Lab(lab= "None")
+                lab = Lab(lab="None")
                 lab.save()
             #lab = Lab(lab="None")
 
-            if (Instructor.objects.filter(instructor= "None")):
-                instructor = Instructor.objects.filter(instructor= "None")
+            if (Instructor.objects.filter(instructor="None")):
+                instructor = Instructor.objects.get(instructor="None")
             else:
-                instructor = Instructor(instructor= "None")
+                instructor = Instructor(instructor="None")
                 instructor.save()
             #instructor = Instructor(instructor="None")
 
-            if (TA.objects.filter(ta= "None")):
-                ta = TA.objects.filter(ta= "None")
+            if (TA.objects.filter(ta="None")):
+                ta = TA.objects.get(ta="None")
             else:
-                ta = TA(ta= "None")
+                ta = TA(ta="None")
                 ta.save()
             #ta = TA(ta="None")
 
