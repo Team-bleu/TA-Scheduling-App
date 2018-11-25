@@ -32,5 +32,5 @@ class Class(models.Model):
 
 class Relationship(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, default='None')
-    course = models.CharField(max_length=50, default='None')
+    course = models.ForeignKey(Class, on_delete=models.CASCADE, default='None')
     labs = models.ForeignKey(Lab, on_delete=models.CASCADE, default='None')
