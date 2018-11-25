@@ -170,8 +170,18 @@ class CourseUtility:
 
         self._instructor = username
 
-
-
+        #Database Relationship Code:
+        user = Account.objects.get(username=username)
+        course = Class.objects.get(course=self._courseName)
+        lab = Lab.objects.get(lab="None")
+        relationship = Relationship.objects.filter(course=course)
+        if relationship:
+            relationship = Relationship.objects.filter(course=course)
+            relationship.update(user=user)
+        else:
+            relationship = Relationship(user=user, course=course, labs=lab)
+            relationship.save()
+        #End of Relationship Code
 
         return oldInstructor
 
