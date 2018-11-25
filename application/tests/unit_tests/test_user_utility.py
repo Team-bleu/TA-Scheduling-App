@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from UserUtility import UserUtility
 from user import User
 
 
-class UserUtilityTest(unittest.TestCase):
+class UserUtilityTest(TestCase):
 
     def test_appendDir(self):
         util = UserUtility()

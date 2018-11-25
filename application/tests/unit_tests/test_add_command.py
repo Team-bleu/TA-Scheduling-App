@@ -1,10 +1,10 @@
-import unittest
+from django.test import TestCase
 from AddCommand import AddCommand
 from UserUtility import UserUtility
 from LoginCommand import LoginCommand
 
 
-class AddCommandTest(unittest.TestCase):
+class AddCommandTest(TestCase):
     util = UserUtility()
 
     def setUp(self):
@@ -44,5 +44,4 @@ class AddCommandTest(unittest.TestCase):
         self.util.removeUser("user2")
 
 
-if __name__ == "__main__":
-    unittest.main()
+

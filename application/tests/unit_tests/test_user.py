@@ -1,7 +1,7 @@
-import unittest
 from user import User
+from django.test import TestCase
 
-class UserTest(unittest.TestCase):
+class UserTest(TestCase):
 
     def setUp(self):
         self.user0 = User()
@@ -33,10 +33,10 @@ class UserTest(unittest.TestCase):
         self.assertEqual(self.user1.getInfo(), ["phone", "email", "address"])
 
     def test_get_class_info(self):
-        self.assertIsNotNone(self.user1.getCourse())
-        self.assertEqual(self.user1.getCourse(), "CS351")
-        self.assertIsNotNone(self.user1.getLab())
-        self.assertEqual(self.user1.getLab(), "lab01")
+        self.assertIsNotNone(self.user1.getCourses())
+        self.assertEqual(self.user1.getCourses(), "CS351")
+        self.assertIsNotNone(self.user1.getLabs())
+        self.assertEqual(self.user1.getLabs(), "lab01")
 
     def test_get_assignment(self):
         self.assertIsNotNone(self.user1.getAssignment())
@@ -66,12 +66,6 @@ class UserTest(unittest.TestCase):
         self.assertIsNotNone(self.user0.getInfo())
         self.assertEqual(self.user0.getInfo(), ["phone", "email", "address"])
 
-    def test_set_class_info(self):
-        self.user0.setClass("CS351","lab01")
-        self.assertIsNotNone(self.user0.getCourse())
-        self.assertEqual(self.user0.getCourse(), "CS351")
-        self.assertIsNotNone(self.user0.getLab())
-        self.assertEqual(self.user0.getLab(), "lab01")
 
     def test_set_assignment(self):
         self.assertIsNotNone(self.user1.getAssignment())

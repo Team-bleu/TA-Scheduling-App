@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from RemoveCommand import RemoveCommand
 from LoginCommand import LoginCommand
 from AddCommand import AddCommand
 
-class RemoveCommandTest(unittest.TestCase):
+class RemoveCommandTest(TestCase):
 
     def setUp(self):
         self.cmd = RemoveCommand()

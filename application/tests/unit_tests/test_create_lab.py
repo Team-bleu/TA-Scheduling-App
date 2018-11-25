@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from CreateLabCommand import CreateLabCommand
 from LoginCommand import LoginCommand
 
 
-class CreateLabTest(unittest.TestCase):
+class CreateLabTest(TestCase):
 
     def setUp(self):
         self.cmd = CreateLabCommand()
