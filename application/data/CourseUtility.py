@@ -128,10 +128,6 @@ class CourseUtility:
 
         # Database Code to update this Course
 
-        #Lab.objects.all().delete()
-        #Instructor.objects.all().delete()
-        #TA.objects.all().delete()
-        #return
 
         if (Class.objects.filter(course= self._courseName)):
             dbCourse = Class.objects.get(course=self._courseName)
@@ -174,9 +170,6 @@ class CourseUtility:
 
         self._instructor = username
 
-        # Database Code:
-        #dbInstructor = Instructor(instructor=username)
-        #dbInstructor.save()
 
 
 
@@ -274,19 +267,10 @@ class CourseUtility:
         fileName = self.append("application/data/courses/", courseName) + ".txt"
 
 
-        #dbInstructor = Instructor.objects.filter(instructor="None")
-        #if (Instructor.objects.filter(instructor="None")):
-        #    print("It exists")
-        #else:
-        #    print("it does not exist")
-
-        #dbInstructor = Instructor.objects.get(instructor="None")
+        #temporary code to delete unneccesary database files
         #Lab.objects.all().delete()
         #Instructor.objects.all().delete()
         #TA.objects.all().delete()
-        #newInstructor = Instructor(instructor= "None")
-        #newInstructor.save()
-        #dbInstructor = Instructor.objects.get(instructor="None")
         #return
 
         if os.path.isfile(fileName):      # Check if file exists already
@@ -303,21 +287,24 @@ class CourseUtility:
             # Database code below:
 
             if (Lab.objects.filter(lab= "None")):
-                lab = Lab.objects.filter(lab= "None")
+                #lab = Lab.objects.filter(lab= "None")
+                lab = Lab.objects.get(lab= "None")
             else:
                 lab = Lab(lab= "None")
                 lab.save()
             #lab = Lab(lab="None")
 
             if (Instructor.objects.filter(instructor= "None")):
-                instructor = Instructor.objects.filter(instructor= "None")
+                #instructor = Instructor.objects.filter(instructor= "None")
+                instructor = Instructor.objects.get(instructor= "None")
             else:
                 instructor = Instructor(instructor= "None")
                 instructor.save()
             #instructor = Instructor(instructor="None")
 
             if (TA.objects.filter(ta= "None")):
-                ta = TA.objects.filter(ta= "None")
+                #ta = TA.objects.filter(ta= "None")
+                ta = TA.objects.get(ta= "None")
             else:
                 ta = TA(ta= "None")
                 ta.save()
@@ -325,7 +312,8 @@ class CourseUtility:
 
 
             if (Class.objects.filter(course=courseName)):
-                course = Class.objects.filter(course=courseName)
+                #course = Class.objects.filter(course=courseName)
+                course = Class.objects.get(course= courseName)
                 course.update(labs=lab, instructor=instructor, ta=ta)
             else:
                 course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)
