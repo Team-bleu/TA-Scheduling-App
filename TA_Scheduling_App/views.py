@@ -10,7 +10,6 @@ class Home(View):
     return render(request, "index.html")
 
   def post(self, request):
-
     app = App()
     out = app.command(request.POST["command"])
     return render(request, "index.html", {"out": out})
