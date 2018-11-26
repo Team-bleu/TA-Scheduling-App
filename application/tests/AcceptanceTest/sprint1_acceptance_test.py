@@ -1,9 +1,9 @@
-import unittest
+from django.test import TestCase
 from application.app import App
 
 
 
-class acceptanceTest(unittest.TestCase):
+class acceptanceTest(TestCase):
     app = App()
 
     # 7(Sprint 1) a Supervisor, I want to have a user interface so that I can login and logout my account
