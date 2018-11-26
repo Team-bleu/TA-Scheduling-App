@@ -7,7 +7,7 @@ class UserUtilityTest(TestCase):
 
     def test_appendDir(self):
         util = UserUtility()
-        self.assertEqual(util.appendDir("test"), "data/users/test")
+        self.assertEqual(util.appendDir("test"), "./application/data/users/test")
 
     def test_appendTxt(self):
         util = UserUtility()
@@ -31,7 +31,7 @@ class UserUtilityTest(TestCase):
     def test_search_user(self):
         util = UserUtility()
         searchuser = User("first", "last", "searchuser", "password", "role",
-                          "phone", "email", "address", "course", "lab", "assignment")
+                          "phone", "email", "address", ["None"], ["None"],  "assignment")
         util.updateUser(searchuser)
         self.assertIsNone(util.searchUser("NotExist"))
 
@@ -47,7 +47,7 @@ class UserUtilityTest(TestCase):
     def test_update_user(self):
         util = UserUtility()
         searchuser = User("first", "last", "searchuser", "password", "role",
-                          "phone", "email", "address", "course", "lab", "assignment")
+                          "phone", "email", "address", ["None"], ["None"], "assignment")
         util.updateUser(searchuser)
 
         # If the user "searchuser" has been added correctly, we can verify its contents
@@ -57,7 +57,7 @@ class UserUtilityTest(TestCase):
     def test_add_user(self):
         util = UserUtility()
         searchuser = User("first", "last", "searchuser", "password", "role",
-                          "phone", "email", "address", "course", "lab", "assignment")
+                          "phone", "email", "address", ["None"], ["None"], "assignment")
         util.addUser(searchuser)
         # If the user "searchuser" has been added correctly, we can verify its contents
         # same reason as update user test
