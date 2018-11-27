@@ -5,6 +5,6 @@ from .models import Account, Class, Relationship, Lab, Instructor, TA
 admin.site.register(Account)
 admin.site.register(Class)
 admin.site.register(Relationship)
-admin.site.register(Lab)
+#admin.site.register(Lab)
 admin.site.register(Instructor)
-admin.site.register(TA)
+#admin.site.register(TA)

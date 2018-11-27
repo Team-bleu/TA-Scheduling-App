@@ -26,9 +26,13 @@ class TA(models.Model):
 
 class Class(models.Model):
     course = models.CharField(max_length=50, default='None')
-    labs = models.ForeignKey(Lab, on_delete=models.CASCADE, default='None')
+    labs = models.CharField(max_length=50, default='None')
+    #labs = models.ForeignKey(Lab, on_delete=models.CASCADE, default='None')
+    #labList = models.ListCharField(Lab)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, default='None')
-    ta = models.ForeignKey(TA, on_delete=models.CASCADE, default='None')
+    ta = models.CharField(max_length=50, default='None')
+    #ta = models.ForeignKey(TA, on_delete=models.CASCADE, default='None')
+    #taList = models.ListCharField(Lab)
 
 class Relationship(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, default='None')
