@@ -6,7 +6,7 @@ from CourseUtility import CourseUtility
 
 
 
-class CreateCourseTest(TestCase):
+class RemoveCourseTest(TestCase):
 
     def setUp(self):
         self.cmd0 = CreateCourseCommand()
