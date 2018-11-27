@@ -1,5 +1,6 @@
 from django.test import TestCase
 from CreateCourseCommand import CreateCourseCommand
+from RemoveCourseCommand import RemoveCourseCommand
 from LoginCommand import LoginCommand
 from CourseUtility import CourseUtility
 
@@ -8,12 +9,13 @@ from CourseUtility import CourseUtility
 class CreateCourseTest(TestCase):
 
     def setUp(self):
-        self.cmd = CreateCourseCommand()
-        self.user_input_list1 = ["createcourse", "CS250"]
-        self.user_input_list2 = ["createcourse","CS520"]
-        self.user_input_list3 = ["createcourse", "CS351"]
-        self.invalid_input_list = ["createcourse"]
-        self.invalid_input_list1 = ["Create", "CS251"]
+        self.cmd0 = CreateCourseCommand()
+        self.cmd = RemoveCourseCommand()
+        self.user_input_list1 = ["removecourse", "CS250"]
+        self.user_input_list2 = ["removecourse","CS520"]
+        self.user_input_list3 = ["removecourse", "CS351"]
+        self.invalid_input_list = ["removecourse"]
+        self.invalid_input_list1 = ["RemoveCourses", "CS251"]
         self.courseUtil = CourseUtility()
 
 
@@ -32,11 +34,16 @@ class CreateCourseTest(TestCase):
     def test_create_course(self):
         # First, before we test adding a course, we must make sure a
         # supervisor is already logged in (since they can add courses)
+        LoginCommand.action(self.cmd0, ["login", "super", "pass"])
+        self.assertEquals(self.cmd0.action(["createcourse", "TEST100"]), "TEST100 has been created")
+
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
+        self.assertEquals(self.cmd.action(["removecourse", "TEST100"]), "TEST100 has been removed")
 
+    def test_create_course_error(self):
 
-        self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "TEST100 has been created")
-        self.courseUtil.getContents("TEST100")
-        self.courseUtil.deleteCourse()
+        self.assertEquals(self.cmd.action(["removecourse", "TEST100"]), "No user is logged in.")
+        LoginCommand.action(self.cmd, ["login", "super", "pass"])
+        self.assertEquals(self.cmd.action(["removecourse", "TEST100"]), "TEST100 does not exist")
 
 
