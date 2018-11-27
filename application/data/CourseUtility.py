@@ -1,6 +1,6 @@
 from UserUtility import UserUtility
 import os
-from TA_Scheduling_App.models import Class, Instructor, TA, Lab
+from TA_Scheduling_App.models import Class, Instructor, TA, Lab, Account, Relationship
 
 
 class CourseUtility:
@@ -72,14 +72,14 @@ class CourseUtility:
         # Database Code updating labs:
         labListString = self.listToString(self._labs)
 
-        if (Lab.objects.filter(lab= labListString)):
-            dbLabs = Lab.objects.get(lab=labListString)
-            #dbLabs = Lab.objects.filter(lab= labListString)
-        else:
-            dbLabs = Lab(lab= labListString)
-            dbLabs.save()
-        #dbLabs = Class(labs=labListString)
-        #dbLabs.save()
+        #if (Lab.objects.filter(lab= labListString)):
+        #    dbLabs = Lab.objects.get(lab=labListString)
+        #    #dbLabs = Lab.objects.filter(lab= labListString)
+        #else:
+        #    dbLabs = Lab(lab= labListString)
+        #    dbLabs.save()
+        ##dbLabs = Class(labs=labListString)
+        ##dbLabs.save()
 
 
 
@@ -116,14 +116,14 @@ class CourseUtility:
 
         # Database Code updating TAs:
         TAListString = self.listToString(self._TAs)
-        if (TA.objects.filter(ta= TAListString)):
-            dbTAs = TA.objects.get(ta=TAListString)
-            #dbTAs = TA.objects.filter(ta= TAListString)
-        else:
-            dbTAs = TA(ta= TAListString)
-            dbTAs.save()
-        #dbTAs = Class(ta=TAListString)
-        #dbTAs.save()
+        #if (TA.objects.filter(ta= TAListString)):
+        #    dbTAs = TA.objects.get(ta=TAListString)
+        #    #dbTAs = TA.objects.filter(ta= TAListString)
+        #else:
+        #    dbTAs = TA(ta= TAListString)
+        #    dbTAs.save()
+        ##dbTAs = Class(ta=TAListString)
+        ##dbTAs.save()
 
 
         # Database Code to update this Course
@@ -132,13 +132,19 @@ class CourseUtility:
         if (Class.objects.filter(course= self._courseName)):
             dbCourse = Class.objects.get(course=self._courseName)
             #dbCourse = Class.objects.filter(course= self._courseName)
-            dbCourse.labs = dbLabs
+            #dbCourse.labs = dbLabs #old
+            dbCourse.labs = labListString
             dbCourse.instructor = dbInstructor
-            dbCourse.ta = dbTAs
+            #dbCourse.ta = dbTAs #old
+            dbCourse.ta = TAListString
             dbCourse.save()
             #dbCourse.update(labs=dbLabs, instructor=dbInstructor, ta=dbTAs)
         else:
-            dbCourse = Class(course= self._courseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs)
+
+            # could maybe change labs to equal labListString, and ta to equal TAListString???
+            # otherwise figure out how to add list of labs/TAs,  or leave it how it is...
+            dbCourse = Class(course=self._courseName, labs=labListString, instructor=dbInstructor, ta=TAListString)      #new
+            #dbCourse = Class(course= self._courseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs) #old
             dbCourse.save()
         #dbCourse = Class.objects.filter(course=self._courseName)
         #dbCourse.update(course= dbCourseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs)
@@ -199,6 +205,7 @@ class CourseUtility:
     def unAssignCourse(self,username):
         util = UserUtility()
         user = util.searchUser(username)
+
 
         if (user.getRole() == "TA"):    # if the user is a TA, search through the TAs and remove them for this course
             changed = False
@@ -296,12 +303,13 @@ class CourseUtility:
 
             # Database code below:
 
-            if (Lab.objects.filter(lab= "None")):
-                #lab = Lab.objects.filter(lab= "None")
-                lab = Lab.objects.get(lab= "None")
-            else:
-                lab = Lab(lab= "None")
-                lab.save()
+            #old
+            #if (Lab.objects.filter(lab= "None")):
+            #    #lab = Lab.objects.filter(lab= "None")
+            #    lab = Lab.objects.get(lab= "None")
+            #else:
+            #    lab = Lab(lab= "None")
+            #    lab.save()
             #lab = Lab(lab="None")
 
             if (Instructor.objects.filter(instructor= "None")):
@@ -312,21 +320,25 @@ class CourseUtility:
                 instructor.save()
             #instructor = Instructor(instructor="None")
 
-            if (TA.objects.filter(ta= "None")):
-                #ta = TA.objects.filter(ta= "None")
-                ta = TA.objects.get(ta= "None")
-            else:
-                ta = TA(ta= "None")
-                ta.save()
-            #ta = TA(ta="None")
+
+            #old
+            #if (TA.objects.filter(ta= "None")):
+            #    #ta = TA.objects.filter(ta= "None")
+            #    ta = TA.objects.get(ta= "None")
+            #else:
+            #    ta = TA(ta= "None")
+            #    ta.save()
+            ##ta = TA(ta="None")
 
 
             if (Class.objects.filter(course=courseName)):
                 #course = Class.objects.filter(course=courseName)
                 course = Class.objects.get(course= courseName)
-                course.update(labs=lab, instructor=instructor, ta=ta)
+                #course.update(labs=lab, instructor=instructor, ta=ta)  #old
+                course.update(labs="None", instructor=instructor, ta="None")
             else:
-                course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)
+                #course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)  #old
+                course = Class(course=courseName, labs="None", instructor=instructor, ta="None")
                 course.save()
 
             return True #courseName + " has been created"
