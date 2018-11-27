@@ -1,6 +1,7 @@
 from django.test import TestCase
 from CreateCourseCommand import CreateCourseCommand
 from LoginCommand import LoginCommand
+from CourseUtility import CourseUtility
 import os
 
 
@@ -13,6 +14,7 @@ class CreateCourseTest(TestCase):
         self.user_input_list3 = ["createcourse", "CS351"]
         self.invalid_input_list = ["createcourse"]
         self.invalid_input_list1 = ["Create", "CS251"]
+        self.courseUtil = CourseUtility()
 
 
     def test_invalid_input_list(self):
@@ -40,3 +42,7 @@ class CreateCourseTest(TestCase):
             # We have to manually delete TEST100.txt from data/courses/ if
             # it's been created prior or already exist so this test can run correctly
             self.assertEquals(self.cmd.action(["createcourse", "TEST100"]), "TEST100 has been created")
+            self.courseUtil.getContents("TEST100")
+            self.courseUtil.deleteCourse()
+
+
