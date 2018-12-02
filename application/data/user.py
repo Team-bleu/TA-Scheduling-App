@@ -1,14 +1,14 @@
 #from CourseUtility import CourseUtility
 
+
 class User:
 
     _courses = []
     _labs = []
 
-
     def __init__(self, firstname=None, lastname=None, username=None, password=None,
                 role=None, phone=None, email=None, address=None, courses=[None], labs=[None],
-                assignment=None):
+                assignment=None, officehours=None):
         self.setName(firstname, lastname)
         self.setAccount(username, password)
         self.setRole(role)
@@ -17,6 +17,7 @@ class User:
         self.setLabs(labs)
         self.setInfo(phone, email, address)
         self.setAssignment(assignment)
+        self.setOfficeHours(officehours)
 
     def setName(self, firstname, lastname):
         self.setFirstName(firstname)
@@ -152,8 +153,6 @@ class User:
 
         return True
 
-
-
     # remove any "None"s from the list
     def cleanUpList(self, origList):
 
@@ -272,8 +271,15 @@ class User:
         self.cleanUpList(self._labs)
         return True
 
+    def setOfficeHours(self, officehours):
+        self.officehours = officehours
+
+    def getOfficeHours(self):
+        if self.officehours == "None":
+            return None
+        return self.officehours
 
     def getContents(self):
         return [self.getFirstName(), self.getLastName(), self.getUsername(), self.getPassword(),
                 self.getRole(), self.getPhone(), self.getEmail(), self.getAddress(),
-                self.getCourses(), self.getLabs(), self.getAssignment()]
+                self.getCourses(), self.getLabs(), self.getAssignment(), self.getOfficeHours()]

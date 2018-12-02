@@ -30,6 +30,9 @@ class EditCommand(Command):
             elif user_input_list[index] == "address":
                 index += 1
                 user.setAddress(EditCommand.getAddress(self, user_input_list, index, length))
+            elif user_input_list[index] == "officehours":
+                index += 1
+                user.setOfficeHours(EditCommand.getOfficeHours(self, user_input_list, index, length))
             elif user_input_list[index] == "firstname":
                 index += 1
                 user.setFirstName(user_input_list[index])
@@ -54,7 +57,18 @@ class EditCommand(Command):
         while index < length:
             if user_input_list[index] == "phone" or user_input_list[index] == "email" or \
                     user_input_list[index] == "address" or user_input_list[index] == "firstname" or \
-                    user_input_list[index] == "lastname":
+                    user_input_list[index] == "lastname"or user_input_list[index] == "officehours":
+                return string
+            string = string + user_input_list[index] + " "
+            index += 1
+        return string
+
+    def getOfficeHours(self, user_input_list, index, length):
+        string = ""
+        while index < length:
+            if user_input_list[index] == "phone" or user_input_list[index] == "email" or \
+                    user_input_list[index] == "address" or user_input_list[index] == "firstname" or \
+                    user_input_list[index] == "lastname" or user_input_list[index] == "officehours":
                 return string
             string = string + user_input_list[index] + " "
             index += 1

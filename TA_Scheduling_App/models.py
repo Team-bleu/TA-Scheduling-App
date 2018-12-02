@@ -14,6 +14,7 @@ class Account(models.Model):
     course = models.CharField(max_length=50, default='None')
     lab = models.CharField(max_length=50, default='None')
     assignment = models.CharField(max_length=50, default='None')
+    officehours = models.CharField(max_length=50, default='None')
 
 class Lab(models.Model):
     lab = models.CharField(max_length=50, default='None')

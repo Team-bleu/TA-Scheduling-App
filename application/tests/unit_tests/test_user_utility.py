@@ -26,12 +26,12 @@ class UserUtilityTest(TestCase):
                                           "assignment"]).getContents(),
                          User("first", "last", "username", "pass", "role",
                               "phone", "email", "address", "course", "lab",
-                              "assignment").getContents())
+                              "assignment", "officehours").getContents())
 
     def test_search_user(self):
         util = UserUtility()
         searchuser = User("first", "last", "searchuser", "password", "role",
-                          "phone", "email", "address", ["None"], ["None"],  "assignment")
+                          "phone", "email", "address", ["None"], ["None"],  "assignment", "officehours")
         util.updateUser(searchuser)
         self.assertIsNone(util.searchUser("NotExist"))
 
@@ -47,7 +47,7 @@ class UserUtilityTest(TestCase):
     def test_update_user(self):
         util = UserUtility()
         searchuser = User("first", "last", "searchuser", "password", "role",
-                          "phone", "email", "address", ["None"], ["None"], "assignment")
+                          "phone", "email", "address", ["None"], ["None"], "assignment", "officehours")
         util.updateUser(searchuser)
 
         # If the user "searchuser" has been added correctly, we can verify its contents
@@ -57,7 +57,7 @@ class UserUtilityTest(TestCase):
     def test_add_user(self):
         util = UserUtility()
         searchuser = User("first", "last", "searchuser", "password", "role",
-                          "phone", "email", "address", ["None"], ["None"], "assignment")
+                          "phone", "email", "address", ["None"], ["None"], "assignment", "officehours")
         util.addUser(searchuser)
         # If the user "searchuser" has been added correctly, we can verify its contents
         # same reason as update user test
