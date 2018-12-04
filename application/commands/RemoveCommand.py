@@ -29,6 +29,8 @@ class RemoveCommand(Command):
                 courseUtil.writeContents()
 
 
+        # TODO removing a user that is an instructor doesn't remove the Instructor object from database
+
         util.removeUser(username)
 
 
