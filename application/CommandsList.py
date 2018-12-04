@@ -14,6 +14,7 @@ from RemoveLabCommand import RemoveLabCommand
 from RemoveCourseCommand import RemoveCourseCommand
 from UnAssignCourseCommand import UnAssignCourseCommand
 from UnAssignLabCommand import UnAssignLabCommand
+from ViewCoursesCommand import ViewCoursesCommand
 
 # This class stores all of the commands
 # and cycles through them to retrieve
@@ -24,7 +25,7 @@ class CommandsList:
     _commands = [LoginCommand, LogoutCommand, AddCommand, CreateCourseCommand, AssignLabCommand,
                  AssignCourseCommand, CreateLabCommand, RoleCommand, RemoveCommand, QuitCommand,
                  ShowCommand, EditCommand, RemoveLabCommand, RemoveCourseCommand, UnAssignCourseCommand,
-                 UnAssignLabCommand]
+                 UnAssignLabCommand, ViewCoursesCommand]
 
     # Method for parsing user input into a list
     def parseInput(self, user_input):

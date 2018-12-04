@@ -300,6 +300,8 @@ class CourseUtility:
             file.write("\nNone")
             file.close()
 
+            self.addToMasterCourseList(courseName)  #add course to courses.txt
+
 
             # Database code below:
 
@@ -372,6 +374,8 @@ class CourseUtility:
 
 
         os.remove(fileName)
+
+        self.removeFromMasterCourseList(self._courseName)  # remove this course from courses.txt
 
     def removeLab(self,labName):
 
@@ -464,6 +468,119 @@ class CourseUtility:
 
         return True
 
+    # return a list of all of the courses
+    def getAllCourses(self):
+        fileName = self.append("application/data/courses/", "courses") + ".txt"
+
+
+        if (os.path.isfile(fileName)):  # check if file exists
+            file = open(fileName, "r+")
+            allCourses = file.readlines()
+            file.close()
+
+            for i in range(0, allCourses.__len__()):
+                allCourses[i] = allCourses[i].replace("\n","")
+
+            return allCourses
+        else:
+            # print "There are no courses"
+            return None
+
+
+    def viewCourses(self):
+
+        #util = CourseUtility()
+
+        allCourses = self.getAllCourses()
+
+        if (allCourses == None):
+            return "No courses to show"
+
+        coursesString = ""
+
+        for i in range(0, allCourses.__len__()):
+            self.getContents(allCourses[i])
+            coursesString = coursesString + self._courseName + ":\n"
+            coursesString = coursesString + "Instructor= " +self._instructor +"\n"
+            coursesString = coursesString + "Labs= " + str(self._labs) + "\n"
+            coursesString = coursesString + "TAs= " + str(self._TAs) + "\n\n"
+
+        print(coursesString)
+
+        return coursesString
+
+
+    # if a course is created or removed, make sure to update the master course list (courses.txt) accordingly
+    def addToMasterCourseList(self, courseName):
+
+        allCourses = self.getAllCourses()
+
+        if (allCourses == None):    # there are no courses yet  (courses.txt doesn't exist yet)
+            # create courses.txt and add new course
+            fileName = self.append("application/data/courses/", "courses") + ".txt"
+            file = open(fileName, "+w")
+            file.write(courseName)
+            file.close()
+        else:
+            #add courseName to allCourses list
+            allCourses.append(courseName)
+
+            # write allCourses to courses.txt
+            fileName = self.append("application/data/courses/", "courses") + ".txt"
+            file = open(fileName, "+w")
+            for i in range(0,allCourses.__len__()):
+                if (i == allCourses.__len__()-1):
+                    file.write(allCourses[i])
+                else:
+                    file.write(allCourses[i] + "\n")
+            file.close()
+
+        return
+
+    def removeFromMasterCourseList(self, courseName):
+
+        allCourses = self.getAllCourses()
+
+        if (allCourses == None):  # there are no courses yet  (courses.txt doesn't exist yet)
+
+            return False    # cannot remove anything, nothing exists!
+
+        else:
+
+            newSize = allCourses.__len__() - 1;
+
+            # if new size is 0, delete courses.txt because there are no courses left
+            if (newSize == 0):
+                fileName = self.append("application/data/courses/", "courses") + ".txt"
+                os.remove(fileName)
+                return True
+
+            # create new list with new size
+            newAllCourses = [None] * (newSize)
+            index = 0;
+
+            #put all courses into newAllCourses list besides "courseName" (the course to remove)
+            for i in range(0,allCourses.__len__()):
+                if (courseName != allCourses[i]):
+                    newAllCourses[index] = allCourses[i]
+                    index = index + 1
+
+            # set allCourse to the new "newAllCourses" list
+            allCourses = newAllCourses
+
+            #write allCourses to courses.txt
+            fileName = self.append("application/data/courses/", "courses") + ".txt"
+            file = open(fileName, "+w")
+            for i in range(0, allCourses.__len__()):
+                if (i == allCourses.__len__()-1):
+                    file.write(allCourses[i])
+                else:
+                    file.write(allCourses[i] + "\n")
+            file.close()
+
+
+        return True
+
 
     #used to access _labs or _TAs as a string
     def listToString(self, dataList):
@@ -494,6 +611,8 @@ class CourseUtility:
     # In particular, this function appends a directory with a file
     def append(self, directory, file):
         return directory + file
+
+
 
 
 
