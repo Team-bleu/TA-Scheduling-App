@@ -219,7 +219,15 @@ class CourseUtility:
         if (user.getRole() == "Instructor"):  # if the user is a TA, search through the TAs and remove them for this course
 
             if (username == self._instructor):
+
+                if (Instructor.objects.filter(instructor= self._instructor)):
+                    dbInstruct = Instructor.objects.get(instructor= self._instructor)
+                    dbInstruct.delete()
+                    #dbInstruct = Instructor.objects.get(instructor="None")
+
                 self._instructor = "None"
+
+
                 return True # removed instructor
             else:
                 return False    # this user was not the instructor, so nothing changes
