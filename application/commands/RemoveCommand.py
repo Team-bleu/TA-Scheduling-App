@@ -22,7 +22,7 @@ class RemoveCommand(Command):
             return username + " doesn't exist!"
 
 
-        if (user.getCourses() is None):
+        if (user.getCourses() is not None):
             for i in range(0, user.getCourses().__len__()):
                 courseUtil.getContents(user.getCourses()[i])
                 courseUtil.unAssignCourse(username)
