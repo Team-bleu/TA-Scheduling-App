@@ -23,11 +23,11 @@ class ShowCommand(Command):
 
         if user_rank <= 2:
             string = "First Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName() \
-                     + "\nemail: " + user.getEmail()
+                     + "\nemail: " + user.getEmail() + "\nOffice Hours: " + user.getOfficeHours()
         else:
             string = "First Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName() \
                      + "\nemail: " + user.getEmail() + "\nphone: " + user.getPhone() \
-                     + "\naddress: " + user.getAddress()
+                     + "\naddress: " + user.getAddress() + "\nOffice Hours: " + user.getOfficeHours()
 
         return string
 
@@ -39,7 +39,6 @@ class ShowCommand(Command):
 
     def checkRank(self, role):
         rank = 0
-
         if role == "Supervisor":
             rank = 4
         if role == "Administrator":

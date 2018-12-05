@@ -39,7 +39,7 @@ class UserUtility:
     def createUser(self, contents):
         user = User(contents[0], contents[1], contents[2], contents[3], contents[4],
                     contents[5], contents[6], contents[7], contents[8], contents[9],
-                    contents[10])
+                    contents[10], contents[11])
         return user
 
     # This function searches for the user,
@@ -145,10 +145,12 @@ class UserUtility:
             account.update(firstname=user.getFirstName(), lastname=user.getLastName(),
                            username=user.getUsername(), password=user.getPassword(), role=user.getRole(),
                            phone=user.getPhone(), email=user.getEmail(), address=user.getAddress(),
-                           course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment())
+                           course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment(),
+                           officehours=user.getOfficeHours())
         else:
             account = Account(firstname=user.getFirstName(), lastname=user.getLastName(),
                               username=user.getUsername(), password=user.getPassword(), role=user.getRole(),
                               phone=user.getPhone(), email=user.getEmail(), address=user.getAddress(),
-                              course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment())
+                              course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment(),
+                              officehours=user.getOfficeHours())
             account.save()

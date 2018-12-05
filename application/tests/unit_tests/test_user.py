@@ -6,7 +6,7 @@ class UserTest(TestCase):
     def setUp(self):
         self.user0 = User()
         self.user1 = User("Peter", "Xiong", "xiongpp", "admin123", "Instrutor", "phone", "email", "address", "CS351",
-                          "lab01", "assignment")
+                          "lab01", "assignment", "officehours")
 
     def test_init(self):
         self.assertIsNotNone(User())

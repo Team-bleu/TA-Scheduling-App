@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>TA Scheduling App</h1>
-  <form method="post" action="/">
-  {% csrf_token %}
-  command: <input type="text" name="command"/><input type="submit"/>
-  </form>
-  <div id="out">{{out}}</div>
+    <h1>TA Scheduling App</h1>
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <form method="post" action="/">
+        {% csrf_token %}
+        command: <input type="text" name="command"/><input type="submit"/>
+    </form>
+    <div id="out">
+        {{out|linebreaks}}
+    </div>
 {% endblock content %}
