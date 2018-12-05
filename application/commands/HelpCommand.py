@@ -5,10 +5,10 @@ class HelpCommand(Command):
 
     def action(self, user_input_list):
 
-        if not Command.isLogged(self):
-            return "No user is logged in."
+        file = open("./application/files/designDoc.txt", "r+")
+        contents = file.read()
 
-        return "Help command string return has to be finished implementing."
+        return contents
 
     def isCommand(self, command):
         return command == "help"
