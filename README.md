@@ -1,0 +1,85 @@
+# TA-Scheduling-App
+TA Scheduling App
+
+Support commands are:
+1, add <username> <password>
+    - Creates a new user with the given username if no such user currently exists, responding with "User <username> added."
+    - If that user already exists the response is "Failed. User exists."
+
+2, login <username> <password>
+    - If the user exists and the password matches, that user is recognized as the current user and the response is "<username> logged in." and logged boolean is set to true
+    - Otherwise the response is "Failed. Username or password invalid." and no change to the current user is made.
+
+3, logout
+    - User has no access to commands and the response is "<Username> logged out"
+    - The logged boolean is set to false
+
+4, remove <name>
+    - Removes information of a user from the database and the response is "<name> has been removed"
+    - If <name> doesn't exist the response is "<name> doesn't exist!"
+
+5, role <name> <role>
+    - Changes the role of the user
+    - If <mame> exsit, the role is change to the <role> and ouput "<name> has becaome a <role>"
+    - If <name> doesn't exist the response is "<name> doesn't exist!"
+    - If <role> doesn't exist the response is "<role> doesn't exist!"
+
+6, createcourse <course>
+    - Makes a new course:
+    - if <course> doesn't exsit, add the new <course> and return "<course> has been created"
+    - if <course> exsit, the response is "<course> already exist!"
+    - if <role> is not supervisor or adminstrator, nothing is being added and  return "Your <role> can't add course"
+
+7, createlab <course> <lab>
+    - Makes a new lab section for <course>
+    - if <lab> doesn't exsit, add the new <lab> and return "<course> has been created"
+    - if <lab> exsit, the response is "<lab> already exist!"
+    - if <role> is not supervisor or adminstrator, nothing is being added and  return "Your <role> can't add course"
+
+8, assigncourse <name> <course>
+    - if <role> is not supervisor or administrator, the course is not assigned and display "Do not have permission"
+    - Assigns a user to a course, displays <name> has been added to <course>
+    - if <course> doesn't exist, display "<course> does not exist"
+    - check users and if <name> doesn't exist, display "<name> doesn't exist"
+
+9, assignlab <name> <course> <lab>
+    - if <role> is not supervisor or administrator, the course is not assigned and display "Do not have permission"
+    - Assigns a user to a lab section, displays "<name> has been added to <lab>"
+    - if <lab> doesn't exist, display "<lab> does not exist"
+    - if <course> doesn't exist, display "<course> does not exist"
+    - check users and if <name> doesn't exist, display "<name> doesn't exist"
+
+10, notify <name> <message>
+    - if <name> doesn't exist, display "<name> doesn't exist"
+    - check <role>, if TA, display "Do not have Permission"
+    - if instructor, check <role> of <name>, if <role> of <name> is not TA, display "<name> is not a TA"
+            if <role> of <name> is a TA, then send the TA a <message> through email.
+    - if <role> is supervisor or adminstrator, send <message> by email to <name>
+    - if email of <name> does not exist, display "Error sending, that email does not exist."
+    - Sends out an email to <name>, displays "email has been sent"
+
+11, edit <name> phone <phone number> email <email> address <address> firstname <first name> lastname <last name>
+    - the edit command syntax above can have the information at any order or even omit some info
+    - if <name> doesn't exist, display "<name> doesn't exist"
+    - Edits the information of <name>
+    - if <role> is instructor or TA, and if <name> parameter is given display "Only can edit your information"
+            if no <name> parameter is given, then the user can change their information, and then it will update.
+    - if <role> is supervisor or adminstrator, if <name> is given, edit the information of <name> and then it will update.
+            if no <name parameter is given, the user will edit their own information, and then it will update.
+    - if edit successful, display "information updated"
+
+12, show <name>
+    - if <name> doesn't exist, display "<name> doesn't exist"
+    - Shows public information to the requester
+    - check <role>
+    - if <role> is Supervisor or Administrator, then also display the private information of <name>
+
+13, viewassignment <name>
+    -if <name> doesn't exist, display "<name> doesn't exist"
+    -if <name> is a TA, view their assignments
+    -if the user is a TA, they can only view TA assignments
+    -if the user is an instructor, they can provide a <course> instead of <name> and view the assignments for that course
+    -if the user is a TA and they provide a <course>, display "Do not have permission"
+
+13, quit
+    - change <logged> to false, then quit the session
