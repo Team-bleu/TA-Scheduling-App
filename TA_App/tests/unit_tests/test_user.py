@@ -75,7 +75,7 @@ class UserTest(TestCase):
         self.assertIsNotNone(self.user1.getContents())
         self.assertEqual(self.user1.getContents(), ["Peter", "Xiong", "xiongpp", "admin123", "Instrutor",
                                                     "phone", "email", "address", "CS351",
-                                                    "lab01", "assignment"])
+                                                    "lab01", "assignment", "officehours"])
 
     def tearDown(self):
         self.emptyUser = None

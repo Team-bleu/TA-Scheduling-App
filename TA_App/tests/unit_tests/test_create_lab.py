@@ -1,6 +1,7 @@
 from django.test import TestCase
 from CreateLabCommand import CreateLabCommand
 from LoginCommand import LoginCommand
+from application import app
 
 
 class CreateLabTest(TestCase):
@@ -30,7 +31,11 @@ class CreateLabTest(TestCase):
         # First, before we test adding a lab, we must make sure a
         # supervisor is already logged in (since they can add lab)
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
+        self.app = app.App()
+        self.app.command("login super pass")
+        self.app.command("createcourse TEST100")
 
         # Now we create a lab in TEST100 course
         # Make sure that TEST100 exists
         self.assertEqual(self.cmd.action(["createlab", "TEST100", "LAB801"]), "LAB801 has been created")
+        self.app.command("removecourse TEST100")

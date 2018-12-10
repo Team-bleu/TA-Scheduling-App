@@ -1,7 +1,7 @@
 from django.test import TestCase
 from AssignCourseCommand import AssignCourseCommand
 from LoginCommand import LoginCommand
-
+from application import app
 
 class AssignCourseCommandTest(TestCase):
     def setUp(self):
@@ -29,6 +29,13 @@ class AssignCourseCommandTest(TestCase):
         # Before we can test whether or not we can add a course,
         # we must first log in a supervisor who has the role to do so
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
+        self.app = app.App()
+        self.app.command("login super pass")
+        self.app.command("add TA1 pass")
+        self.app.command("role TA1 Instructor")
+        self.app.command("createcourse TEST100")
 
         # Next, we will use the dummy user to assign it a course
-        self.assertEqual(self.cmd.action(["assicncourse", "TA1", "TEST100"]), "TA1 has been assigned to TEST100")
+        self.assertEqual(self.cmd.action(["assigncourse", "TA1", "TEST100"]), "TA1 has been assigned to TEST100")
+        self.app.command("remove TA1")
+        self.app.command("removecourse TEST100")

@@ -1,6 +1,7 @@
 from django.test import TestCase
 from EditCommand import EditCommand
 from LoginCommand import LoginCommand
+from application import app
 
 
 class EditCommandTest(TestCase):
@@ -19,8 +20,12 @@ class EditCommandTest(TestCase):
     def test_role_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
+        self.app = app.App()
+        self.app.command("login super pass")
+        self.app.command("add TA1 pass")
         self.assertEqual(self.cmd.action(self.valid_command0), "information updated")
         self.assertEqual(self.cmd.action(self.valid_command1), "information updated")
+        self.app.command("remove TA1")
 
     def test_invalid_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")

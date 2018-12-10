@@ -52,6 +52,7 @@ class acceptanceTest(TestCase):
     def test_supervisor_assign_course(self):
         self.assertEqual(self.app.command("login super pass"), "super logged in.")
         self.assertEqual(self.app.command("createcourse CS351"), "CS351 has been created")
+        self.assertEqual(self.app.command("add TA1 pass"), "TA1 has been added")
         self.assertEqual(self.app.command("assigncourse TA1 CS351"), "TA1 is not an Instructor")
         self.assertEqual(self.app.command("assigncourse TA1"), "Not enough arguments.")
         self.assertEqual(self.app.command("logout"), "logged out.")
@@ -90,9 +91,11 @@ class acceptanceTest(TestCase):
     # 5(Sprint 1) As a supervisor I want to assign TAs to particular lab sections so that they know what lab to teach.
     def test_supervisor_assign_lab(self):
         self.assertEqual(self.app.command("login super pass"), "super logged in.")
-        self.assertEqual(self.app.command("createcourse CS351"), "CS351 already exists")
+        self.assertEqual(self.app.command("createcourse CS351"), "CS351 has been created")
         self.assertEqual(self.app.command("createlab CS351 lab801"), "lab801 has been created")
         self.assertEqual(self.app.command("createlab CS351 lab802"), "lab802 has been created")
+        self.assertEqual(self.app.command("role TA1 TA"), "TA1 has become a TA")
+        self.assertEqual(self.app.command("assignlab TA1 CS351 lab801"), "TA1 has been assigned to lab801")
         self.assertEqual(self.app.command("assignlab TA1 CS351 lab801"), "TA1 is already assigned to CS351-lab801")
         self.assertEqual(self.app.command("assignlab CS361"), "Not enough arguments.")
         self.assertEqual(self.app.command("logout"), "logged out.")
@@ -128,14 +131,14 @@ class acceptanceTest(TestCase):
     def test_admin_show(self):
         self.assertEqual(self.app.command("login super pass"), "super logged in.")
         self.assertEqual(self.app.command("add user2 admin123"), "User already exists.")
-        self.assertEqual(self.app.command("show user2"), "First Name: first\nLast Name: last\nemail: email\nphone: phone\naddress: address")
+        self.assertEqual(self.app.command("show user2"), "First Name: first\nLast Name: last\nemail: email\nphone: phone\naddress: address\nOffice Hours: officehours")
         self.assertEqual(self.app.command("logout"), "logged out.")
 
     # 19 (Sprint 2) As an instructor I want to read public contact information
     def test_instructor_show(self):
         self.assertEqual(self.app.command("login super pass"), "super logged in.")
         self.assertEqual(self.app.command("add user2 admin123"), "User already exists.")
-        self.assertEqual(self.app.command("show user2"), "First Name: first\nLast Name: last\nemail: email\nphone: phone\naddress: address")
+        self.assertEqual(self.app.command("show user2"), "First Name: first\nLast Name: last\nemail: email\nphone: phone\naddress: address\nOffice Hours: officehours")
         self.assertEqual(self.app.command("logout"), "logged out.")
 
     # 24 (Sprint 2) As a TA I want to edit my own information so that the administrator and supervisor have access to it
@@ -144,3 +147,9 @@ class acceptanceTest(TestCase):
         self.assertEqual(self.app.command("edit phone, email, address, first name, last name"), "phone, doesn't exist!")
         self.assertEqual(self.app.command("logout"), "logged out.")
 
+    def test_zbreakdown(self):
+        self.app.command("login super pass")
+        self.app.command("remove user1")
+        self.app.command("remove user2")
+        self.app.command("remove TA1")
+        self.assertEqual(self.app.command("quit"), "Quiting session.")

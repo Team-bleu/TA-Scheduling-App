@@ -136,6 +136,8 @@ class UserUtility:
         file = self._directory + user.getUsername() + self._concat
         os.remove(file)
 
+        if not Account.objects.filter(username=user.getUsername()):
+            return
         account = Account.objects.get(username=user.getUsername())
         account.delete()
 

@@ -23,7 +23,7 @@ class UserUtilityTest(TestCase):
         util = UserUtility()
         self.assertEqual(util.createUser(["first", "last", "username", "pass", "role",
                                           "phone", "email", "address", "course", "lab",
-                                          "assignment"]).getContents(),
+                                          "assignment", "officehours"]).getContents(),
                          User("first", "last", "username", "pass", "role",
                               "phone", "email", "address", "course", "lab",
                               "assignment", "officehours").getContents())

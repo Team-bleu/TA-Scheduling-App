@@ -179,7 +179,11 @@ class CourseUtility:
         #Database Relationship Code:
         user = Account.objects.get(username=username)
         course = Class.objects.get(course=self._courseName)
-        lab = Lab.objects.get(lab="None")
+        if not Lab.objects.filter(lab="None"):
+            lab = Lab(lab="None")
+            lab.save()
+        else:
+            lab = Lab.objects.get(lab="None")
         relationship = Relationship.objects.filter(course=course)
         if relationship:
             relationship = Relationship.objects.filter(course=course)
@@ -207,7 +211,7 @@ class CourseUtility:
         user = util.searchUser(username)
 
 
-        if (user.getRole() == "TA"):    # if the user is a TA, search through the TAs and remove them for this course
+        if (user.getRole() == "TA" and self._TAs is not None):    # if the user is a TA, search through the TAs and remove them for this course
             changed = False
             for i in range(0, self._TAs.__len__()):
                 if (username == self._TAs[i]):
