@@ -9,14 +9,16 @@ class EditCommand(Command):
         if not Command.isLogged(self):
             return "No user is logged in."
 
-        if Command.getCredentialss(self) < 3:
-            return "Do not have permission"
-
         util = UserUtility()
         username = user_input_list[1]
         user = util.searchUser(username)
+
         if user is None:
             return username + " doesn't exist!"
+
+        if username != self._logger.getUsername():
+            if Command.getCredentialss(self) < 3:
+                return "Do not have permission"
 
         length = len(user_input_list)
         index = 2
