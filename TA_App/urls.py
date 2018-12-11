@@ -20,5 +20,6 @@ from TA_Scheduling_App.views import Home, Login
 
 urlpatterns = [
   url(r'^admin/', admin.site.urls),
-  path('', Home.as_view()),
+  path('', Login.as_view()),
+  path('home/', Home.as_view()),
 ]
