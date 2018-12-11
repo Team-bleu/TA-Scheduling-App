@@ -29,6 +29,9 @@ class RemoveCommand(Command):
                 courseUtil.writeContents()
 
 
+        if (user.getRole() == "Instructor"):
+            courseUtil.removeDBInstructor(username)
+
         util.removeUser(username)
 
 

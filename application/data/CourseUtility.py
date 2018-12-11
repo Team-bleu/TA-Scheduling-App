@@ -176,6 +176,9 @@ class CourseUtility:
 
         self._instructor = username
 
+        #TODO noticed this code crashes if a saved user starts with uppercase letter, but is searched by starting with lowercase letter
+        #TODO this was discovered by using assigncourse command (Ex: savedUser= "Instruct", but user types "assigncourse instruct CS251")
+
         #Database Relationship Code:
         user = Account.objects.get(username=username)
         course = Class.objects.get(course=self._courseName)
@@ -224,19 +227,22 @@ class CourseUtility:
 
             if (username == self._instructor):
 
-                if (Instructor.objects.filter(instructor= self._instructor)):
-                    dbInstruct = Instructor.objects.get(instructor= self._instructor)
-                    dbInstruct.delete()
-                    #dbInstruct = Instructor.objects.get(instructor="None")
-
                 self._instructor = "None"
-
 
                 return True # removed instructor
             else:
                 return False    # this user was not the instructor, so nothing changes
 
         #return False    # return False if no user was unassigned
+
+    #only for remove command, this removes database instructor file from database
+    def removeDBInstructor(self,username):
+        if (Instructor.objects.filter(instructor= username)):
+            dbInstruct = Instructor.objects.get(instructor= username)
+            dbInstruct.delete()
+            #dbInstruct = Instructor.objects.get(instructor="None")
+        return
+
 
     def assignLab(self,username, LabName):
 
