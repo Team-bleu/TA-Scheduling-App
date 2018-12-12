@@ -7,13 +7,13 @@ from application.app import App
 # Create your views here.
 app = App()
 
-class Home(View):
+class Main(View):
     def get(self, request):
-        return render(request, "index.html")
+        return render(request, "main.html")
 
     def post(self, request):
         out = app.command(request.POST["command"])
-        return render(request, "index.html", {"out": out})
+        return render(request, "main.html", {"out": out})
 
 
 class Login(View):
@@ -27,4 +27,4 @@ class Login(View):
         out = app.command(command)
         if out != username + " logged in.":
             return render(request, "login.html", {"out": out})
-        return redirect('home/', request)
+        return redirect('main/', request)

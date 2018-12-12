@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.urls import include, path
 from django.contrib import admin
-from TA_Scheduling_App.views import Home, Login
+from TA_Scheduling_App.views import Main, Login
 
 urlpatterns = [
   url(r'^admin/', admin.site.urls),
   path('', Login.as_view()),
-  path('home/', Home.as_view()),
+  path('main/', Main.as_view()),
 ]
