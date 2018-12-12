@@ -11,8 +11,8 @@ class ShowCommandTest(TestCase):
         self.valid_command0 = ["show", "TA1"]
         self.valid_command1 = ["show", "super"]
         self.login_command = ["login", "super", "pass"]
-        self.string = "First Name: John\nLast Name: last\nemail: email\nphone: 905-444-2222\naddress: address" \
-                      "\nOffice Hours: officehours"
+        self.string = "First Name: SuperUser\nLast Name: TeamBleu\nemail: email\nphone: 414-123-4567\naddress: " \
+                      "None \nOffice Hours: None "
 
     def test_is_command(self):
         self.assertFalse(self.cmd.isCommand(self.invalid_input_list1[0]))
