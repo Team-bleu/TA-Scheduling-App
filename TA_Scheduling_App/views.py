@@ -12,10 +12,6 @@ class Main(View):
         return render(request, "main.html")
 
     def post(self, request):
-        logout = request.POST["logout"]
-        if logout:
-            out = app.command("logout")
-            return redirect('/', request, {"out": out})
         out = app.command(request.POST["command"])
         return render(request, "main.html", {"out": out})
 
