@@ -7,7 +7,7 @@
         {% csrf_token %}
         username: <input type="text" name="username"/><br>
         password: <input type="password" name="password"/>
-        <input type="submit"/>
+        <input type="submit" name="login" value="Login"/>
     </form>
     <div id="out">
         {{out|linebreaks}}

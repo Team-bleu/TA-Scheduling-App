@@ -7,7 +7,8 @@
 
     <form method="post" action="/main/">
         {% csrf_token %}
-        command: <input type="text" name="command"/><input type="submit"/>
+        command: <input type="text" name="command"/><input type="submit" name="commandbutton" value="Submit"/>
+        <input type="submit" name="logout" value="Logout">
     </form>
     <div id="out">
         {{out|linebreaks}}
