@@ -6,59 +6,47 @@ from TA_Scheduling_App.models import Class, Instructor, TA, Lab, Account, Relati
 class CourseUtility:
 
     _courseName = None
-    #_sections = []
     _labs = []
     _instructor = None
     _TAs = None
 
     def __init__(self):
         self._courseName = None
-        #self._sections = [None]
         self._labs = [None]
 
+    #   getContents() opens the file "courseName".txt if it exists, reads all contents
+    #       and puts the data into CourseUtility variables accordingly
+    #       returns True if file exists
+    #       returns False if file does not exist
     def getContents(self, courseName):
 
         fileName = self.append("application/data/courses/",courseName)+".txt"
-
-        #print("fileName =",fileName)
 
         if (os.path.isfile(fileName)):      #check if file exists
             file = open(fileName, "r+")
             contents = file.readlines()
 
             self._courseName = contents[0].replace("\n", "")
-            #self._sections = contents[1].replace("\n", "").split(",")
             self._labs = contents[1].replace("\n", "").split(",")
             self._instructor = contents[2].replace("\n", "")
             self._TAs = contents[3].replace("\n", "").split(",")
 
             file.close()
+            return True
         else:
-            #print("Course does not exist\n")
+            # Course does not exist
             return False
 
+    #   writeContents() writes all the contents of this course to its .txt file
+    #       This is used for updating a course's .txt file (Ex: CS251.txt) with
+    #       the updated data which is stored in the CourseUtility Variables
     def writeContents(self):
         fileName = self.append("application/data/courses/", str(self._courseName))+".txt"
 
-        #print("FileName = ",fileName)
         file = open(fileName, "w+")
-
-
-
 
         #write course name to 1st line
         file.write(self._courseName+"\n")
-
-
-        # Database Code for updating coursename:    # probably do not need this
-        #if (Class.objects.filter(course= self._courseName)):    #if this course already exists in database, set dbCourseName to it
-        #    dbCourseName = Class.objects.filter(course= self._courseName)
-        #else:
-        #    dbCourseName = Class(course=self._courseName)       # else create new element in database
-        #    dbCourseName.save()
-        # dbCourseName = Class(course=self._courseName)
-        # dbCourseName.save()
-
 
         #write labs to 2nd line
         for x in range(0,self._labs.__len__()):
@@ -69,26 +57,13 @@ class CourseUtility:
             else:
                 file.write(self._labs[x]+"\n")
 
-        # Database Code updating labs:
+        # Convert Lab list to a single string
         labListString = self.listToString(self._labs)
-
-        #if (Lab.objects.filter(lab= labListString)):
-        #    dbLabs = Lab.objects.get(lab=labListString)
-        #    #dbLabs = Lab.objects.filter(lab= labListString)
-        #else:
-        #    dbLabs = Lab(lab= labListString)
-        #    dbLabs.save()
-        ##dbLabs = Class(labs=labListString)
-        ##dbLabs.save()
-
-
-
-
 
         #write instructor to 3rd line
         file.write(str(self._instructor)+"\n")
 
-        # Database Code updating instructor:
+        # Database Code for updating instructor:
         instructorName = str(self._instructor)
         if (Instructor.objects.filter(instructor= instructorName)):
             #dbInstructor = Instructor.objects.filter(instructor= instructorName)
@@ -96,13 +71,6 @@ class CourseUtility:
         else:
             dbInstructor = Instructor(instructor= instructorName)
             dbInstructor.save()
-        #dbInstructor = Class(instructor=self._instructor)
-        #dbInstructor.save()
-
-
-
-
-
 
         #write TAs to 4th line
         for x in range(0,self._TAs.__len__()):
@@ -114,42 +82,19 @@ class CourseUtility:
             else:
                 file.write((self._TAs[x]))
 
-        # Database Code updating TAs:
+        # Convert TA list to a single string
         TAListString = self.listToString(self._TAs)
-        #if (TA.objects.filter(ta= TAListString)):
-        #    dbTAs = TA.objects.get(ta=TAListString)
-        #    #dbTAs = TA.objects.filter(ta= TAListString)
-        #else:
-        #    dbTAs = TA(ta= TAListString)
-        #    dbTAs.save()
-        ##dbTAs = Class(ta=TAListString)
-        ##dbTAs.save()
-
 
         # Database Code to update this Course
-
-
         if (Class.objects.filter(course= self._courseName)):
             dbCourse = Class.objects.get(course=self._courseName)
-            #dbCourse = Class.objects.filter(course= self._courseName)
-            #dbCourse.labs = dbLabs #old
             dbCourse.labs = labListString
             dbCourse.instructor = dbInstructor
-            #dbCourse.ta = dbTAs #old
             dbCourse.ta = TAListString
             dbCourse.save()
-            #dbCourse.update(labs=dbLabs, instructor=dbInstructor, ta=dbTAs)
         else:
-
-            # could maybe change labs to equal labListString, and ta to equal TAListString???
-            # otherwise figure out how to add list of labs/TAs,  or leave it how it is...
             dbCourse = Class(course=self._courseName, labs=labListString, instructor=dbInstructor, ta=TAListString)      #new
-            #dbCourse = Class(course= self._courseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs) #old
             dbCourse.save()
-        #dbCourse = Class.objects.filter(course=self._courseName)
-        #dbCourse.update(course= dbCourseName, labs= dbLabs, instructor= dbInstructor, ta= dbTAs)
-        # if course didn't exist yet, should maybe use dbCourse.save()
-
 
         file.close()
 
@@ -165,10 +110,11 @@ class CourseUtility:
     def getTAs(self):
         return self._TAs
 
-    #assign this course to this instructor, return old instructor if there is one, else return "None"
+    #   assignCourse() assigns this course to this instructor
+    #       returns old instructor if there is one
+    #       returns "None" otherwise
     def assignCourse(self,username):
         util = UserUtility()
-        #insObj = util.searchUser(username)
         oldInstructor = "None"
 
         if (self._instructor != "None"):
@@ -199,20 +145,12 @@ class CourseUtility:
         return oldInstructor
 
 
-        #if (insObj.getRole() != "Instructor"): #and insObj.getRole() != "TA"):
-        #    return False
-
-        #if (insObj.getRole() == "Instructor"):
-        #    self._instructor = insObj.username
-        # print(username, "has been added to", self._courseName)
-
-        #return True
-
-    #unassign instructors or TAs from this class, could also use this for unassignlab
+    #   unAssignCourse() unassigns instructors or TAs from this class
+    #       returns True if there is a change
+    #       returns False if there is no change
     def unAssignCourse(self,username):
         util = UserUtility()
         user = util.searchUser(username)
-
 
         if (user.getRole() == "TA" and self._TAs is not None):    # if the user is a TA, search through the TAs and remove them for this course
             changed = False
@@ -220,7 +158,6 @@ class CourseUtility:
                 if (username == self._TAs[i]):
                     self._TAs[i] = "None"
                     changed = True
-                    #return True #removed TA
             return changed
 
         if (user.getRole() == "Instructor"):  # if the user is a TA, search through the TAs and remove them for this course
@@ -229,34 +166,31 @@ class CourseUtility:
 
                 self._instructor = "None"
 
-                return True # removed instructor
+                return True     # removed instructor
             else:
                 return False    # this user was not the instructor, so nothing changes
 
-        #return False    # return False if no user was unassigned
 
-    #only for remove command, this removes database instructor file from database
+    #   only used with Remove and Role Commands, this removes database instructor file from database
     def removeDBInstructor(self,username):
         if (Instructor.objects.filter(instructor= username)):
             dbInstruct = Instructor.objects.get(instructor= username)
             dbInstruct.delete()
-            #dbInstruct = Instructor.objects.get(instructor="None")
         return
 
 
+    #   assignLab() assigns the TA "username" to the this lab "LabName"
+    #       returns the previous TA of this lab if there was one
+    #       returns "None" otherwise
     def assignLab(self,username, LabName):
 
         courseLabName = self._courseName+"-"+LabName
-        #print("courselabname = ",courseLabName)
 
         util = UserUtility()
         TAobj = util.searchUser(username)
 
-        #print("TA =",TAobj.getUsername())
-
         if (TAobj.getRole() != "TA"):   # this shouldn't occur
-            return "None" #print(username,"is not a TA")
-
+            return "None"   # username is not a TA
 
         count = 0;
         index = -1
@@ -267,7 +201,7 @@ class CourseUtility:
             count = count + 1
 
         if (index == -1):   # this shouldn't occur
-            return "None"  # " lab doesn't exist"
+            return "None"   # lab doesn't exist
         else:
 
             if ((index+1) > self._TAs.__len__()):
@@ -277,15 +211,15 @@ class CourseUtility:
                     tempTAList[x] = self._TAs[x]
                 self._TAs = tempTAList
 
-
             oldTA = self._TAs[index]
             self._TAs[index] = username
             return oldTA
 
-
         return "None"
 
-    # unassign a TA from a lab, return True if successful, else False
+    #   unAssignLab() unassigns the TA "userName" from the lab "labName
+    #       returns True if successful
+    #       returns False otherwise
     def unAssignLab(self, userName, labName):
 
         for i in range(0,self._labs.__len__()):
@@ -295,21 +229,16 @@ class CourseUtility:
                     return True
         return False
 
-
-
+    #   createCourse() creates a .txt file for this course (Ex: CS251.txt) if this course didn't exist yet
+    #       This also adds the newly created course to "courses.txt" (the file that keeps a list of all courses)
+    #       returns True if the course .txt file is successfully created
+    #       returns False if course already exists
     def createCourse(self, courseName):
 
         fileName = self.append("application/data/courses/", courseName) + ".txt"
 
-
-        #temporary code to delete unneccesary database files
-        #Lab.objects.all().delete()
-        #Instructor.objects.all().delete()
-        #TA.objects.all().delete()
-        #return
-
         if os.path.isfile(fileName):      # Check if file exists already
-            return False  #"Course already exists"
+            return False  # Course already exists
         else:
             file = open(fileName, "+w")
             file.write(courseName)
@@ -321,58 +250,33 @@ class CourseUtility:
             self.addToMasterCourseList(courseName)  #add course to courses.txt
 
 
-            # Database code below:
-
-            #old
-            #if (Lab.objects.filter(lab= "None")):
-            #    #lab = Lab.objects.filter(lab= "None")
-            #    lab = Lab.objects.get(lab= "None")
-            #else:
-            #    lab = Lab(lab= "None")
-            #    lab.save()
-            #lab = Lab(lab="None")
-
+            # Database code for Instructor below:
             if (Instructor.objects.filter(instructor= "None")):
-                #instructor = Instructor.objects.filter(instructor= "None")
                 instructor = Instructor.objects.get(instructor= "None")
             else:
                 instructor = Instructor(instructor= "None")
                 instructor.save()
-            #instructor = Instructor(instructor="None")
 
-
-            #old
-            #if (TA.objects.filter(ta= "None")):
-            #    #ta = TA.objects.filter(ta= "None")
-            #    ta = TA.objects.get(ta= "None")
-            #else:
-            #    ta = TA(ta= "None")
-            #    ta.save()
-            ##ta = TA(ta="None")
-
-
+            # create the database file for this course
             if (Class.objects.filter(course=courseName)):
-                #course = Class.objects.filter(course=courseName)
                 course = Class.objects.get(course= courseName)
-                #course.update(labs=lab, instructor=instructor, ta=ta)  #old
                 course.update(labs="None", instructor=instructor, ta="None")
             else:
-                #course = Class(course=courseName, labs=lab, instructor=instructor, ta=ta)  #old
                 course = Class(course=courseName, labs="None", instructor=instructor, ta="None")
                 course.save()
 
-            return True #courseName + " has been created"
+            return True     # course has been created
 
+    #   deleteCourse() deletes the .txt file and database file of this course
+    #       this also removes this course from courses.txt (the file that keeps a list of all courses)
     def deleteCourse(self):
         fileName = self.append("application/data/courses/", self._courseName) + ".txt"
-
         userUtil = UserUtility()
 
         # if there is an instructor assigned to this course, remove this course from them
         if (self._instructor != "None"):
             user = userUtil.searchUser(self._instructor)
             user.unAssignCourse(self._courseName)
-            #user.setClass("None", "None")
             userUtil.updateUser(user)
 
         # if there are TAs assigned to this course, remove this course from them
@@ -381,26 +285,24 @@ class CourseUtility:
                 user = userUtil.searchUser(self._TAs[i])
                 if (user != None):
                     user.unAssignCourse(self._courseName)
-                    #user.setClass("None","None")
                     userUtil.updateUser(user)
-
 
         #Database Code:
         course = Class.objects.filter(course=self._courseName)
         course.delete()
 
-
-
         os.remove(fileName)
-
         self.removeFromMasterCourseList(self._courseName)  # remove this course from courses.txt
 
+    #   removeLab() removes the lab "labName" for this course if it exists
+    #       returns True if lab is removed
+    #       returns False if lab doesn't exist
     def removeLab(self,labName):
 
         userUtil = UserUtility()
 
-        if (self._labs == None):
-            return "There are no Labs to remove"
+        if (self._labs == None):    # this shouldn't occur
+            return False    #There are no Labs to remove
 
         for i in range(0,self._labs.__len__()):
             if (self._labs[i] == labName):
@@ -416,7 +318,8 @@ class CourseUtility:
 
         return False
 
-    #remove any "None"s from the list
+    #   cleanUpList() removes any unneeded "None" strings from the list "origList"
+    #       returns the cleaned up list
     def cleanUpList(self, origList):
 
         tempListOld = list(origList)
@@ -432,10 +335,12 @@ class CourseUtility:
                 if (tempListOld[i] != "None"):
                     tempListNew[i] = tempListOld[i]
 
-            origList = tempListNew # set original list to this new list without "None"s
+            origList = tempListNew # set original list to this new list without "None" strings
 
         return origList
 
+    #   cleanUpLabList() removes all unneeded "None" strings from this course's lab list
+    #       returns the cleaned up lab list
     def cleanUpLabList(self):
 
         tempOldLabList = self._labs
@@ -466,7 +371,9 @@ class CourseUtility:
 
 
 
-    # return False if lab already exists, if not, create the lab and return true
+    #   createLab() creates a new lab for this course
+    #       returns True if lab is successfully created
+    #       returns False if lab already exists
     def createLab(self, labName):
         index = self._labs.__len__()
 
@@ -486,25 +393,26 @@ class CourseUtility:
 
         return True
 
-    # return a list of all of the courses
+    #   getAllCourses()
+    #       returns a list of all of the courses if there is at least one (courses.txt should exist)
+    #       return None if there are no courses (courses.txt would not exist)
     def getAllCourses(self):
         fileName = self.append("application/data/courses/", "courses") + ".txt"
-
 
         if (os.path.isfile(fileName)):  # check if file exists
             file = open(fileName, "r+")
             allCourses = file.readlines()
             file.close()
-
             for i in range(0, allCourses.__len__()):
                 allCourses[i] = allCourses[i].replace("\n","")
-
             return allCourses
         else:
-            # print "There are no courses"
+            # There are no courses
             return None
 
-
+    #   viewCourses() shows the user all of the courses and their contents
+    #       if courses exist, return the string containing all the courses and their data
+    #       if no courses exists, return "No courses to show"
     def viewCourses(self):
 
         #util = CourseUtility()
@@ -523,12 +431,11 @@ class CourseUtility:
             coursesString = coursesString + "Labs= " + str(self._labs) + "\n"
             coursesString = coursesString + "TAs= " + str(self._TAs) + "\n\n"
 
-        print(coursesString)
-
         return coursesString
 
 
-    # if a course is created or removed, make sure to update the master course list (courses.txt) accordingly
+    #   addToMasterCourseList() adds the course "courseName" to courses.txt (the file that keeps a list of all courses)
+    #       returns nothing
     def addToMasterCourseList(self, courseName):
 
         allCourses = self.getAllCourses()
@@ -540,7 +447,7 @@ class CourseUtility:
             file.write(courseName)
             file.close()
         else:
-            #add courseName to allCourses list
+            # add courseName to allCourses list
             allCourses.append(courseName)
 
             # write allCourses to courses.txt
@@ -555,6 +462,9 @@ class CourseUtility:
 
         return
 
+    #   removeFromMasterCourseList() removes the course "courseName" from courses.txt (the file that keeps a list of all courses)
+    #       returns True if "courseName" is removed from courses.txt
+    #       returns False if there are no courses to remove
     def removeFromMasterCourseList(self, courseName):
 
         allCourses = self.getAllCourses()
@@ -596,11 +506,11 @@ class CourseUtility:
                     file.write(allCourses[i] + "\n")
             file.close()
 
-
         return True
 
 
-    #used to access _labs or _TAs as a string
+    #   listToString() returns the list "dataList" as a string (mainly used with _labs and _TAs)
+    #       returns the list "dataList" as a string
     def listToString(self, dataList):
 
         #to be safe
@@ -608,7 +518,6 @@ class CourseUtility:
             return "None"
 
         newList = list(dataList)
-
         listString = ""
 
         for i in range(0, newList.__len__()):
@@ -623,24 +532,10 @@ class CourseUtility:
 
 
 
-
-
-    # This function is used to append two strings together
-    # In particular, this function appends a directory with a file
+    #   append() is used to append two strings together
+    #       In particular, this function appends a directory with a file
+    #       returns the two strings "directory" and "file" as one combined string
     def append(self, directory, file):
         return directory + file
 
-
-
-
-
-#print("current directory: ",os.getcwd())
-
-# Testing stuff below
-
-#obj = CourseUtility()
-#obj.getContents("CS251")
-#string = obj.listToString(obj.getLabs())
-#print("string = ",string)
-#obj.writeContents()
 

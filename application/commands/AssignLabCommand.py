@@ -33,6 +33,8 @@ class AssignLabCommand(Command):
             return labName + " does not exist"
 
         user = userUtil.searchUser(username)
+        if (user == None):
+            return username + " does not exist"
 
         if (user.getRole() != "TA"):
             return user.getUsername()+" is not a TA"
