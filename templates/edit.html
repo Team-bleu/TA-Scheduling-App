@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Information</title>
+</head>
+
+<body>
+<a href="/main/">BACK</a>
+<form method="get" action="/edit/">
+    {% csrf_token %}
+    <h1>Your information:</h1>
+    {{ info | linebreaks }}
+</form>
+<br>
+<form method="post" action="/edit/">
+    {%  csrf_token %}
+    <h2> Would you like to change your information?</h2>
+    <body>
+    First Name:   <input type="text" name="firstname"/><br>
+    Last Name:    <input type="text" name="lastname"/><br>
+    Phone:        <input type="text" name="phone"/><br>
+    Email:        <input type="text" name="email"/><br>
+    Address:      <input type="text" name="address"/><br>
+    Office Hours: <input type="text" name="officehours"/><br>
+    </body>
+    <input type="submit" value="Update"/>
+</form>
+</body>
+</html>
