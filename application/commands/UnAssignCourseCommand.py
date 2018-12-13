@@ -18,6 +18,10 @@ class UnAssignCourseCommand(Command):
         username = user_input_list[1]
         courseName = user_input_list[2]
 
+        user = userUtil.searchUser(username)
+        if (user == None):
+            return username + " does not exist"
+
         if (courseUtil.getContents(courseName) == False):  # if course doesn't exist, return error
             return "Course doesn't exist"
 
@@ -25,8 +29,6 @@ class UnAssignCourseCommand(Command):
             return username + " is not a part of this course"
 
         courseUtil.writeContents()
-
-        user = userUtil.searchUser(username)
 
         user.unAssignCourse(courseName)
         userUtil.updateUser(user)
