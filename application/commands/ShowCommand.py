@@ -10,6 +10,8 @@ class ShowCommand(Command):
 
         if len(user_input_list) is 1:
             user = self._logger
+            util = UserUtility()
+            user = util.searchUser(user.getUsername())
             return "First Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName() \
                     + "\nemail: " + user.getEmail() + "\nphone: " + user.getPhone() \
                     + "\naddress: " + user.getAddress() + "\nOffice Hours: " + user.getOfficeHours()
