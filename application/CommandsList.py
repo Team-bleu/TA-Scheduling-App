@@ -51,3 +51,6 @@ class CommandsList:
 
                 # Preforms the command
                 return command.action(self, user_input_list)
+
+    def getLogger(self):
+        return self._logger

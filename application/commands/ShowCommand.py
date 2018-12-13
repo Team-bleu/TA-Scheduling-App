@@ -8,6 +8,12 @@ class ShowCommand(Command):
         if not Command.isLogged(self):
             return "No user is logged in."
 
+        if len(user_input_list) is 1:
+            user = self._logger
+            return "First Name: " + user.getFirstName() + "\nLast Name: " + user.getLastName() \
+                    + "\nemail: " + user.getEmail() + "\nphone: " + user.getPhone() \
+                    + "\naddress: " + user.getAddress() + "\nOffice Hours: " + user.getOfficeHours()
+
         util = UserUtility()
         username = user_input_list[1]
         user = util.searchUser(username)
@@ -35,7 +41,7 @@ class ShowCommand(Command):
         return command == "show"
 
     def countArgs(self, user_input_list):
-        return len(user_input_list) < 2
+        return len(user_input_list) < 1
 
     def checkRank(self, role):
         rank = 0

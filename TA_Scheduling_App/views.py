@@ -28,3 +28,38 @@ class Login(View):
         if out != username + " logged in.":
             return render(request, "login.html", {"out": out})
         return redirect('main/', request)
+
+
+class Edit(View):
+    def get(self, request):
+        info = app.command("show")
+        return render(request, "edit.html", {"info": info})
+
+    def post(self, request):
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
+        phone = request.POST["phone"]
+        email = request.POST["email"]
+        address = request.POST["address"]
+        officehours = request.POST["officehours"]
+
+        username = app.commands.getLogger().getUsername()
+
+        editstring = "edit " + username
+        if len(firstname) is not 0:
+            editstring = editstring + " firstname " + firstname
+        if len(lastname) is not 0:
+            editstring = editstring + " lastname " + lastname
+        if len(phone) is not 0:
+            editstring = editstring + " phone " + phone
+        if len(email) is not 0:
+            editstring = editstring + " email " + email
+        if len(address) is not 0:
+            editstring = editstring + " address " + address
+        if len(officehours) is not 0:
+            editstring = editstring + " officehours " + officehours
+
+        app.command(editstring)
+
+        info = app.command("show")
+        return render(request, "edit.html", {"info": info})
