@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>TA Scheduling App: Login</h1>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <h1 id="hbox">TA Scheduling App: Login</h1>
+    <link rel="stylesheet" href="/TA_Scheduling_App/static/css/style.css" />
 
-    <form method="post" action="/">
+    <form method="post" action="/" id="box">
         {% csrf_token %}
-        username: <input type="text" name="username"/><br>
-        password: <input type="password" name="password"/>
+        <l>username: </l> <input type="text" name="username"/><br>
+        <l>password:  </l> <input type="password" name="password"/>
         <input type="submit" name="login" value="Login"/>
     </form>
+
     <div id="out">
         {{out|linebreaks}}
     </div>
+
 {%  endblock %}
