@@ -9,11 +9,13 @@ app = App()
 
 class Main(View):
     def get(self, request):
-        return render(request, "main.html")
+        help = app.command("help")
+        return render(request, "main.html", {"help": help})
 
     def post(self, request):
+        help = app.command("help")
         out = app.command(request.POST["command"])
-        return render(request, "main.html", {"out": out})
+        return render(request, "main.html", {"out": out, "help": help})
 
 
 class Login(View):

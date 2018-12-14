@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-    <a href="/edit/">ACCOUNT INFORMATION</a>  <a href="/">LOGOUT</a>
+    <a href="/edit/">ACCOUNT</a><a href="/">LOGOUT</a>
 
-    <h1>TA Scheduling App: Main</h1>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <h1 id="hbox">TA Scheduling App: Main</h1>
+    <link rel="stylesheet" href="/TA_Scheduling_App/static/css/style.css" />
 
-    <form method="post" action="/main/">
+
+    <form method="post" action="/main/" id="box">
         {% csrf_token %}
-        command: <input type="text" name="command"/><input type="submit" name="commandbutton" value="Submit"/>
+        <l>command: </l> <input type="text" name="command"/><input type="submit" name="commandbutton" value="Submit"/>
     </form>
-    <div id="out">
+    <div id="outbox">
         {{out|linebreaks}}
     </div>
+    <div id="helpbox">
+        {{help|linebreaks}}
+    </div>
+
 {% endblock content %}
