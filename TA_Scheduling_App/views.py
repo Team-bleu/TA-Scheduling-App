@@ -35,9 +35,9 @@ class Login(View):
     def post(self, request):
         username = request.POST["username"]
         password = request.POST["password"]
-        command = "login " + username + " " + password
+        command = "login " + str(username).upper() + " " + password
         out = app.command(command)
-        if out != username + " logged in.":
+        if out != str(username).upper() + " logged in.":
             return render(request, "login.html", {"out": out})
         return redirect('main/', request)
 

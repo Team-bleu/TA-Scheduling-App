@@ -1,6 +1,6 @@
 SuperUser
 TeamBleu
-super
+SUPER
 pass
 Supervisor
 414-123-4567

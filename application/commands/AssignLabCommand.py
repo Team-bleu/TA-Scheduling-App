@@ -17,9 +17,9 @@ class AssignLabCommand(Command):
         courseUtil = CourseUtility()
         userUtil = UserUtility()
 
-        username = user_input_list[1]
-        courseName = user_input_list[2]
-        labName = user_input_list[3]
+        username = str(user_input_list[1]).upper()      # force uppercase
+        courseName = str(user_input_list[2]).upper()    # force uppercase
+        labName = str(user_input_list[3]).upper()       # force uppercase
 
         if (courseUtil.getContents(courseName) == False):
             return courseName + " does not exist"

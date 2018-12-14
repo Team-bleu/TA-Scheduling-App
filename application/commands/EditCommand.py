@@ -10,7 +10,7 @@ class EditCommand(Command):
             return "No user is logged in."
 
         util = UserUtility()
-        username = user_input_list[1]
+        username = str(user_input_list[1]).upper()  # force uppercase
         user = util.searchUser(username)
 
         if user is None:

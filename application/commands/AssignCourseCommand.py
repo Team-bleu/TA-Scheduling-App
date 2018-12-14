@@ -15,8 +15,8 @@ class AssignCourseCommand(Command):
         
         userUtil = UserUtility()
         courseUtil = CourseUtility()
-        username = user_input_list[1]
-        courseName = user_input_list[2]
+        username = str(user_input_list[1]).upper()      # force uppercase
+        courseName = str(user_input_list[2]).upper()    # force uppercase
 
         if (courseUtil.getContents(courseName) == False):   #if course doesn't exist, return error
             return "Course doesn't exist"

@@ -6,7 +6,7 @@ class LoginCommand(Command):
 
     def action(self, user_input_list):
         util = UserUtility()
-        username = user_input_list[1]
+        username = str(user_input_list[1]).upper()  # force uppercase
         password = user_input_list[2]
 
         user = util.searchUser(username)

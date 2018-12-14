@@ -13,8 +13,8 @@ class CreateLabCommand(Command):
             return "Do not have permission"
 
         courseUtil = CourseUtility()
-        courseName = user_input_list[1]
-        labName = user_input_list[2]
+        courseName = str(user_input_list[1]).upper()    # force uppercase
+        labName = str(user_input_list[2]).upper()       # force uppercase
 
         if (courseUtil.getContents(courseName) == False):   #if course doesn't exist, return error
             return courseName + " does not exist"

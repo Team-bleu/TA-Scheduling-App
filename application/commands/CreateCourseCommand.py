@@ -12,7 +12,7 @@ class CreateCourseCommand(Command):
             return "Do not have permission"
         
         courseUtil = CourseUtility()
-        courseName = user_input_list[1]
+        courseName = str(user_input_list[1]).upper()    # force uppercase
 
         if (courseUtil.createCourse(courseName) == False):
             return courseName + " already exists"

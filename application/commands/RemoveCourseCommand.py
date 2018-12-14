@@ -15,7 +15,7 @@ class RemoveCourseCommand(Command):
         # <course>
         courseUtil = CourseUtility()
 
-        courseName = user_input_list[1]
+        courseName = str(user_input_list[1]).upper()    # force uppercase
 
         if (courseUtil.getContents(courseName) == False):
             return courseName + " does not exist"

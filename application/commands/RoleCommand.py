@@ -13,7 +13,7 @@ class RoleCommand(Command):
         if Command.getCredentialss(self) < 3:
             return "Do not have permission"
 
-        username = user_input_list[1]
+        username = str(user_input_list[1]).upper()  # force uppercase
         role = user_input_list[2]
         util = UserUtility()
         courseUtil = CourseUtility()
