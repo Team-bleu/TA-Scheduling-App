@@ -24,7 +24,7 @@ class LoginCommandTest(TestCase):
         self.assertTrue(self.cmd.isCommand(self.user_input_list2[0]))
 
     def test_login_command(self):
-        self.assertEqual(self.cmd.action(self.user_input_list1), "super logged in.")
+        self.assertEqual(self.cmd.action(self.user_input_list1), "SUPER logged in.")
         self.assertEqual(self.cmd.action(self.user_input_list3), "No such user exists.")
 
 

@@ -34,4 +34,4 @@ class RoleCommandTest(TestCase):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
         self.assertEqual(self.cmd.action(self.invalid_input_list2), "staff doesn't exist!")
-        self.assertEqual(self.cmd.action(self.invalid_input_list0), "Peter doesn't exist!")
+        self.assertEqual(self.cmd.action(self.invalid_input_list0), "PETER doesn't exist!")

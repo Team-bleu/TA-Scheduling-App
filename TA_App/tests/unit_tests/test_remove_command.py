@@ -22,13 +22,13 @@ class RemoveCommandTest(TestCase):
     def test_role_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.addCmd, ["login", "super", "pass"])
-        self.assertEqual(self.addCmd.action(self.user_input_list1), "user1 has been added")
+        self.assertEqual(self.addCmd.action(self.user_input_list1), "USER1 has been added")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
-        self.assertEqual(self.cmd.action(self.valid_command1), "user1 has been removed.")
-        self.assertEqual(self.cmd.action(self.valid_command1), "user1 doesn't exist!")
+        self.assertEqual(self.cmd.action(self.valid_command1), "USER1 has been removed.")
+        self.assertEqual(self.cmd.action(self.valid_command1), "USER1 doesn't exist!")
 
 
     def test_invalid_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
-        self.assertEqual(self.cmd.action(self.invalid_input_list0), "Peter doesn't exist!")
+        self.assertEqual(self.cmd.action(self.invalid_input_list0), "PETER doesn't exist!")

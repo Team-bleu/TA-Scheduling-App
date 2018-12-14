@@ -30,4 +30,4 @@ class EditCommandTest(TestCase):
     def test_invalid_command(self):
         self.assertEqual(self.cmd.action(self.valid_command0), "No user is logged in.")
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
-        self.assertEqual(self.cmd.action(self.invalid_input_list0), "Peter doesn't exist!")
+        self.assertEqual(self.cmd.action(self.invalid_input_list0), "PETER doesn't exist!")

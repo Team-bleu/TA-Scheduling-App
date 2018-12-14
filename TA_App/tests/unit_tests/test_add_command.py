@@ -35,9 +35,9 @@ class AddCommandTest(TestCase):
         LoginCommand.action(self.cmd, ["login", "super", "pass"])
 
         # Now, we can start adding users.
-        self.assertEqual(self.cmd.action(self.user_input_list1), "user1 has been added")
+        self.assertEqual(self.cmd.action(self.user_input_list1), "USER1 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list1), "User already exists.")
-        self.assertEqual(self.cmd.action(self.user_input_list2), "user2 has been added")
+        self.assertEqual(self.cmd.action(self.user_input_list2), "USER2 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list2), "User already exists.")
         # Now we got to remove the users added so it doesn't crash the second run
         self.util.removeUser("user1")
