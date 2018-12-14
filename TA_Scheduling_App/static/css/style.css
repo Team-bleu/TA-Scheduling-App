@@ -63,6 +63,18 @@ body {
     padding: 50px;
     margin: 25px;
 }
+#helpbox {
+    position: relative;
+    top:-560px;
+    left: 550px;
+    color:#C9F2FF;
+    border-radius: 15px 50px;
+    background-color: #3B4753;
+    width: 400px;
+    border: 100px #3B4753;
+    padding: 50px;
+    margin: 25px;
+}
 
 a{
     color: #C9F2FF;
