@@ -65,6 +65,10 @@ class HelpCommand(Command):
         viewAssignmentsString=   "viewassignments <username>\n" \
                                  "view assignments of user <username>\n\n"
 
+        viewUsersString =       "viewusers <role>\n" \
+                                "view all users with role <role>, \n" \
+                                "by providing 'all' for <role>, all users with be displayed\n\n"
+
 
 
         if (role == 4):     #Supervisor
@@ -82,7 +86,8 @@ class HelpCommand(Command):
                          unAssignCourseString + \
                          unAssignLabString + \
                          viewCoursesString + \
-                         viewAssignmentsString
+                         viewAssignmentsString + \
+                         viewUsersString
 
         elif (role == 3):   #Adminstrator
             helpString = addCommandString + \
@@ -95,7 +100,8 @@ class HelpCommand(Command):
                          removeLabString + \
                          showString + \
                          viewCoursesString + \
-                         viewAssignmentsString
+                         viewAssignmentsString + \
+                         viewUsersString
 
         elif (role == 2):   #Instructor
             helpString = assignLabString + \
@@ -104,13 +110,16 @@ class HelpCommand(Command):
                          showString + \
                          unAssignLabString + \
                          viewCoursesString + \
-                         viewAssignmentsString
+                         viewAssignmentsString + \
+                         viewUsersString
 
         elif (role == 1):   #TA
             helpString = helpCommandString + \
                          quitString + \
-                         showString+\
-                         viewAssignmentsString
+                         showString+ \
+                         viewCoursesString + \
+                         viewAssignmentsString + \
+                         viewUsersString
 
         return helpString
 
