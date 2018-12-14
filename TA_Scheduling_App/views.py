@@ -9,13 +9,23 @@ app = App()
 
 class Main(View):
     def get(self, request):
-        help = app.command("help")
-        return render(request, "main.html", {"help": help})
+        help = self.getHelp()
+        role = self.getRole()
+        return render(request, "main.html", {"help": help, "role": role})
 
     def post(self, request):
-        help = app.command("help")
+        help = self.getHelp()
+        role = self.getRole()
         out = app.command(request.POST["command"])
-        return render(request, "main.html", {"out": out, "help": help})
+        if out == "Quiting session." or out == "logged out.":
+            return redirect('/', request)
+        return render(request, "main.html", {"out": out, "help": help, "role": role})
+
+    def getRole(self):
+        return app.commands.getLogger().getRole()
+
+    def getHelp(self):
+        return app.command("help")
 
 
 class Login(View):

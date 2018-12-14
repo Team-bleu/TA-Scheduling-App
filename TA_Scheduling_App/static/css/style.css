@@ -64,16 +64,33 @@ body {
     margin: 25px;
 }
 #helpbox {
-    position: relative;
-    top:-560px;
-    left: 550px;
+    position: absolute;
+    top: 40px;
+    right: 10px;
     color:#C9F2FF;
+    font-size: 14px;
     border-radius: 15px 50px;
     background-color: #3B4753;
     width: 400px;
     border: 100px #3B4753;
     padding: 50px;
     margin: 25px;
+}
+#rolebox {
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    color:#C9F2FF;
+    font-size: 30px;
+    border-radius: 15px 50px;
+    background-color: #3B4753;
+    width: 200px;
+    border: 100px #3B4753;
+    padding: 20px;
+    margin: 25px;
+}
+#coursesbox {
+
 }
 
 a{
