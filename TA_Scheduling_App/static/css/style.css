@@ -64,6 +64,9 @@ body {
     margin: 25px;
 }
 #helpbox {
+    /*position: absolute;*/
+    /*top: 40px;*/
+    /*right: 10px;*/
     position: relative;
     top:-560px;
     left: 550px;
