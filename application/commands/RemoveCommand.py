@@ -34,6 +34,7 @@ class RemoveCommand(Command):
 
         util.removeUser(username)
 
+        util.removeFromMasterUserList(username)
 
         return username + " has been removed."
 
