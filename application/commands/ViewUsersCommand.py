@@ -29,6 +29,9 @@ class ViewUsersCommand(Command):
         if (roleToCheck == "all"):
             accountsString = "All Users: \n\n"
             for i in range(0, userFiles.__len__()):
+                # THE NEXT LINE OF CODE WILL BREAK DEPENDING ON THE OS BEING USED!!
+                # MAC USERS MUST USE REPLACE: "application/data/users/" INSTEAD!!!
+                # AND WINDOWS USERS MUST REPLACE: "application/data/users\\" INSTEAD!!
                 username = userFiles[i].replace("application/data/users/", "").replace(".txt", "")
                 user = userUtil.searchUser(username)
                 userRole = user.getRole();
