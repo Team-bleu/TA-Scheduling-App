@@ -1,5 +1,6 @@
 from Command import Command
 import glob
+import platform
 from UserUtility import UserUtility
 
 
@@ -25,11 +26,19 @@ class ViewUsersCommand(Command):
 
         accountsString = ""
 
+        platString = platform.system()
+
 
         if (roleToCheck == "all"):
             accountsString = "All Users: \n\n"
             for i in range(0, userFiles.__len__()):
-                username = userFiles[i].replace("application/data/users/", "").replace(".txt", "")
+                # THE NEXT LINE OF CODE WILL BREAK DEPENDING ON THE OS BEING USED!!
+                # MAC USERS MUST USE REPLACE: "application/data/users/" INSTEAD!!!
+                # AND WINDOWS USERS MUST REPLACE: "application/data/users\\" INSTEAD!!
+                if (platString == "Darwin"):
+                    username = userFiles[i].replace("application/data/users", "").replace(".txt", "")
+                else:
+                    username = userFiles[i].replace("application/data/users\\", "").replace(".txt", "")
                 user = userUtil.searchUser(username)
                 userRole = user.getRole();
                 userFirstName = user.getFirstName()
