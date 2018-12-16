@@ -156,3 +156,110 @@ class UserUtility:
                               course=user.getCourses(), lab=user.getLabs(), assignment=user.getAssignment(),
                               officehours=user.getOfficeHours())
             account.save()
+
+
+
+
+
+    #   getAllUsers()
+    #       returns a list of all of the users if there is at least one (users.txt should exist)
+    #       return None if there are no users (users.txt would not exist)
+    def getAllUsers(self):
+        fileName = self.append("application/data/users/", "users") + ".txt"
+
+        if (os.path.isfile(fileName)):  # check if file exists
+            file = open(fileName, "r+")
+            allUsers = file.readlines()
+            file.close()
+            for i in range(0, allUsers.__len__()):
+                allUsers[i] = allUsers[i].replace("\n","")
+            return allUsers
+        else:
+            # There are no users
+            return None
+
+
+
+    #   addToMasterUserList() adds the user "userName" to users.txt (the file that keeps a list of all users)
+    #       returns nothing
+    def addToMasterUserList(self, userName):
+
+        allUsers = self.getAllUsers()
+
+        if (allUsers == None):  # there are no users yet  (users.txt doesn't exist yet)
+            # create users.txt and add new user
+            fileName = self.append("application/data/users/", "users") + ".txt"
+            file = open(fileName, "+w")
+            file.write(userName)
+            file.close()
+        else:
+            # add usersName to allUsers list
+            allUsers.append(userName)
+
+            # write allUsers to users.txt
+            fileName = self.append("application/data/users/", "users") + ".txt"
+            file = open(fileName, "+w")
+            for i in range(0, allUsers.__len__()):
+                if (i == allUsers.__len__() - 1):
+                    file.write(allUsers[i])
+                else:
+                    file.write(allUsers[i] + "\n")
+            file.close()
+
+        return
+
+
+
+    #   removeFromMasterUserList() removes the user "userName" from users.txt (the file that keeps a list of all users)
+    #       returns True if "userName" is removed from users.txt
+    #       returns False if there are no users to remove
+    def removeFromMasterUserList(self, userName):
+
+        allUsers = self.getAllUsers()
+
+        if (allUsers == None):  # there are no users yet  (users.txt doesn't exist yet)
+
+            return False    # cannot remove anything, nothing exists!
+
+        else:
+
+            newSize = allUsers.__len__() - 1;
+
+            # if new size is 0, delete users.txt because there are no users left
+            if (newSize == 0):
+                fileName = self.append("application/data/users/", "users") + ".txt"
+                os.remove(fileName)
+                return True
+
+            # create new list with new size
+            newAllUsers = [None] * (newSize)
+            index = 0;
+
+            #put all users into newAllUsers list besides "userName" (the user to remove)
+            for i in range(0,allUsers.__len__()):
+                if (userName != allUsers[i]):
+                    newAllUsers[index] = allUsers[i]
+                    index = index + 1
+
+            # set allUsers to the new "newAllUsers" list
+            allUsers = newAllUsers
+
+            #write allUsers to users.txt
+            fileName = self.append("application/data/users/", "users") + ".txt"
+            file = open(fileName, "+w")
+            for i in range(0, allUsers.__len__()):
+                if (i == allUsers.__len__()-1):
+                    file.write(allUsers[i])
+                else:
+                    file.write(allUsers[i] + "\n")
+            file.close()
+
+        return True
+
+
+
+    #   append() is used to append two strings together
+    #       In particular, this function appends a directory with a file
+    #       returns the two strings "directory" and "file" as one combined string
+    def append(self, directory, file):
+        return directory + file

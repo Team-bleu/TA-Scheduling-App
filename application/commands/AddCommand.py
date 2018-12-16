@@ -30,6 +30,8 @@ class AddCommand(Command):
 
         util.updateUser(user)
 
+        util.addToMasterUserList(username)
+
         return username + " has been added"
 
     def isCommand(self, command):
