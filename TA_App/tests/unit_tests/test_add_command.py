@@ -2,6 +2,7 @@ from django.test import TestCase
 from AddCommand import AddCommand
 from UserUtility import UserUtility
 from LoginCommand import LoginCommand
+from RemoveCommand import  RemoveCommand
 
 
 class AddCommandTest(TestCase):
@@ -9,6 +10,9 @@ class AddCommandTest(TestCase):
 
     def setUp(self):
         self.cmd = AddCommand()
+        self.remCmd = RemoveCommand()
+        self.remList = ["remove", "user1"]
+        self.remList2 = ["remove", "user2"]
         self.user_input_list1 = ["add", "user1", "admin123"]
         self.user_input_list2 = ["add", "user2", "admin123"]
         self.user_input_list3 = ["add", "user3", "admin123"]
@@ -40,8 +44,11 @@ class AddCommandTest(TestCase):
         self.assertEqual(self.cmd.action(self.user_input_list2), "USER2 has been added")
         self.assertEqual(self.cmd.action(self.user_input_list2), "User already exists.")
         # Now we got to remove the users added so it doesn't crash the second run
-        self.util.removeUser("user1")
-        self.util.removeUser("user2")
+        LoginCommand.action(self.remCmd, ["login", "super", "pass"])
+        self.remCmd.action(self.remList)
+        self.remCmd.action(self.remList2)
+        #self.util.removeUser("USER1")
+        #self.util.removeUser("USER2")
 
 
 
